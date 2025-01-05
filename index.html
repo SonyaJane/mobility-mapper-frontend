@@ -13,9 +13,62 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Custom CSS Link -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
+    <header>
+        <h1>Plan Route</h1>
+    </header>
+    <main>
+
+        <!-- Device selection -->
+        <div id="device" class="row">
+            <div class="col-6">
+                <label for="device-type">Device</label>
+            </div>
+            <div class="col-6">
+                <select id="device-type">
+                    <option value="wheelchair">Wheelchair</option>
+                    <option value="scooter">Mobility Scooter</option>
+                    <option value="tricycle">Tricycle</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Start location -->
+        <div id="start" class="row">
+            <div class="col-6">
+                <label for="start-location">Start</label>
+            </div>
+            <div class="col-6">
+                <input type="text" id="start-location" placeholder="Enter your starting location">
+            </div>
+        </div>
+
+        <!-- Destination location -->
+        <div id="destination" class="row">
+            <div class="col-6">
+                <label for="destination-location">Destination</label>
+            </div>
+            <div class="col-6">
+                <input type="text" id="destination-location" placeholder="Enter your destination">
+            </div>    
+        </div>
+
+        <!-- Route generation button -->
+        <div>
+            <button id="generate-route">Find Accessible Route</button>
+        </div>
+
+        <!-- Map -->
+        <div id="map">
+
+        </div>  
+    </main>
+
+    <!-- Bootstrap JS Links -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
 </html>

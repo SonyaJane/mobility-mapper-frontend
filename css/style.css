@@ -1,0 +1,59 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Bootstrap icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+:root {
+    /* Fonts */
+	--primary-font: 'Open Sans', sans-serif;
+	--secondary-font: 'Bitter', serif;
+
+    /* Colours */
+    --color-coffee-6: rgb(67, 43, 32); 	/* main font-color */
+
+    /* Asterisk wildcard selector to override default styles added by the browser */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
+    }
+
+    html {
+        font-size: 16px; /* Ensure 1rem is equal to 16px */
+    }
+
+    body {
+        /* Font family and colour */
+        font-family: var(--primary-font), sans-serif;
+        color: var(--color-coffee-6);
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--color-coffee-6);
+        cursor: pointer;
+    }
+
+    h2, .h2 {
+        font-family: var(--secondary-font), sans-serif;
+        font-weight: 700;
+    }
+
+    h3, .h3 {
+        font-family: var(--secondary-font), sans-serif;
+        font-weight: 600;
+    }
+
+    h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+        font-weight: 400;
+    }
+
+    /* Buttons */
+    .btn {
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+        font-family: var(--primary-font), sans-serif;
+    }
+
+}
