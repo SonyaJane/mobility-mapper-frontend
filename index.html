@@ -21,53 +21,63 @@
     </header>
     <main>
 
-        <!-- Device selection -->
-        <!-- Reveal div containing device options, on tap or click -->
         <div class="container my-2">
 
-            <!-- Current device -->
-            <div class="row border-bottom py-1 device-row">
-                <div class="col-6 fw-bold">Device</div>
-                <div class="col-6 fw-bold" id="currentDevice">Manual Wheelchair</div>
+            <!-- Device selection -->
+            <div id="device-select">
+
+                <!-- Current device -->
+                <div class="row py-1 border-bottom border-top device-row">
+                    <div class="col-6">Device</div>
+                    <div class="col-6" id="currentDevice">Manual Wheelchair</div>
+                </div>
+
+                <!-- Other device options -->
+                <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
+                    <div class="col-6"></div>
+                    <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
+                </div>
+
+                <div class="row py-1 hidden device-row option" id="tricycleRow">
+                    <div class="col-6"></div>
+                    <div class="col-6" data-device="Tricycle">Tricycle</div>
+                </div>
+
             </div>
 
-            <!-- Other device options -->
-            <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
-                <div class="col-6"></div>
-                <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
-            </div>
-
-            <div class="row py-1 hidden device-row option" id="tricycleRow">
-                <div class="col-6"></div>
-                <div class="col-6" data-device="Tricycle">Tricycle</div>
-            </div>
-            </div>
         </div>
 
-        <!-- Start location -->
-        <div id="start" class="row">
+        <!-- Start location selection -->
+        <div class="row py-1 border-bottom" id="start-select">
+
             <div class="col-6">
                 <label for="start-location">Start</label>
             </div>
+
             <div class="col-6">
-                <input type="text" id="start-location" placeholder="Enter your starting location">
+                <input type="text" id="start-location" placeholder="Type start location">
             </div>
+
         </div>
 
         <!-- Destination location -->
-        <div id="destination" class="row">
+        <div  class="row py-1 border-bottom" id="destination-select">
+
             <div class="col-6">
                 <label for="destination-location">Destination</label>
             </div>
+
             <div class="col-6">
-                <input type="text" id="destination-location" placeholder="Enter your destination">
-            </div>    
+                <input type="text" id="destination-location" placeholder="Type destination">
+            </div>
+
         </div>
 
         <!-- Route generation button -->
-        <div>
+        <div class="py-2 d-flex justify-content-center align-items-center">
             <button id="generate-route">Find Accessible Route</button>
         </div>
+    </div>
 
         <!-- Map -->
         <div id="map">
