@@ -11,6 +11,8 @@
 
     /* Colours */
     --color-coffee-6: rgb(67, 43, 32); 	/* main font-color */
+    --color-orange-1: #f5ddd2;
+    --color-orange-2: #eabaa5; 
 
     /* Asterisk wildcard selector to override default styles added by the browser */
     * {
@@ -56,4 +58,24 @@
         font-family: var(--primary-font), sans-serif;
     }
 
+}
+
+.highlight {
+    background-color: #d4edda !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.device-row {
+    cursor: pointer;
+}
+
+.device-row:hover {
+    background-color: var(--color-orange-2);
+}
+
+.option {
+    background-color: var(--color-orange-1);
 }

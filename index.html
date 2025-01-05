@@ -22,16 +22,25 @@
     <main>
 
         <!-- Device selection -->
-        <div id="device" class="row">
-            <div class="col-6">
-                <label for="device-type">Device</label>
+        <!-- Reveal div containing device options, on tap or click -->
+        <div class="container my-2">
+
+            <!-- Current device -->
+            <div class="row border-bottom py-1 device-row">
+                <div class="col-6 fw-bold">Device</div>
+                <div class="col-6 fw-bold" id="currentDevice">Manual Wheelchair</div>
             </div>
-            <div class="col-6">
-                <select id="device-type">
-                    <option value="wheelchair">Wheelchair</option>
-                    <option value="scooter">Mobility Scooter</option>
-                    <option value="tricycle">Tricycle</option>
-                </select>
+
+            <!-- Other device options -->
+            <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
+                <div class="col-6"></div>
+                <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
+            </div>
+
+            <div class="row py-1 hidden device-row option" id="tricycleRow">
+                <div class="col-6"></div>
+                <div class="col-6" data-device="Tricycle">Tricycle</div>
+            </div>
             </div>
         </div>
 
@@ -70,5 +79,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Custom JS Link -->
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

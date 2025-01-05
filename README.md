@@ -121,3 +121,5 @@ Test installation
     `npm test`
 7. Create folders and files for code
 8. Add initial HTML code
+9. Create "Plan Route" page structure with title, mobility device, start location, destination location, find route button, and div placeholder for map.
+10. Create toggle view of device options on click
