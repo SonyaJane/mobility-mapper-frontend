@@ -97,3 +97,27 @@ Use Jest for automatic testing
 |  |  |
 |  |  |
 |  |  |
+
+## Development Log
+
+1. Created repository on GitHub
+2. Created local mobility-mapper-frontend folder
+3. Created README.md 
+4. Initiated local git repo and pushed to remote
+5. Created .gitignore
+6. Install Jest for JavaScript testing:
+
+    `npm init`
+
+    Keep all defaults except enter supply Jest as the testing command.
+    Creates a package.json file 
+    Install Jest:
+    
+    `npm install --save-dev jest`
+
+Install the DOM test environment
+    `npm install jest-environment-jsdom --save-dev`
+Test installation
+    `npm test`
+7. Create folders and files for code
+8. Add initial HTML code

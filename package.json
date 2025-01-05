@@ -1,0 +1,23 @@
+{
+  "name": "mobility-mapper-frontend",
+  "version": "1.0.0",
+  "description": "Mobility Mapper is a route finder and navigation app for users of wheelchairs, mobility scooters, tricycles and other wheeled mobility devices (referred to as wheelers).",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SonyaJane/mobility-mapper-frontend.git"
+  },
+  "author": "Sonya Ridden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SonyaJane/mobility-mapper-frontend/issues"
+  },
+  "homepage": "https://github.com/SonyaJane/mobility-mapper-frontend#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
