@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
     // Create map on load
-    const map = createMap();
+    // make mapObject a global variable so it can be accessed by other functions
+
+    window.mapObject = createMap([51.97, -4.64], 10);
         
     // Create a map with the given centre coordinates and zoom level
-    function createMap(centerCoords = [38.5, -120.2], zoomLevel = 10) {
+    function createMap(centerCoords, zoomLevel) {
     
         // Initialise Leaflet map
         const map = L.map('map').setView(centerCoords, zoomLevel);
@@ -31,7 +33,6 @@ $(document).ready(function () {
         // Swap values
         $('#currentDevice').text(newDevice);
         $(this).find('[data-device]').text(currentDevice);
-
 
     });
 

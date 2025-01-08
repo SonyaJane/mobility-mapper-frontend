@@ -99,4 +99,6 @@
     color: var(--color-orange-4);
 }
 
-#map { height: 300px; }
+#map { 
+    height: 300px; 
+}

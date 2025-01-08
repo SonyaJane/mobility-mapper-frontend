@@ -5,7 +5,9 @@ const API_URL = `https://api.openrouteservice.org/v2/directions/${profile}/json`
 
 document.getElementById("generate-route").addEventListener("click", e => postForm(e));
 
-let coordinates = "[[8.681495,49.41461],[8.687872,49.420318]]";
+// let coordinates = "[[8.681495,49.41461],[8.687872,49.420318]]";
+let coordinates = "[[-4.647578,51.968935],[-4.684234,52.111446]]";
+
 let instructions = "false";
 const body = `{"coordinates":${coordinates}, "instructions":${instructions}}`;
 
@@ -26,16 +28,8 @@ async function postForm(e) {
     const data = await response.json();
 
     if (response.ok) {
-        // displayResults(data);
-        console.log(data.routes[0].summary.distance);
-        // decode the polyline
-        const encodedPolyline = data.routes[0].geometry;
-        // Decode the polyline into [lat, lng] pairs
-        const coordinates = polyline.decode(encodedPolyline);
-
+        displayRoute(data);
         console.log(data);
-        console.log(coordinates);
-
     } else {
         // displayException(data);
         throw new Error(data.error);
@@ -43,17 +37,22 @@ async function postForm(e) {
 
 }
 
-// Decode the encoded polyline if provided
-// if (encodedPolyline) {
-//     const coordinates = polyline.decode(encodedPolyline);
-//     const latLngs = coordinates.map(coord => [coord[0], coord[1]]); // Convert to [lat, lng] format
+function displayRoute(data) {
+    // Access the global mapObject
+    const map = window.mapObject;
 
-//     // Add polyline to the map
-//     L.polyline(latLngs, { color: 'blue', weight: 3 }).addTo(map);
+    // Get the polyline (series of coordinates) from the response
+    const encodedPolyline = data.routes[0].geometry;
+    // Decode the polyline into [lat, lng] pairs
 
-//     // Adjust map to fit the polyline bounds
-//     map.fitBounds(latLngs);
-// }
+    const routeCoordinates = polyline.decode(encodedPolyline);
+
+    // Add polyline to the map
+    L.polyline(routeCoordinates, { color: 'blue', weight: 3 }).addTo(map);
+
+    // Adjust map to fit the polyline bounds
+    map.fitBounds(routeCoordinates);
+}
 
 // function displayResults(data) {
 
