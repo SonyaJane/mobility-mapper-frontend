@@ -4,7 +4,7 @@ Mobility Mapper is a route finder and navigation app for users of wheelchairs, m
 
 This repository is the frontend of Mobility Mapper.
 
-Sends a POST request to the GraphHopper API with inputs in JSON format. 
+Sends a POST request to the OpenRouteService API with inputs in JSON format. 
 Gets a route with details...
 
 ## Pages
@@ -123,3 +123,7 @@ Test installation
 8. Add initial HTML code
 9. Create "Plan Route" page structure with title, mobility device, start location, destination location, find route button, and div placeholder for map.
 10. Create toggle view of device options on click
+11. Use the formData object to get the form data
+11. Create a function to make an API post request
+12. Create a function to display the data: turn the response into json and then call the appropriate function or throw an error if the  
+response doesn't return okay. 

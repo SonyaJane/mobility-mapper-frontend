@@ -29,6 +29,7 @@
         /* Font family and colour */
         font-family: var(--primary-font), sans-serif;
         color: var(--color-coffee-6);
+        max-width: 420px;
     }
 
     a {
@@ -74,4 +75,9 @@
 
 .option {
     background-color: var(--color-orange-1);
+}
+
+.square-box {
+    border: solid 1px var(--color-coffee-6);
+    border-radius: 5px;
 }
