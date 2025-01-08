@@ -98,6 +98,29 @@ Use Jest for automatic testing
 |  |  |
 |  |  |
 
+## Open Route Service
+
+### Profiles
+
+The available profiles relevant to Mobility mapper are:
+
+wheelchair 
+foot-walking
+cycling-road
+cycling-mountain
+cycling-electric 
+
+Other profiles:
+
+driving-car
+driving-hgv        
+foot-hiking
+public-transport
+
+Returns:
+
+An encoded polyline is a compressed format used to represent a series of geographic points (latitude and longitude) as a compact string of characters. This encoding significantly reduces the amount of space needed to store or transfer path information.
+
 ## Development Log
 
 1. Created repository on GitHub
@@ -123,7 +146,9 @@ Test installation
 8. Add initial HTML code
 9. Create "Plan Route" page structure with title, mobility device, start location, destination location, find route button, and div placeholder for map.
 10. Create toggle view of device options on click
-11. Use the formData object to get the form data
+11. Create Start location section
+    
 11. Create a function to make an API post request
 12. Create a function to display the data: turn the response into json and then call the appropriate function or throw an error if the  
 response doesn't return okay. 
+11. Use the formData object to get the form data

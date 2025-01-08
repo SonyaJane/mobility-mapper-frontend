@@ -12,7 +12,9 @@
     /* Colours */
     --color-coffee-6: rgb(67, 43, 32); 	/* main font-color */
     --color-orange-1: #f5ddd2;
-    --color-orange-2: #eabaa5; 
+    --color-orange-2: #eabaa5;
+    --color-orange-4: #bd582c; 	/* main colour */
+
 
     /* Asterisk wildcard selector to override default styles added by the browser */
     * {
@@ -80,4 +82,19 @@
 .square-box {
     border: solid 1px var(--color-coffee-6);
     border-radius: 5px;
+    width: 30%;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+}
+
+.wheel-icon {
+    width: 1.2rem;
+}
+
+.marker-icon {
+    font-size: 1.2rem;
+}
+
+.orange {
+    color: var(--color-orange-4);
 }

@@ -20,18 +20,22 @@
 
 <body>
     <header>
-        <h1>Plan Route</h1>
+        <h1 class="px-1">Plan Route</h1>
     </header>
     <main>
 
-        <div class="container my-2">
+        <div class="container my-2 px-1">
 
             <!-- Device selection -->
             <div id="device-select">
 
                 <!-- Current device -->
                 <div class="row py-1 border-bottom border-top device-row">
-                    <div class="col-6">Device</div>
+                    <div class="col-6">
+                        <img src="./images/wheel_no_background_300_x_300.png"
+                                    alt="Mobility Mapper wheel icon" class="wheel-icon">
+                        Device
+                    </div>
                     <div class="col-6" id="currentDevice">Manual Wheelchair</div>
                 </div>
 
@@ -53,7 +57,7 @@
 
                 <!-- Displayed start location -->
                 <div class="row py-1 border-bottom">
-                    <div class="col-6">Start</div>
+                    <div class="col-6"><i class="bi bi-geo-alt-fill py-1 orange marker-icon pe-1"></i>Start</div>
                     <div class="col-6" id="currentStart">Choose location</div>
                 </div>
 
@@ -73,35 +77,28 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-4">
-                            <!-- square box container -->
-                            <div class="square-box d-flex justify-content-center align-items-center"
-                                data-location="Current Location">
-                                <div>use current location</div>
+                        <div class="col-12 d-flex justify-content-between">
+                            
+                            <div class="square-box d-flex flex-column justify-content-center">
+                                <div class="d-flex justify-content-center"><i class="bi bi-crosshair py-1"></i></div>
+                                <div class="text-center">use current location</div>
+                            </div>
+
+                            <div class="square-box d-flex flex-column justify-content-center">
+                                <div class="d-flex justify-content-center"><i class="bi bi-map py-1"></i></div>
+                                <div class="text-center"><p>select on map</p></div>
+                            </div>
+
+                            <div class="square-box d-flex flex-column justify-content-center">
+                                <div class="d-flex justify-content-center"><i class="bi bi-bookmark py-1"></i></div>
+                                <div class="text-center">select from saved places</div>
                             </div>
                         </div>
-
-                        <div class="col-4">
-                            <!-- square box container -->
-                            <div class="square-box d-flex justify-content-center align-items-center"
-                                data-location="Current Location">
-                                <div>select on map</div>
-                            </div>
-                        </div>
-
-                        <div class="col-4">
-                            <!-- square box container -->
-                            <div class="square-box d-flex justify-content-center align-items-center"
-                                data-location="Current Location">
-                                <div>select from saved places</div>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
             </div>
-        </div>
+        
 
         <!-- Destination location -->
         <div id="destination-select">
@@ -121,7 +118,7 @@
             <button id="generate-route">Find Accessible Route</button>
         </div>
         </div>
-
+    </div>
         <!-- Map -->
         <div id="map">
 
@@ -135,8 +132,12 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Custom JS Link -->
+        <script src="https://unpkg.com/@mapbox/polyline"></script>
+    <!-- Mapbox, for decoding encoded polyline -->
+    <script src="https://unpkg.com/@mapbox/polyline"></script> 
+        <!-- Custom JS Link -->
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/ors.js"></script>
 </body>
 
 </html>
