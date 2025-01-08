@@ -29,21 +29,31 @@ async function postForm(e) {
         // displayResults(data);
         console.log(data.routes[0].summary.distance);
         // decode the polyline
-        const polyline = data.routes[0].geometry;
+        const encodedPolyline = data.routes[0].geometry;
         // Decode the polyline into [lat, lng] pairs
         const coordinates = polyline.decode(encodedPolyline);
 
-        // Convert to LatLng format for Leaflet
-        const latLngs = coordinates.map(coord => [coord[0], coord[1]]);        console.log(decodedPolyline);
         console.log(data);
         console.log(coordinates);
-        console.log(latLngs);
+
     } else {
         // displayException(data);
         throw new Error(data.error);
     }
 
 }
+
+// Decode the encoded polyline if provided
+// if (encodedPolyline) {
+//     const coordinates = polyline.decode(encodedPolyline);
+//     const latLngs = coordinates.map(coord => [coord[0], coord[1]]); // Convert to [lat, lng] format
+
+//     // Add polyline to the map
+//     L.polyline(latLngs, { color: 'blue', weight: 3 }).addTo(map);
+
+//     // Adjust map to fit the polyline bounds
+//     map.fitBounds(latLngs);
+// }
 
 // function displayResults(data) {
 
