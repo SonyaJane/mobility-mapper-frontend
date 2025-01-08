@@ -121,6 +121,9 @@ Returns:
 
 An encoded polyline is a compressed format used to represent a series of geographic points (latitude and longitude) as a compact string of characters. This encoding significantly reduces the amount of space needed to store or transfer path information.
 
+## Nominatim
+Use API to get LatLon from text search
+
 ## Development Log
 
 1. Created repository on GitHub

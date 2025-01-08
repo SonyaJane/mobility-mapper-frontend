@@ -4,12 +4,33 @@ const profile = 'wheelchair';
 const API_URL = `https://api.openrouteservice.org/v2/directions/${profile}/json`
 
 document.getElementById("generate-route").addEventListener("click", e => postForm(e));
+document.getElementById("search-location").addEventListener("click", e => getLatLon(e));
 
-// let coordinates = "[[8.681495,49.41461],[8.687872,49.420318]]";
 let coordinates = "[[-4.647578,51.968935],[-4.684234,52.111446]]";
 
 let instructions = "false";
 const body = `{"coordinates":${coordinates}, "instructions":${instructions}}`;
+
+async function getLatLon(e) {
+    // Find the input field
+    const inputField = e.target.closest('.row').querySelector('input[type="text"]');
+    // Get the text from the input field
+    const locationText = inputField.value;
+    console.log("Entered location:", locationText);
+
+    const api_url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationText)}`;
+
+    const response = await fetch(api_url);
+
+    const data = await response.json();
+
+    if (response.ok) {
+        console.log(data);
+    } else {
+        throw new Error(data.error);
+    }
+
+}
 
 async function postForm(e) {
 
@@ -43,8 +64,8 @@ function displayRoute(data) {
 
     // Get the polyline (series of coordinates) from the response
     const encodedPolyline = data.routes[0].geometry;
+    
     // Decode the polyline into [lat, lng] pairs
-
     const routeCoordinates = polyline.decode(encodedPolyline);
 
     // Add polyline to the map
@@ -52,21 +73,12 @@ function displayRoute(data) {
 
     // Adjust map to fit the polyline bounds
     map.fitBounds(routeCoordinates);
+
+    // Add markers for start and end points
+    const start = routeCoordinates[0];
+    const end = routeCoordinates[routeCoordinates.length - 1];
+    L.marker(start).addTo(map);
+    L.marker(end).addTo(map);
+
 }
 
-// function displayResults(data) {
-
-//     let results = `Open Route Service Results`;
-//     if (data.total_errors === 0) {
-//         results = `<div class="no_errors">No errors reported!</div>`;
-//     } else {
-//         results = `<div>Total Errors: <span class="error_count">${data.total_errors}</span></div>`;
-//         for (let error of data.error_list) {
-//             results += `<div>At line <span class="line">${error.line}</span>, `;
-//             results += `column <span class="column">${error.col}:</span></div>`;
-//             results += `<div class="error">${error.error}</div>`;
-//         }
-//     }
-
-//     document.getElementById("map").innerText = results;
-// }
