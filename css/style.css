@@ -64,14 +64,14 @@
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.device-row {
+.cursor-pointer {
     cursor: pointer;
 }
 
-.device-row:hover {
+.device-row:hover, #start-location-display:hover {
     background-color: var(--color-orange-2);
 }
 

@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     // Toggle display of options when clicking the main device row
     // touchstart registers the moment the user touches the screen rather than waiting for them to lift their finger
-    $('#currentDevice').on('click touchstart', function () {
+    $('#current-device-container').on('click touchstart', function () {
         $('.option').toggleClass('hidden');
     });
 
@@ -34,6 +34,12 @@ $(document).ready(function () {
         $('#currentDevice').text(newDevice);
         $(this).find('[data-device]').text(currentDevice);
 
+    });
+
+    // Toggle display of #start-options when clicking the row #start-location-display
+    // touchstart registers the moment the user touches the screen rather than waiting for them to lift their finger
+    $('#start-location-display').on('click touchstart', function () {
+        $('#start-options').toggleClass('hidden');
     });
 
 

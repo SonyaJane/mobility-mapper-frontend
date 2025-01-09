@@ -24,17 +24,17 @@
 
 <body>
     <header>
-        <h1 class="px-1">Plan Route</h1>
+        <h1 class="px-1 mb-1">Plan Route</h1>
     </header>
     <main>
 
-        <div class="container my-2 px-1">
+        <div class="container px-1">
 
             <!-- Device selection -->
             <div id="device-select">
 
                 <!-- Current device -->
-                <div class="row py-1 border-bottom border-top device-row">
+                <div class="row py-1 border-bottom border-top device-row cursor-pointer" id="current-device-container">
                     <div class="col-6">
                         <img src="./images/wheel_no_background_300_x_300.png"
                                     alt="Mobility Mapper wheel icon" class="wheel-icon">
@@ -60,13 +60,13 @@
             <div id="start-select">
 
                 <!-- Displayed start location -->
-                <div class="row py-1 border-bottom">
+                <div class="row py-1 border-bottom cursor-pointer" id="start-location-display">
                     <div class="col-6"><i class="bi bi-geo-alt-fill py-1 orange marker-icon pe-1"></i>Start</div>
                     <div class="col-6" id="currentStart">Choose location</div>
                 </div>
 
                 <!-- Start location options -->
-                <div class="py-1" id="start-options">
+                <div class="py-1 hidden" id="start-options">
 
                     <div class="row" id="start-location-select">
                         <div class="col-10">
@@ -80,11 +80,11 @@
                         </div>
                     </div>
 
-                    <div class="row py-1">
+                    <div class="row py-1" id="or">
                         <div class="col-12 d-flex justify-content-center align-items-center">OR</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" id="start-location-options">
                         <div class="col-12 d-flex justify-content-between">
                             
                             <div class="square-box d-flex flex-column justify-content-center">
@@ -122,9 +122,10 @@
         </div>
 
         <!-- Route generation button -->
-        <div class="py-2 d-flex justify-content-center align-items-center">
+        <div class="py-2 d-flex justify-content-center align-items-center" id="generate-route-container">
             <button id="generate-route">Find Accessible Route</button>
         </div>
+
         </div>
     </div>
         <!-- Map -->

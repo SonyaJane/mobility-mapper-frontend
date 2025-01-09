@@ -3,9 +3,11 @@ const API_KEY = "5b3ce3597851110001cf6248f31ca2fd5da04a70b84fb4fe327c3588";
 const profile = 'wheelchair';
 const API_URL = `https://api.openrouteservice.org/v2/directions/${profile}/json`
 
+const hide_divs = ["map", "device-select", "generate-route-container", "destination-select", "start-location-display", "or", "start-location-options"];
+
 document.getElementById("generate-route").addEventListener("click", e => postForm(e));
 document.getElementById("search-location").addEventListener('click', e => {
-    hideElements(e);
+    hideElements(hide_divs);
     searchLocation(e);
 });
 
@@ -14,18 +16,13 @@ let coordinates = "[[-4.647578,51.968935],[-4.684234,52.111446]]";
 let instructions = "false";
 const body = `{"coordinates":${coordinates}, "instructions":${instructions}}`;
 
-function hideElements(e) {
-    // Get the closest .row to the button clicked
-    const closestRow = e.target.closest('.row');
-    console.log(closestRow);
 
-    // Get all descendants of <main>
-    const mainDescendants = Array.from(document.querySelectorAll('main *'));
-    console.log(mainDescendants);
-    // Hide all elements inside `<main>` except the closest `.row`, its ancestors, and its descendants
-    mainDescendants.filter((element) => element !== closestRow && !closestRow.contains(element) && !element.contains(closestRow))
-                   .forEach((element) => {element.style.display = 'none'; // Hide sibling elements
-    });
+function hideElements(arr) {
+    arr.forEach((divId) => {document.getElementById(divId).classList.add('hidden')});
+}
+
+function showElements(arr) {
+    arr.forEach((divId) => {document.getElementById(divId).classList.remove('hidden')});
 }
 
 async function searchLocation(e) {
@@ -34,7 +31,6 @@ async function searchLocation(e) {
 
     // Get the text from the input field
     const locationText = inputField.value;
-    console.log("Entered location:", locationText);
 
     const api_url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationText)}&addressdetails=1`;
 
@@ -43,10 +39,6 @@ async function searchLocation(e) {
     const data = await response.json();
 
     if (response.ok) {
-        console.log(data);
-        for (let place of data) {
-            console.log(`${place.type} ${place.addresstype} ${place.display_name}`);
-        }
         displaySearchLocationResults(data)
     } else {
         throw new Error(data.error);
@@ -55,20 +47,42 @@ async function searchLocation(e) {
 }
 
 function displaySearchLocationResults(data) {
-    
     // if a results div already exists, remove it
-    const existingResultsDiv = document.querySelector('.location-search-results');
+    const existingResultsDiv = document.querySelector('#location-search-results');
     if (existingResultsDiv) {
         existingResultsDiv.remove();
     }   
-    // create a new div
-    const resultsDiv = document.createElement('div .location-search-results');   
+
+    // create a new div with id #location-search-results
+    const resultsDiv = document.createElement('div');
+    resultsDiv.id = 'location-search-results';
+    resultsDiv.classList.add('container', 'px-1');
 
     // Iterate through the data
     for (let place of data) {
         // Create a new div for each result
         const placeDiv = document.createElement('div');
-        placeDiv.textContent = `${place.type} ${place.addresstype} ${place.display_name}`;
+        // add html to the div
+        placeDiv.innerHTML = `<p>${capitaliseWords(place.addresstype)}</p>
+                              <p>${place.display_name}</p>`;
+        // add css classes to the div
+        placeDiv.classList.add('border-bottom', 'py-1', 'cursor-pointer');
+        // add data attributes to the div
+        placeDiv.dataset.lat = place.lat;
+        placeDiv.dataset.lon = place.lon;
+        placeDiv.dataset.location = place.display_name;
+        // add an event listener to the div
+        placeDiv.addEventListener('click', e => {
+            let [lon, lat, placeName] = getLocation(e);
+            coordinates = [[lon, lat]];
+            console.log(coordinates);
+            // Get the start location element and set the text to the clicked location
+            document.querySelector('#currentStart').textContent = placeName;
+            // Remove the search results div
+            document.querySelector('#location-search-results').remove();
+            showElements(hide_divs);
+            hideElements(["start-options"]);
+        });
         
         // Append the div to the new div
         resultsDiv.appendChild(placeDiv);
@@ -78,6 +92,16 @@ function displaySearchLocationResults(data) {
     document.body.appendChild(resultsDiv);
 
 }
+
+function getLocation(e) {
+    // When a user clicks on a location div
+    // Get the latitude and longitude, and place name from the clicked div
+    const lat = e.currentTarget.dataset.lat;
+    const lon = e.currentTarget.dataset.lon;
+    const loc = e.currentTarget.dataset.location;
+    return [lon, lat, loc];
+};
+
 
 async function postForm(e) {
 
@@ -97,7 +121,6 @@ async function postForm(e) {
 
     if (response.ok) {
         displayRoute(data);
-        console.log(data);
     } else {
         // displayException(data);
         throw new Error(data.error);
@@ -129,3 +152,6 @@ function displayRoute(data) {
 
 }
 
+function capitaliseWords(str) {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+}
