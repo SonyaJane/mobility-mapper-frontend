@@ -16,8 +16,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Leaflet CSS link -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Custom CSS Link -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -26,87 +25,93 @@
     <header>
         <h1 class="px-1 mb-1">Plan Route</h1>
     </header>
-    <main>
+    <main class="container px-1">
 
-        <div class="container px-1">
+        <!-- Device selection -->
+        <div id="device-select">
 
-            <!-- Device selection -->
-            <div id="device-select">
+            <!-- Current device -->
+            <div class="row py-1 border-bottom border-top device-row cursor-pointer" id="current-device-container">
+                <div class="col-6">
+                    <img src="./images/wheel_no_background_300_x_300.png" alt="Mobility Mapper wheel icon"
+                        class="wheel-icon">
+                    Device
+                </div>
+                <div class="col-6" id="currentDevice">Manual Wheelchair</div>
+            </div>
 
-                <!-- Current device -->
-                <div class="row py-1 border-bottom border-top device-row cursor-pointer" id="current-device-container">
-                    <div class="col-6">
-                        <img src="./images/wheel_no_background_300_x_300.png"
-                                    alt="Mobility Mapper wheel icon" class="wheel-icon">
-                        Device
+            <!-- Other device options -->
+            <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
+                <div class="col-6"></div>
+                <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
+            </div>
+
+            <div class="row py-1 hidden device-row option" id="tricycleRow">
+                <div class="col-6"></div>
+                <div class="col-6" data-device="Tricycle">Tricycle</div>
+            </div>
+
+        </div>
+
+        <!-- Start location selection -->
+        <div id="start-select">
+
+            <!-- Display current start location -->
+            <div class="row py-1 border-bottom cursor-pointer" id="start-location-display">
+                <div class="col-6"><i class="bi bi-geo-alt-fill py-1 orange marker-icon pe-1"></i>Start</div>
+                <div class="col-6" id="currentStart">Choose location</div>
+            </div>
+
+            <!-- Start location selection options -->
+            <div class="py-1" id="start-options">
+
+                <!-- Text search -->
+                <div class="row" id="start-location-select">
+                    <div class="col-10">
+                        <!-- text input to enter place or address -->
+                        <input type="text" id="start-location" name="start-location" placeholder="Type place or address"
+                            class="w-100">
                     </div>
-                    <div class="col-6" id="currentDevice">Manual Wheelchair</div>
+                    <div class="col-2">
+                        <!-- Search button -->
+                        <button id="search-location" class="w-100">Search</button>
+                    </div>
                 </div>
 
-                <!-- Other device options -->
-                <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
-                    <div class="col-6"></div>
-                    <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
+                <div class="row py-1" id="or">
+                    <div class="col-12 d-flex justify-content-center align-items-center">OR</div>
                 </div>
 
-                <div class="row py-1 hidden device-row option" id="tricycleRow">
-                    <div class="col-6"></div>
-                    <div class="col-6" data-device="Tricycle">Tricycle</div>
+                <!-- Other Location selection options -->
+                <div class="row" id="start-location-options">
+                    <div class="col-12 d-flex justify-content-between">
+
+                        <!-- Use current location -->
+                        <div class="square-box d-flex flex-column justify-content-center" id="current-location">
+                            <div class="d-flex justify-content-center"><i class="bi bi-crosshair py-1"></i></div>
+                            <div class="text-center">use current location</div>
+                        </div>
+
+                        <!-- Select on map -->
+                        <div class="square-box d-flex flex-column justify-content-center">
+                            <div class="d-flex justify-content-center"><i class="bi bi-map py-1"></i></div>
+                            <div class="text-center">
+                                <p>select on map</p>
+                            </div>
+                        </div>
+
+                        <!-- Select from saved places -->
+                        <div class="square-box d-flex flex-column justify-content-center">
+                            <div class="d-flex justify-content-center"><i class="bi bi-bookmark py-1"></i></div>
+                            <div class="text-center">select from saved places</div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
+        </div>
 
-            <!-- Start location selection -->
-            <div id="start-select">
-
-                <!-- Displayed start location -->
-                <div class="row py-1 border-bottom cursor-pointer" id="start-location-display">
-                    <div class="col-6"><i class="bi bi-geo-alt-fill py-1 orange marker-icon pe-1"></i>Start</div>
-                    <div class="col-6" id="currentStart">Choose location</div>
-                </div>
-
-                <!-- Start location options -->
-                <div class="py-1 hidden" id="start-options">
-
-                    <div class="row" id="start-location-select">
-                        <div class="col-10">
-                            <!-- text input to enter place or address -->
-                            <input type="text" id="start-location" name="start-location"
-                                placeholder="Type place or address" class="w-100">
-                        </div>
-                        <div class="col-2">
-                            <!-- Search button -->
-                            <button id="search-location" class="w-100">Search</button> 
-                        </div>
-                    </div>
-
-                    <div class="row py-1" id="or">
-                        <div class="col-12 d-flex justify-content-center align-items-center">OR</div>
-                    </div>
-
-                    <div class="row" id="start-location-options">
-                        <div class="col-12 d-flex justify-content-between">
-                            
-                            <div class="square-box d-flex flex-column justify-content-center">
-                                <div class="d-flex justify-content-center"><i class="bi bi-crosshair py-1"></i></div>
-                                <div class="text-center">use current location</div>
-                            </div>
-
-                            <div class="square-box d-flex flex-column justify-content-center">
-                                <div class="d-flex justify-content-center"><i class="bi bi-map py-1"></i></div>
-                                <div class="text-center"><p>select on map</p></div>
-                            </div>
-
-                            <div class="square-box d-flex flex-column justify-content-center">
-                                <div class="d-flex justify-content-center"><i class="bi bi-bookmark py-1"></i></div>
-                                <div class="text-center">select from saved places</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        
 
         <!-- Destination location -->
         <div id="destination-select">
@@ -127,7 +132,6 @@
         </div>
 
         </div>
-    </div>
         <!-- Map -->
         <div id="map">
 
@@ -141,15 +145,15 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@mapbox/polyline"></script>
+    <script src="https://unpkg.com/@mapbox/polyline"></script>
     <!-- Mapbox, for decoding encoded polyline -->
-    <script src="https://unpkg.com/@mapbox/polyline"></script> 
+    <script src="https://unpkg.com/@mapbox/polyline"></script>
     <!-- Leaflet JS link -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Custom JS Links -->
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/choose-location.js"></script>
     <script src="./scripts/ors.js"></script>
 </body>
 

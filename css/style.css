@@ -102,3 +102,8 @@
 #map { 
     height: 300px; 
 }
+
+/* Hide the arrow on the popup */
+.leaflet-popup-tip {
+    display: none !important; /* Hides the arrow completely */
+}
