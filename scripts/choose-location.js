@@ -20,22 +20,41 @@ document.getElementById("search-location").addEventListener('click', e => {
 });
 
 // Add click event listener to use current location div
-document.getElementById("current-location").addEventListener('click', locateAndDisplay);
+document.getElementById("current-location").addEventListener('click', async e => {
+    // Get the user's location
+    const [lat, lon, accuracy] = await locateUser();
+    // Display the user's location on the map
+    displayLocation(lat, lon, accuracy);
+    // get place name from lat and lon
+    const placeName = await latLonToAddress(lat, lon);
+    // Display the place name in the start location div
+    document.querySelector('#currentStart').textContent = placeName;
+    // add coordinates to the global variable
+    coordinates[0] = [[lon, lat]];
+    console.log(coordinates);
+});
 
-async function locateAndDisplay() {
-    try {
-        const [lat, lon, accuracy] = await locateUser();
-        console.log(`Location: Latitude: ${lat}, Longitude: ${lon}`);
-        // add coordinates to the start position (0) in the global variable
-        coordinates[0] = [lat, lon];
-        // Add a marker at the user's location
-        const userMarker = L.marker([lat, lon]).addTo(window.mapObject);
-        userMarker.bindPopup(`You are within ${accuracy.toFixed(2)} meters of this point`, {offset: [0, -20]}).openPopup();
-        L.circle([lat, lon], accuracy).addTo(window.mapObject);
-    } catch (error) {
-        
-            console.error("Error locating user:", error.message);
-    };
+async function latLonToAddress(lat, lon) {
+    // define the api url
+    const api_url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;
+    // fetch the data
+    const response = await fetch(api_url);
+    // convert the response to json
+    const data = await response.json();
+    // if the response is ok, display the search results
+    if (response.ok) {
+        console.log(data.display_name);
+        return data.display_name;
+    } else {
+        throw new Error(data.error);
+    }
+}
+
+function displayLocation(lat, lon, accuracy) {
+    // Add a marker at location
+    const userMarker = L.marker([lat, lon]).addTo(window.mapObject);
+    userMarker.bindPopup(`You are within ${accuracy.toFixed(2)} meters of this point`, {offset: [0, -20]}).openPopup();
+    L.circle([lat, lon], accuracy).addTo(window.mapObject);
 };
 
 // Get current user's location using Leaflet's locate method
@@ -52,8 +71,7 @@ async function locateUser() {
                 reject(new Error(e.message));
             });
         });
-
-        console.log(`User's location: Latitude: ${lat}, Longitude: ${lon}, Accuracy: ${accuracy}`);
+        console.log(`Location: Latitude: ${lat}, Longitude: ${lon}, Accuracy: ${accuracy}`);
         return [lat, lon, accuracy]; // Return the location values if successful
 
     } catch (error) { // for when the location cannot be retrieved (eg permissions denied, timeout)
