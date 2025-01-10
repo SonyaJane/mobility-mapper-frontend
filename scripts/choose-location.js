@@ -20,38 +20,49 @@ document.getElementById("search-location").addEventListener('click', e => {
 });
 
 // Add click event listener to use current location div
-document.getElementById("current-location").addEventListener('click',locateUser);
+document.getElementById("current-location").addEventListener('click', locateAndDisplay);
+
+async function locateAndDisplay() {
+    try {
+        const [lat, lon, accuracy] = await locateUser();
+        console.log(`Location: Latitude: ${lat}, Longitude: ${lon}`);
+        // add coordinates to the start position (0) in the global variable
+        coordinates[0] = [lat, lon];
+        // Add a marker at the user's location
+        const userMarker = L.marker([lat, lon]).addTo(window.mapObject);
+        userMarker.bindPopup(`You are within ${accuracy.toFixed(2)} meters of this point`, {offset: [0, -20]}).openPopup();
+        L.circle([lat, lon], accuracy).addTo(window.mapObject);
+    } catch (error) {
+        
+            console.error("Error locating user:", error.message);
+    };
+};
 
 // Get current user's location using Leaflet's locate method
-function locateUser() {
-    console.log("Locating user...");
-    // get user's current location
-    window.mapObject.locate({ setView: true, maxZoom: 16, enableHighAccuracy: true });
+async function locateUser() {
+    try {
+        const [lat, lon, accuracy] = await new Promise((resolve, reject) => {
+            window.mapObject.locate({ setView: false, enableHighAccuracy: true });
 
-    // Handle the location found event
-    window.mapObject.on('locationfound', (e) => {
-        const lat = e.latitude;
-        const lon = e.longitude;
-        const accuracy = e.accuracy; // accuracy radius in meters
+            window.mapObject.on('locationfound', (e) => {
+                resolve([e.latitude, e.longitude, e.accuracy]);
+            });
 
-        console.log(`User's location: Lat: ${lat}, Lon: ${lon}`);
-        console.log(`Location accuracy: ${accuracy} meters`);
-        
-        // add coordinates to the global variable
-        coordinates[0] = [lon, lat]
+            window.mapObject.on('locationerror', (e) => {
+                reject(new Error(e.message));
+            });
+        });
 
-        // Add a marker at the user's location
-        // const userMarker = L.marker([lat, lon]).addTo(window.mapObject);
-        // userMarker.bindPopup(`You are within ${accuracy.toFixed(2)} meters of this point`, {offset: [0, -20]}).openPopup();
-        // L.circle([lat, lon], accuracy).addTo(window.mapObject);
-    });
+        console.log(`User's location: Latitude: ${lat}, Longitude: ${lon}, Accuracy: ${accuracy}`);
+        return [lat, lon, accuracy]; // Return the location values if successful
 
-    // Handle location error
-    window.mapObject.on('locationerror', (e) => {
-        console.error("Location access denied or unavailable:", e.message);
-        alert("Could not get your location. Please allow location access.");
-    });
+    } catch (error) { // for when the location cannot be retrieved (eg permissions denied, timeout)
+        console.error(error.message);
+        alert("Could not get your location. Please allow location access."); 
+        return null; 
+    }
 }
+
 
 function addMarkerAndZoom(lat, lon, popupText = "Marker location", zoomLevel = 15) {
     const marker = L.marker([lat, lon]).addTo(window.mapObject);
@@ -111,24 +122,9 @@ function displaySearchLocationResults(data) {
         placeDiv.dataset.lat = place.lat;
         placeDiv.dataset.lon = place.lon;
         placeDiv.dataset.location = place.display_name;
-        // add an event listener to the div
-        placeDiv.addEventListener('click', e => {
-            let [lon, lat, placeName] = getLocation(e);
-            // add coordinates to the global variable
-            coordinates[0] = [lon, lat];
 
-            console.log(coordinates);
-            // Get the start location element and set the text to the clicked location
-            document.querySelector('#currentStart').textContent = placeName;
-            // Remove the search results div
-            document.querySelector('#location-search-results').remove();
-            showElements(divs_to_hide);
-            hideElements(["start-options"]);
-
-            // add marker to the map
-            L.marker([lat, lon]).addTo(window.mapObject);
-            window.mapObject.setView([lat, lon], zoomLevel = 15);
-        });
+        // add an event listener to the div for choosing the location
+        placeDiv.addEventListener('click', selectLocation);
         
         // Append the div to the new div
         resultsDiv.appendChild(placeDiv);
@@ -136,6 +132,25 @@ function displaySearchLocationResults(data) {
     
     // Append the new div to the body
     document.body.appendChild(resultsDiv);
+}
+
+function selectLocation(e) {
+    // Get the latitude, longitude and place name of the selected location
+    let [lon, lat, placeName] = getLocation(e);
+    // add coordinates to the global variable
+    coordinates[0] = [lon, lat];
+
+    console.log(coordinates);
+    // Get the start location element and set the text to the clicked location
+    document.querySelector('#currentStart').textContent = placeName;
+    // Remove the search results div
+    document.querySelector('#location-search-results').remove();
+    showElements(divs_to_hide);
+    hideElements(["start-options"]);
+
+    // add marker to the map
+    L.marker([lat, lon]).addTo(window.mapObject);
+    window.mapObject.setView([lat, lon], zoomLevel = 15);
 }
 
 function getLocation(e) {
