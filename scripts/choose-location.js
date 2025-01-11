@@ -34,6 +34,60 @@ document.getElementById("current-location").addEventListener('click', async e =>
     console.log(coordinates);
 });
 
+// Add click event listener to choose location on map div
+document.getElementById("select-on-map").addEventListener('click', async e => {
+    window.mapObject.on('click', async function (e) {
+        const lat = e.latlng.lat;
+        const lon = e.latlng.lng;
+    
+        console.log(`Clicked location: Latitude: ${lat.toFixed(5)}, Longitude: ${lon.toFixed(5)}`);
+    
+        // get address from lat and lon
+        const placeName = await latLonToAddress(lat, lon);
+
+        // Create popup content with the location and button
+        const popupContent = `
+        <div class="p-2">
+            <p class="mb-1">${placeName}
+            <hr class="my-1">
+            ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
+            <button id="use-location-btn" class="btn btn-use-this">Use This Location</button>
+        </div>
+        `;
+
+        // remove any existing markers
+        window.mapObject.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+                window.mapObject.removeLayer(layer);
+            }
+        });
+
+        // Add marker at clicked location
+        L.marker([lat, lon]).addTo(window.mapObject)
+            .bindPopup(popupContent)
+            .openPopup();
+    
+        // Center the map on the clicked point
+        window.mapObject.setView([lat, lon]);  // Zoom level 15
+
+        // Add click event listener to the button in the popup
+        document.getElementById("use-location-btn").addEventListener('click', e => {
+            // Display the place name in the start location div
+            document.querySelector('#currentStart').textContent = placeName;
+            // add coordinates to the global variable
+            coordinates[0] = [[lon, lat]];
+            console.log(coordinates);
+            // Remove the popup
+            window.mapObject.closePopup();
+            // Remove the event listener
+            window.mapObject.off('click');
+            // Show the hidden elements
+        });
+    });
+});
+
+
+
 async function latLonToAddress(lat, lon) {
     // define the api url
     const api_url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;

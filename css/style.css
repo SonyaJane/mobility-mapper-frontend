@@ -107,3 +107,11 @@
 .leaflet-popup-tip {
     display: none !important; /* Hides the arrow completely */
 }
+
+.btn-use-this {
+    background-color: var(--color-orange-4);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
