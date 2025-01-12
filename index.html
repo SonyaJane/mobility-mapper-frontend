@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <h1 class="px-1 mb-1">Plan Route</h1>
     </header>
     <main class="container px-1">
@@ -32,23 +32,23 @@
 
             <!-- Current device -->
             <div class="row py-1 border-bottom border-top device-row cursor-pointer" id="current-device-container">
-                <div class="col-6">
+                <div class="col-4">
                     <img src="./images/wheel_no_background_300_x_300.png" alt="Mobility Mapper wheel icon"
                         class="wheel-icon">
                     Device
                 </div>
-                <div class="col-6" id="currentDevice">Manual Wheelchair</div>
+                <div class="col-8" id="currentDevice">Manual Wheelchair</div>
             </div>
 
             <!-- Other device options -->
             <div class="row py-1 hidden device-row option" id="mobilityScooterRow">
-                <div class="col-6"></div>
-                <div class="col-6" data-device="Mobility Scooter">Mobility Scooter</div>
+                <div class="col-4"></div>
+                <div class="col-8" data-device="Mobility Scooter">Mobility Scooter</div>
             </div>
 
             <div class="row py-1 hidden device-row option" id="tricycleRow">
-                <div class="col-6"></div>
-                <div class="col-6" data-device="Tricycle">Tricycle</div>
+                <div class="col-4"></div>
+                <div class="col-8" data-device="Tricycle">Tricycle</div>
             </div>
 
         </div>
@@ -58,52 +58,51 @@
 
             <!-- Display current start location -->
             <div class="row py-1 border-bottom cursor-pointer" id="start-location-display">
-                <div class="col-6"><i class="bi bi-geo-alt-fill py-1 orange marker-icon pe-1"></i>Start</div>
-                <div class="col-6" id="currentStart">Choose location</div>
+                <div class="col-4">
+                    <img src="./images/marker_narrow.png" alt="Mobility Mapper marker"
+                    class="mm-marker">
+                    Start</div>
+                <div class="col-8" id="currentStart">Choose location</div>
             </div>
 
             <!-- Start location selection options -->
             <div class="py-1" id="start-options">
 
-                <!-- Text search -->
-                <div class="row" id="start-location-select">
-                    <div class="col-10">
+                <!-- Text search for a place or address -->
+                <div class="row py-1" id="start-location-select">
+                    <div class="col-11">
                         <!-- text input to enter place or address -->
-                        <input type="text" id="start-location" name="start-location" placeholder="Type place or address"
+                        <input type="text" id="search-input" placeholder="Search for place or address"
                             class="w-100">
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <!-- Search button -->
-                        <button id="search-location" class="w-100">Search</button>
+                        <button id="search-location" class="w-100"><i class="bi bi-search py-1"></i></button>
                     </div>
-                </div>
-
-                <div class="row py-1" id="or">
-                    <div class="col-12 d-flex justify-content-center align-items-center">OR</div>
                 </div>
 
                 <!-- Other Location selection options -->
-                <div class="row" id="start-location-options">
+                <div class="row pt-2" id="start-location-options">
                     <div class="col-12 d-flex justify-content-between">
 
                         <!-- Use current location -->
                         <div class="square-box d-flex flex-column justify-content-center" id="current-location">
                             <div class="d-flex justify-content-center"><i class="bi bi-crosshair py-1"></i></div>
-                            <div class="text-center">use current location</div>
+                            <div class="text-center">Current Location</div>
                         </div>
 
                         <!-- Select on map -->
                         <div class="square-box d-flex flex-column justify-content-center" id="select-on-map">
                             <div class="d-flex justify-content-center"><i class="bi bi-map py-1"></i></div>
                             <div class="text-center">
-                                <p>select on map</p>
+                                <p>Select on Map</p>
                             </div>
                         </div>
 
                         <!-- Select from saved places -->
-                        <div class="square-box d-flex flex-column justify-content-center">
+                        <div class="square-box d-flex flex-column justify-content-center" id="saved-places">
                             <div class="d-flex justify-content-center"><i class="bi bi-bookmark py-1"></i></div>
-                            <div class="text-center">select from saved places</div>
+                            <div class="text-center">Saved Places</div>
                         </div>
                     </div>
 
@@ -116,14 +115,6 @@
         <!-- Destination location -->
         <div id="destination-select">
 
-            <div class="col-6">
-                <label for="destination-location">Destination</label>
-            </div>
-
-            <div class="col-6">
-                <input type="text" id="destination-location" placeholder="Type destination">
-            </div>
-
         </div>
 
         <!-- Route generation button -->
@@ -133,7 +124,7 @@
 
         </div>
         <!-- Map -->
-        <div id="map">
+        <div id="map" class="map">
 
         </div>
     </main>

@@ -91,21 +91,55 @@
     width: 1.2rem;
 }
 
-.marker-icon {
-    font-size: 1.2rem;
+.mm-marker {
+    width: 1.2rem;
 }
+
+ 
 
 .orange {
     color: var(--color-orange-4);
 }
 
-#map { 
+.map { 
     height: 300px; 
 }
 
-/* Hide the arrow on the popup */
+.map-fullscreen {
+    height: 100vh;
+    max-height: 1000px;
+} 
+
 .leaflet-popup-tip {
-    display: none !important; /* Hides the arrow completely */
+    display: none;      
+}
+
+
+.red-placeholder::placeholder {
+    color: red;
+}
+
+.leaflet-popup-content {
+    font-size: 1rem;
+}
+
+.leaflet-container {
+    font-family: var(--primary-font), sans-serif;
+}
+
+/* Pop up for selecting location on map */
+.fixed-popup {
+    position: absolute;
+    top: 10px;  /* 20px from the top */
+    left: 55%;
+    transform: translateX(-50%);
+    background-color: white;
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;  /* Ensure it stays above the map */
+    font-size: 1rem;
+    width: 80%;
 }
 
 .btn-use-this {

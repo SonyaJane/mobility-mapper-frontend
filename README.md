@@ -93,10 +93,13 @@ Use Jest for automatic testing
 
 | Function | Action |
 |----------|--------|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+| getClickedLocation(e) | When user clicks on a location div (created as a result of a search or saved places), get the latitude, longitude, and place name |
+| displayLocationOnMap(lat, lon, zoomLevel) | Display the given location on the map, and zoom to it at the given level |
+| latLonToAddress(lat, lon) | Get the address from the latitude and longitude |
+| locateUser() | Get current user's location using Leaflet's locate method |
+| hideElements(arr) | Hide the elements in the given array |
+| howElements(arr) | Show the elements in the given array |
+| setLocationText(placeName, divId)| Display the name of the selected location in the div with the given id |
 
 ## Open Route Service
 
