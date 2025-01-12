@@ -36,11 +36,11 @@ $(document).ready(function () {
 
     });
 
-    // Toggle display of #start-options when clicking the row #start-location-display
+    // Toggle display of #waypoint-selection-options when clicking the row #start-location-display
     // touchstart registers the moment the user touches the screen rather than waiting for them to lift their finger
-    $('#start-location-display').on('click touchstart', function () {
-        $('#start-options').toggleClass('hidden');
-    });
+    // $('#start-location-display').on('click touchstart', function () {
+    //     $('#waypoint-selection-options').toggleClass('hidden');
+    // });
 
 
 });
