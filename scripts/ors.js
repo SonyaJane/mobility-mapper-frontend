@@ -5,7 +5,7 @@ const API_URL = `https://api.openrouteservice.org/v2/directions/${profile}/json`
 
 document.getElementById("generate-route").addEventListener("click", e => postForm(e));
 
-//let coordinates = "[[-4.647578,51.968935],[-4.684234,52.111446]]";
+let coordinates = "[[-4.647578,51.968935],[-4.684234,52.111446]]";
 let instructions = "false";
 const body = `{"coordinates":${coordinates}, "instructions":${instructions}}`;
 

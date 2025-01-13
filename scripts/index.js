@@ -1,46 +1,53 @@
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // Create map on load
-    // make mapObject a global variable so it can be accessed by other functions
+    // Create MM (Mobility Mapper) global namespace to store global variables
+    window.MM = window.MM || {}; // || {} ensures that if the namespace already exists, it won't be overwritten
 
-    window.mapObject = createMap([51.97, -4.64], 10);
-        
-    // Create a map with the given centre coordinates and zoom level
-    function createMap(centerCoords, zoomLevel) {
+    // Initialise global variables
+    MM.currentDevice = null;
+    MM.waypoints = [];
+    MM.coordinates = []; // Coordinates for the route
     
-        // Initialise Leaflet map
-        const map = L.map('map').setView(centerCoords, zoomLevel);
+    // Initialise Leaflet map
+    MM.map = L.map('map');
     
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-    
-        return map;
-    }
+    // locate the user's location and set zoom level
+    MM.map.locate({setView: true, maxZoom: 6});
 
-    // Toggle display of options when clicking the main device row
-    // touchstart registers the moment the user touches the screen rather than waiting for them to lift their finger
-    $('#current-device-container').on('click touchstart', function () {
-        $('.option').toggleClass('hidden');
+    // get the user's location
+    MM.map.on('locationfound', e => {
+        MM.userLocation = [e.latitude, e.longitude, e.accuracy];
     });
 
-    // Handle the selection of a new device
-    $('.option').on('click touchstart', function () {
-        const newDevice = $(this).find('[data-device]').text();
-        const currentDevice = $('#currentDevice').text();
+    // if the user's location cannot be found, request location access
+    MM.map.on('locationerror', e => {
+        alert("Could not get your location. Please allow location access.");
+    });
+  
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(MM.map);
 
+    // Device selection section: Add event listeners to show/hide device options
+
+    // Toggle display of other device options when clicking the current device row
+    document.getElementById('current-device-container').addEventListener('click', () => {
+        document.querySelectorAll('.device-option').forEach(item => {
+            item.classList.toggle('hidden');
+        });
+    });
+
+    // Handle the selection of a different device option
+    document.querySelectorAll('.device-option').forEach(item => {
+        item.addEventListener('click', e => {
+        // get the name of the new device (stored in the last child of the clicked element)
+        const newDevice = e.currentTarget.lastElementChild.textContent;
+        // get the name of the current device 
+        const currentDevice = document.getElementById('currentDevice').textContent;
         // Swap values
-        $('#currentDevice').text(newDevice);
-        $(this).find('[data-device]').text(currentDevice);
-
+        document.getElementById('currentDevice').textContent = newDevice;
+        e.currentTarget.lastElementChild.textContent = currentDevice;
+        });
     });
-
-    // Toggle display of #waypoint-selection-options when clicking the row #start-location-display
-    // touchstart registers the moment the user touches the screen rather than waiting for them to lift their finger
-    // $('#start-location-display').on('click touchstart', function () {
-    //     $('#waypoint-selection-options').toggleClass('hidden');
-    // });
-
-
 });

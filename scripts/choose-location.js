@@ -11,9 +11,9 @@ const savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759 },
 { name: "Work", lat: 51.485925, lon: -3.176533 },
 { name: "Dentist", lat: 51.519471, lon: -3.117880 }];
 
-// Define a global variable to store the list of latitude and 
-// longitude coordinates for the route
-let coordinates = [];
+// Waypoint markers
+let startMarker = null;
+let endMarker = null;
 
 // IDs of the divs to hide when the user searches for location
 const divs_to_hide =   ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "other-selection-options", "map"];
@@ -130,6 +130,7 @@ function addEventListenersToLocationSelctors(outputDivId) {
                 </div>
                 `;
 
+            // TODO: change this to remove only existing markers for current waypoint
             // remove any existing markers
             window.mapObject.eachLayer((layer) => {
                 if (layer instanceof L.Marker) {
@@ -137,6 +138,7 @@ function addEventListenersToLocationSelctors(outputDivId) {
                 }
             });
 
+            // TODO: change this to link marker to current waypoint
             // add marker at clicked location
             L.marker([lat, lon]).addTo(window.mapObject);
 
