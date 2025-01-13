@@ -40,13 +40,6 @@ const htmlContent = `
 </div>
 `
 function showLocationSelectionOptions(e) {
-    // check if #waypoint-selection-options already exists
-    const existingDiv = document.getElementById('waypoint-selection-options');
-    // if it exists, remove it
-    if (existingDiv) {
-        // remove existingDiv
-        existingDiv.remove();
-    }
     const newDiv = document.createElement('div');
     newDiv.className = 'py-1';
     newDiv.id = 'waypoint-selection-options';

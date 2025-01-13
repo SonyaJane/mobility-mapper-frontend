@@ -16,9 +16,9 @@ const savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759 },
 let coordinates = [];
 
 // IDs of the divs to hide when the user searches for location
-const divs_to_hide = ["map", "device-select", "generate-route-container", "destination-select", "start-location-display", "other-selection-options"];
-const divs_to_hide_2 = ["map", "device-select", "generate-route-container", "destination-select", "start-location-display", "other-selection-options", "text-search", "header"];
-let divs = ["header", "device-select", "start-location-display", "generate-route-container"];
+const divs_to_hide =   ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "other-selection-options", "map"];
+const divs_to_hide_2 = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options", "map"];
+const divs_to_hide_3             = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
 
 // Add click event listeners
 
@@ -26,24 +26,47 @@ let divs = ["header", "device-select", "start-location-display", "generate-route
 // get all elements with class .location-selection
 document.querySelectorAll('.location-selection').forEach(item => {
     item.addEventListener('click', e => {
-        // If the div already exists, remove it, otherwise create it and add event listeners
+
+        // if waypoint-selection-options div does not exist for any waypoint, 
+        // add it for this waypoint
+        // if waypoint-selection-options div already exists for this waypoint, 
+        // remove it and finish, else add it for this waypoint
+        // if waypoint-selection-options div already exists for another waypoint,
+        // remove it then add it for this waypoint
+
         const existingDiv = document.getElementById('waypoint-selection-options');
-        if (existingDiv) {
-            existingDiv.remove();
+        // If it doesnt exist, add it
+        if (!existingDiv) {
+            //add the location selection options div for this waypoint
+            addDiv(e)
         } else {
+            // If it exists for this waypoint, remove it and finish
+            if (existingDiv.previousElementSibling === e.currentTarget) {
+                existingDiv.remove();
+                return;
+            } else { // if it exists for another waypoint, remove it and add it for this waypoint
+                existingDiv.remove();
+                //add the location selection options div
+                addDiv(e)
+            }
+        }
+
+        function addDiv(e) {
             showLocationSelectionOptions(e);
-            // get id of last child div of div that was clicked (requred to display the selected location, and store the coordinates)
+            // get id of last child div of div that was clicked 
+            // (requred to display the selected location, and store the coordinates)
             const lastChildId = e.currentTarget.lastElementChild.id;
-            
+            // add event listeners to the location selection options
             addEventListenersToLocationSelctors(lastChildId);
         }
+
     }
     );
 });
 
 // add event listeners to the location selection options
 function addEventListenersToLocationSelctors(outputDivId) {
-    
+
     // Add click event listener to button for "Search for place or address" text input
     // (Magnifying glass icon)
     document.getElementById("text-search-submit").addEventListener('click', async e => {
@@ -52,12 +75,12 @@ function addEventListenersToLocationSelctors(outputDivId) {
         const locationText = document.getElementById("text-search-input").value;
 
         if (locationText) {
-            // Hide everything except the header, search text input, and search results div
+            // Hide everything except search text input, and search results div
             hideElements(divs_to_hide);
             // Use the search input to query the Nominatim API
             const data = await searchLocationNominatim(locationText);
             // Display the search results
-            displaySearchLocationResults(data);
+            displaySearchLocationResults(data, outputDivId);
         } else {
             // If the input field is empty, add placeholder text in red
             document.getElementById("text-search-input").placeholder = "Please enter a location to search";
@@ -75,39 +98,37 @@ function addEventListenersToLocationSelctors(outputDivId) {
         // get place name from lat and lon
         const placeName = await latLonToAddress(lat, lon);
         // Display the place name in the start location div
-        document.querySelector('#currentStart').textContent = placeName;
-        // add coordinates to the global variable
-        coordinates[0] = [[lon, lat]];
+        document.getElementById(outputDivId).textContent = placeName;
+        // add coordinates as a data attribute to the div
+        document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
     });
 
-    // Add click event listener to choose location on map div
+    // Add click event listener to select on map div
     document.getElementById("select-on-map").addEventListener('click', async e => {
         // hide elements
-        hideElements(divs);
+        hideElements(divs_to_hide_3);
         // make map take up full screen
         document.getElementById("map").classList.add("map-fullscreen");
-
-        window.mapObject.invalidateSize();  // Ensure map resizes to fit the new container size
+        // Ensure map resizes to fit the new container size
+        window.mapObject.invalidateSize();  
 
         // add click event listener to the map
         window.mapObject.on('click', async function (e) {
             // Get the latitude and longitude of the clicked point
             const lat = e.latlng.lat;
             const lon = e.latlng.lng;
-
             // get address from lat and lon
             const placeName = await latLonToAddress(lat, lon);
-
             // Create popup content with the location and button
             const popupContent = `
-        <div class="p-2 text-center">
-            <p class="mb-1">${placeName}
-            <hr class="my-2">
-            ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
-            <button id="use-location-btn" class="btn btn-use-this m-2">
-            Select This Location</button>
-        </div>
-        `;
+                <div class="p-2 text-center">
+                    <p class="mb-1">${placeName}
+                    <hr class="my-2">
+                    ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
+                    <button id="use-location-btn" class="btn btn-use-this m-2">
+                    Select This Location</button>
+                </div>
+                `;
 
             // remove any existing markers
             window.mapObject.eachLayer((layer) => {
@@ -139,7 +160,7 @@ function addEventListenersToLocationSelctors(outputDivId) {
         // hide elements
         hideElements(divs_to_hide_2);
         // show the saved places
-        showSavedPlaces();
+        showSavedPlaces(outputDivId);
     });
 
 };
@@ -161,7 +182,7 @@ function showFixedPopup(content) {
     document.getElementById('map').appendChild(popup);
 }
 
-function showSavedPlaces() {
+function showSavedPlaces(outputDivId) {
     // create a new div with id #saved-places-list
     const savedPlacesDiv = document.createElement('div');
     savedPlacesDiv.id = 'saved-places-list';
@@ -189,12 +210,13 @@ function showSavedPlaces() {
         // add an event listener to the div for choosing the location
         placeDiv.addEventListener('click', e => {
             let [lon, lat, placeName] = getClickedLocation(e);
-            setLocationText(placeName, '#currentStart');
+            setLocationText(placeName, outputDivId);
+            // add coordinates as a data attribute to the div
+            document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
+
             // Display the location on the map
             displayLocationOnMap(lat, lon, zoom = 15)
-            // add coordinates to the global variable
-            coordinates[0] = [lon, lat];
-            console.log(coordinates);
+
             // Remove the saved places div
             document.querySelector('#saved-places-list').remove();
             // Show the hidden elements
@@ -214,9 +236,9 @@ function addEventListenerToUseLocationButton(lat, lon, placeName, outputDivId) {
     // Add click event listener to the button in the popup
     document.getElementById("use-location-btn").addEventListener('click', e => {
         // show hidden divs
-        showElements(divs);
+        showElements(divs_to_hide_3);
         // Display the place name in the start location div
-        document.getElementById(outputDivId).textContent = placeName;
+        setLocationText(placeName, outputDivId);
         // add coordinates as a data attribute to the div
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
         // Remove the popup
@@ -227,7 +249,12 @@ function addEventListenerToUseLocationButton(lat, lon, placeName, outputDivId) {
         document.getElementById("map").classList.remove("map-fullscreen");
         // reset view to center on selected location
         window.mapObject.invalidateSize();
-        window.mapObject.setView([lat, lon]);
+        window.mapObject.setView([lat, lon]), undefined, { animate: false };
+        // go to the top of the page
+        console.log("Going to the top of the page");
+        setTimeout(() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });  // Scroll to the top of the page
+        }, 5000); 
     });
 };
 
@@ -313,7 +340,7 @@ async function searchLocationNominatim(locationText) {
     }
 }
 
-function displaySearchLocationResults(data) {
+function displaySearchLocationResults(data, outputDivId) {
     // Displays the results of a search for a place or address 
     // Creates a new div for each result with a click event listener
 
@@ -345,12 +372,11 @@ function displaySearchLocationResults(data) {
         // add an event listener to the div for choosing the location
         placeDiv.addEventListener('click', e => {
             let [lon, lat, placeName] = getClickedLocation(e);
-            setLocationText(placeName, '#currentStart');
+            setLocationText(placeName, outputDivId);
+            // add coordinates as a data attribute to the div
+            document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
             // Display the location on the map
             displayLocationOnMap(lat, lon, zoomLevel = 15)
-            // add coordinates to the global variable
-            coordinates[0] = [lon, lat];
-            console.log(coordinates);
             // Remove the search results div
             document.querySelector('#location-search-results').remove();
             // Show the hidden elements
@@ -369,7 +395,7 @@ function displaySearchLocationResults(data) {
 
 function setLocationText(placeName, divId) {
     // Display the name of the seleted location in the div with the given id
-    document.querySelector(divId).textContent = placeName;
+    document.getElementById(divId).textContent = placeName;
 
 }
 
