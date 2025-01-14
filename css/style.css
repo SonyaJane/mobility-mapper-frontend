@@ -9,58 +9,101 @@
 	--primary-font: 'Open Sans', sans-serif;
 	--secondary-font: 'Bitter', serif;
 
+    --bs-body-font-size: 1.4rem;
+
     /* Colours */
     --color-coffee-6: rgb(67, 43, 32); 	/* main font-color */
     --color-orange-1: #f5ddd2;
     --color-orange-2: #eabaa5;
     --color-orange-4: #bd582c; 	/* main colour */
 
+    /* Header height */
+    --header-height: 2.5rem;
 
-    /* Asterisk wildcard selector to override default styles added by the browser */
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
-    }
+    /* Footer height */
+    --footer-height: 55px;
 
     html {
         font-size: 16px; /* Ensure 1rem is equal to 16px */
     }
+}
 
-    body {
-        /* Font family and colour */
-        font-family: var(--primary-font), sans-serif;
-        color: var(--color-coffee-6);
-        max-width: 420px;
-    }
+body {
+    /* Font family and colour */
+    font-family: var(--primary-font), sans-serif;
+    color: var(--color-coffee-6);
+    /* max-width: 420px; */
+}
 
-    a {
-        text-decoration: none;
-        color: var(--color-coffee-6);
-        cursor: pointer;
-    }
+body, html {
+    /*  Ensure the body and html span the full viewport height. */
+    height: 100%;
+    margin: 0;
+}
 
-    h2, .h2 {
-        font-family: var(--secondary-font), sans-serif;
-        font-weight: 700;
-    }
+main {
+    /* Make main>a flex container with vertical stacking. */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--header-height) - var(--footer-height)); /* Full viewport height minus header and footer heights */
+}
 
-    h3, .h3 {
-        font-family: var(--secondary-font), sans-serif;
-        font-weight: 600;
-    }
+.map {
+    flex-grow: 1; /* Allow the map to grow and take up available space */
+}
 
-    h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-        font-weight: 400;
-    }
+header {
+    height: var(--header-height);
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Aligns content to left and right */
+    align-items: bottom;
+}
 
-    /* Buttons */
-    .btn {
-        cursor: pointer;
-        transition: background-color 0.3s ease; /* Smooth transition on hover */
-        font-family: var(--primary-font), sans-serif;
-    }
+header > h1 {
+    font-size: 1.5rem;
+    letter-spacing: -1px; /* Reduce space between letters */
+    padding-bottom: 5px;
+    margin: 0;
+}
 
+a {
+    text-decoration: none;
+    color: var(--color-coffee-6);
+    cursor: pointer;
+}
+
+h1, .h1 {
+    font-family: var(--primary-font), sans-serif;
+    font-weight: 700;
+}
+
+h2, .h2 {
+    font-family: var(--primary-font), sans-serif;
+    font-weight: 700;
+}
+
+h3, .h3 {
+    font-family: var(--secondary-font), sans-serif;
+    font-weight: 600;
+}
+
+h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    font-weight: 400;
+}
+
+/* Buttons */
+.btn {
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    font-family: var(--primary-font), sans-serif;
+}
+
+/* Asterisk wildcard selector to override default styles added by the browser */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
 }
 
 .hidden {
@@ -69,6 +112,39 @@
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+
+#logo {
+    height: 1.4rem;
+}
+
+.row {
+    margin: 0;
+    padding: 0;
+}
+
+/* override Bootstrap */
+.row>* {
+    padding: 0;
+    margin: 0
+}
+
+#current-device-container {
+    border-top: solid 1px #eabaa5;
+}
+
+.flex-center {
+    display: flex;        /* Vertically center */
+    align-items: center;
+}
+
+.border-bottom-orange {
+    border-bottom: solid 1px #eabaa5;
+}
+
+.border-top-orange {
+    border-top: solid 1px #eabaa5;
 }
 
 .device-row:hover, #start-location-display:hover {
@@ -88,21 +164,15 @@
 }
 
 .wheel-icon {
-    width: 1.2rem;
+    height: 1.2rem;
 }
 
 .mm-marker {
-    width: 1.2rem;
+    height: 1.4rem;
 }
-
- 
 
 .orange {
     color: var(--color-orange-4);
-}
-
-.map { 
-    height: 300px; 
 }
 
 .map-fullscreen {
@@ -113,7 +183,6 @@
 .leaflet-popup-tip {
     display: none;      
 }
-
 
 .red-placeholder::placeholder {
     color: red;
@@ -130,16 +199,15 @@
 /* Pop up for selecting location on map */
 .fixed-popup {
     position: absolute;
-    top: 10px;  /* 20px from the top */
-    left: 55%;
-    transform: translateX(-50%);
+     /* at the bottom of the screen */
+    bottom: 0px; 
+    left: 50%;                   /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
     background-color: white;
-    /* border: 1px solid black; */
-    border-radius: 4px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    border: solid 1px var(--color-orange-1);
     z-index: 1000;  /* Ensure it stays above the map */
     font-size: 1rem;
-    width: 80%;
+    width: 100%;
 }
 
 .btn-use-this {
@@ -148,4 +216,13 @@
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+}
+
+footer {
+    height: var(--footer-height);
+    /* ensure it stays at the bottom of the page */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--color-orange-1);
 }

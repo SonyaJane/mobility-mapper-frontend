@@ -1,10 +1,4 @@
-// Description: This script is used to allow the user to search for 
-// a location using text input, and then select a location from the 
-// search results to use as a start or finish location, or waypoint 
-// on the route.
-
-// Get the map object from the global scope
-const map = window.mapObject;
+console.log(window.MM);
 
 // List of user saved places
 const savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759 },
@@ -21,6 +15,54 @@ const divs_to_hide_2 = ["header", "device-select", "start-location-display", "de
 const divs_to_hide_3             = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
 
 // Add click event listeners
+
+// add click event listener to the map
+MM.map.on('click', async function (e) {
+    // Get the latitude and longitude of the clicked point
+    const lat = e.latitude;
+    const lon = e.longitude;
+    // get address from lat and lon
+    const placeName = await latLonToAddress(lat, lon);
+    // Create popup content with the location and a button
+    const popupContent = `
+        <div class="p-2 text-center">
+            <p class="mb-1">${placeName}
+            <hr class="my-2">
+            ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
+            <button id="start-here" class="btn btn-use-this m-2">
+            Start Here</button>
+            <button id="add-waypoint" class="btn btn-use-this m-2">
+            Add as Waypoint</button>
+            <button id="end-here" class="btn btn-use-this m-2">
+            Set as Destination</button>
+        </div>
+        `;
+
+    // TODO: change this to remove only existing markers for current waypoint
+    // remove any existing markers
+    MM.map.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+            MM.map.removeLayer(layer);
+        }
+    });
+
+    // TODO: change this to link marker to current waypoint
+    // add marker at clicked location
+    L.marker([lat, lon]).addTo(MM.map);
+
+    // Center the map on the clicked point
+    // get current zoom level
+    const zoom = MM.map.getZoom();
+    // zoom to level 15 or remain at current zoom level, whichever is greater
+    MM.map.setView([lat, lon], Math.max(15, zoom));
+
+    // add popup at top center of map
+    showFixedPopup(popupContent);
+
+    // Add click event listeners to the buttons in the popup
+    addEventListenerToUseLocationButton(lat, lon, placeName, btnId);
+
+});
 
 // Add a click event listener for choosing a location
 // get all elements with class .location-selection
@@ -92,7 +134,23 @@ function addEventListenersToLocationSelctors(outputDivId) {
     // Add click event listener to "Current Location" square
     document.getElementById("use-current-location").addEventListener('click', async e => {
         // Get the user's location
-        const [lat, lon] = await locateUser();
+        // check if user location is already stored in MM.userLocation
+        // if not try to get it again
+        if (!MM.userLocation) {
+            locateUser().then(userLocation => { 
+                MM.userLocation = userLocation;
+                // if user location is still not available, alert the user
+                if (!MM.userLocation) {
+                    alert("Could not get your location. Please allow location access.");
+                    // exit the function
+                    return;
+                }
+            });
+        }
+
+        const lat = MM.userLocation.lat; 
+        const lon = MM.userLocation.lon;
+
         // Display the user's location on the map
         displayLocationOnMap(lat, lon, 15);
         // get place name from lat and lon
@@ -101,6 +159,7 @@ function addEventListenersToLocationSelctors(outputDivId) {
         document.getElementById(outputDivId).textContent = placeName;
         // add coordinates as a data attribute to the div
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
+        
     });
 
     // Add click event listener to select on map div
@@ -110,51 +169,9 @@ function addEventListenersToLocationSelctors(outputDivId) {
         // make map take up full screen
         document.getElementById("map").classList.add("map-fullscreen");
         // Ensure map resizes to fit the new container size
-        window.mapObject.invalidateSize();  
+        MM.map.invalidateSize();  
 
-        // add click event listener to the map
-        window.mapObject.on('click', async function (e) {
-            // Get the latitude and longitude of the clicked point
-            const lat = e.latlng.lat;
-            const lon = e.latlng.lng;
-            // get address from lat and lon
-            const placeName = await latLonToAddress(lat, lon);
-            // Create popup content with the location and button
-            const popupContent = `
-                <div class="p-2 text-center">
-                    <p class="mb-1">${placeName}
-                    <hr class="my-2">
-                    ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
-                    <button id="use-location-btn" class="btn btn-use-this m-2">
-                    Select This Location</button>
-                </div>
-                `;
-
-            // TODO: change this to remove only existing markers for current waypoint
-            // remove any existing markers
-            window.mapObject.eachLayer((layer) => {
-                if (layer instanceof L.Marker) {
-                    window.mapObject.removeLayer(layer);
-                }
-            });
-
-            // TODO: change this to link marker to current waypoint
-            // add marker at clicked location
-            L.marker([lat, lon]).addTo(window.mapObject);
-
-            // Center the map on the clicked point
-            // get current zoom level
-            const zoom = window.mapObject.getZoom();
-            // zoom to level 15 or remain at current zoom level, whichever is greater
-            window.mapObject.setView([lat, lon], Math.max(15, zoom));
-
-            // add popup at top center of map
-            showFixedPopup(popupContent);
-
-            // Add click event listener to the button in the popup
-            addEventListenerToUseLocationButton(lat, lon, placeName, outputDivId);
-
-        });
+        
     });
 
     // Add click event listener to select location from saved places
@@ -234,31 +251,61 @@ function showSavedPlaces(outputDivId) {
 }
 
 
-function addEventListenerToUseLocationButton(lat, lon, placeName, outputDivId) {
+function addEventListenerToUseLocationButton(lat, lon, placeName, btnID) {
     // Add click event listener to the button in the popup
-    document.getElementById("use-location-btn").addEventListener('click', e => {
-        // show hidden divs
-        showElements(divs_to_hide_3);
+    document.getElementById(btnID).addEventListener('click', e => {
+        // get output div id given the button id
+        let outputDivId;
+        switch (btnID) {
+            case "start-here":
+                outputDivId = "start-location-display";
+                break;
+            case "end-here":
+                outputDivId = "destination-location-display";
+                break;
+            case "add-waypoint":
+                // create a new waypoint div
+                outputDivId = createWaypointDiv().id;
+                break;
+        }
         // Display the place name in the start location div
         setLocationText(placeName, outputDivId);
         // add coordinates as a data attribute to the div
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
         // Remove the popup
         document.getElementById('fixed-popup').remove();
-        // Remove the event listener
-        window.mapObject.off('click');
-        // Retun the map to its original size
-        document.getElementById("map").classList.remove("map-fullscreen");
+    });
+};
+
+// create a new waypoint div
+function createWaypointDiv() {
+    const waypointDiv = document.createElement('div');
+    waypointDiv.classList.add('row', 'px-1', 'py-3', 'border-bottom', 'cursor-pointer', 'location-selection', 'flex-center', 'border-top-orange');
+    waypointDiv.id=`waypoint-location-display-${MM.waypoints.length}`;
+    waypointDiv.innerHTML = `
+    <div class="col-4">
+        <img src="./images/marker_narrow.png" alt="Mobility Mapper marker" class="mm-marker">
+        Waypoint
+    </div>
+    <div class="col-8 text-end" id="currentDestination">Choose location</div>`;
+    return waypointDiv;
+}
+
+function exitMapFullScreen() {
+// show hidden divs
+showElements(divs_to_hide_3);
+// Return the map to its original size
+document.getElementById("map").classList.remove("map-fullscreen");
+// Ensure map resizes to fit the new container size
+MM.map.invalidateSize();
         // reset view to center on selected location
-        window.mapObject.invalidateSize();
-        window.mapObject.setView([lat, lon]), undefined, { animate: false };
+        MM.map.setView([lat, lon]), undefined, { animate: false };
         // go to the top of the page
         console.log("Going to the top of the page");
         setTimeout(() => {
             window.scrollTo({ top: 0, left: 0, behavior: 'auto' });  // Scroll to the top of the page
         }, 5000); 
-    });
-};
+}
 
 async function latLonToAddress(lat, lon) {
     // Get the address from the latitude and longitude
@@ -279,34 +326,11 @@ async function latLonToAddress(lat, lon) {
 
 function displayLocationOnMap(lat, lon, zoom) {
     // Add a marker at given location
-    L.marker([lat, lon]).addTo(window.mapObject);
-    window.mapObject.setView([lat, lon], zoomLevel = zoom);
+    L.marker([lat, lon]).addTo(MM.map);
+    MM.map.setView([lat, lon], zoomLevel = zoom);
 };
 
-// Get current user's location using Leaflet's locate method
-async function locateUser() {
-    // Get current user's location using Leaflet's locate method
-    try {
-        const [lat, lon, accuracy] = await new Promise((resolve, reject) => {
-            window.mapObject.locate({ setView: false, enableHighAccuracy: true });
 
-            window.mapObject.on('locationfound', (e) => {
-                resolve([e.latitude, e.longitude, e.accuracy]);
-            });
-
-            window.mapObject.on('locationerror', (e) => {
-                reject(new Error(e.message));
-            });
-        });
-        console.log(`Location: Latitude: ${lat}, Longitude: ${lon}, Accuracy: ${accuracy}`);
-        return [lat, lon, accuracy]; // Return the location values if successful
-
-    } catch (error) { // for when the location cannot be retrieved (eg permissions denied, timeout)
-        console.error(error.message);
-        alert("Could not get your location. Please allow location access.");
-        return null;
-    }
-}
 
 function hideElements(arr) {
     arr.forEach((divId) => { document.getElementById(divId).classList.add('hidden') });
