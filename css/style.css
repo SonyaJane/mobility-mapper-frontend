@@ -18,10 +18,10 @@
     --color-orange-4: #bd582c; 	/* main colour */
 
     /* Header height */
-    --header-height: 2.5rem;
+    --header-height: 3rem;
 
     /* Footer height */
-    --footer-height: 55px;
+    --footer-height: 70px;
 
     html {
         font-size: 16px; /* Ensure 1rem is equal to 16px */
@@ -55,10 +55,7 @@ main {
 header {
     height: var(--header-height);
     width: 100%;
-    display: flex;
-    justify-content: space-between; /* Aligns content to left and right */
-    align-items: bottom;
-}
+    justify-content: space-between; /* Aligns content to left and right */}
 
 header > h1 {
     font-size: 1.5rem;
@@ -114,7 +111,6 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     cursor: pointer;
 }
 
-
 #logo {
     height: 1.4rem;
 }
@@ -158,13 +154,20 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .square-box {
     border: solid 1px var(--color-coffee-6);
     border-radius: 5px;
-    width: 30%;
+    width: 31%;
     aspect-ratio: 1/1;
     box-sizing: border-box;
 }
 
+.square-box p {
+    font-size: clamp(1.1rem, 1vw, 1.5rem); /* Font size scales between 0.8rem and 1.5rem based on viewport */
+}
+
 .wheel-icon {
-    height: 1.2rem;
+    width: 24px; 
+    height: 24px;
+    margin-top: 5px;
+    margin-bottom: 10px; 
 }
 
 .mm-marker {
@@ -174,11 +177,6 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .orange {
     color: var(--color-orange-4);
 }
-
-.map-fullscreen {
-    height: 100vh;
-    max-height: 1000px;
-} 
 
 .leaflet-popup-tip {
     display: none;      
@@ -198,11 +196,8 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 /* Pop up for selecting location on map */
 .fixed-popup {
-    position: absolute;
-     /* at the bottom of the screen */
-    bottom: 0px; 
-    left: 50%;                   /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
+    /* at the bottom of the screen, above the footer */
+    bottom: var(--footer-height);
     background-color: white;
     border: solid 1px var(--color-orange-1);
     z-index: 1000;  /* Ensure it stays above the map */
@@ -218,11 +213,38 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border-radius: 5px;
 }
 
+#text-search-input {
+    width: auto;
+    font-size: inherit; /* overrides the font-size set by Bootstrap */
+    flex-grow: 1;       /* Make the input take the remaining space */
+    margin-right: 5px;
+}
+
+#text-search-submit {
+    /* Make button same height as input field */
+    height: 47px;
+    width: 47px; /* Make the button square */
+    padding: 0;    
+    display: flex; /* Center the icon inside */
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
 footer {
     height: var(--footer-height);
-    /* ensure it stays at the bottom of the page */
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--color-orange-1);
+} 
+
+footer button {
+    border: none; /* Remove button border */
+    background-color: transparent; /* Transparent background */
+    flex-grow: 1; /* Make all buttons equal width */
+}
+
+footer i {
+    font-size: 1.5rem; /* Icon size */
+}
+
+footer span {
+    font-size: 0.8rem; /* Label size */
 }

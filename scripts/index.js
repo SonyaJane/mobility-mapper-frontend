@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // IDs of the divs to hide when the user searches for location
     const divs_to_hide = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "other-selection-options", "map"];
     const divs_to_hide_2 = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options", "map"];
-    const divs_to_hide_3 = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
+    const divs_to_hide_3 = ["device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
 
             
     // Initialise Leaflet map
@@ -39,8 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(MM.map);
-
-
 
 
     // Add click event listeners
@@ -72,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // add popup at bottom of screen, below map, and get its height
         popupHeight = showFixedPopup(popupContent);
-        console.log(`Popup height: ${popupHeight}`);
         expandMap(popupHeight);
 
         // TODO: change this to remove only existing markers for current waypoint
@@ -120,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // If it exists for this waypoint, remove it and finish
                 if (existingDiv.previousElementSibling === e.currentTarget) {
                     existingDiv.remove();
+                    MM.map.invalidateSize();
                     return;
                 } else { // if it exists for another waypoint, remove it and add it for this waypoint
                     existingDiv.remove();
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // add event listeners to the location selection options
                 addEventListenersToLocationSelctors(lastChildId);
             }
-
         }
         );
     });
@@ -191,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // get place name from lat and lon
             const placeName = await latLonToAddress(lat, lon);
             // Display the place name in the start location div
-            document.getElementById(outputDivId).textContent = placeName;
+            // get the string before the first comma
+            document.getElementById(outputDivId).textContent = placeName.split(",")[0];
             // add coordinates as a data attribute to the div
             document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
 
@@ -214,15 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function expandMap(divHeight) {
-        // hide elements
+        // hide all elements except the map and footer
         hideElements(divs_to_hide_3);
+        // exapnd map to fill the remaining space on the screen
         // make map take up all the space on the screen above the popup
-        // get height of screen minus the height of the popup
-        console.log(`Window height ${window.innerHeight}`);
-        const mapHeight = window.innerHeight - divHeight;
-        console.log(`Map height: ${mapHeight}`);
+        // get height of screen minus the height of the popup and the height of the footer
+        //const mapHeight = window.innerHeight - divHeight;    
         // set the height of the map to the calculated height
-        document.getElementById("map").style.height = `${mapHeight}px`;
+        //document.getElementById("map").style.height = `${mapHeight}px`;
         //document.getElementById("map").classList.add("map-fullscreen");
         // Ensure map resizes to fit the new container size
         MM.map.invalidateSize();
@@ -328,10 +325,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let outputDivId;
             switch (btnID) {
                 case "start-here":
-                    outputDivId = "start-location-display";
+                    outputDivId = "currentStart";
                     break;
                 case "end-here":
-                    outputDivId = "destination-location-display";
+                    outputDivId = "currentDestination";
                     break;
                 case "add-waypoint":
                     // create a new waypoint div
@@ -345,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Remove the popup
             document.getElementById('fixed-popup').remove();
             // return the map to its original size
-            exitMapFullScreen();
+            exitMapFullScreen(lat, lon);
         });
     };
 
@@ -363,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return waypointDiv;
     }
 
-    function exitMapFullScreen() {
+    function exitMapFullScreen(lat, lon) {
         // show hidden divs
         showElements(divs_to_hide_3);
         // Return the map to its original size
@@ -390,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
         // if the response is ok, display the search results
         if (response.ok) {
-            console.log(data.display_name);
+            //console.log(data);
             return data.display_name;
         } else {
             throw new Error(data.error);
@@ -402,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
         L.marker([lat, lon]).addTo(MM.map);
         MM.map.setView([lat, lon], zoomLevel = zoom);
     };
-
 
     // hide elements in the input array
     function hideElements(arr) {
@@ -505,8 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setLocationText(placeName, divId) {
         // Display the name of the seleted location in the div with the given id
-        document.getElementById(divId).textContent = placeName;
-
+        document.getElementById(divId).textContent = placeName.split(",")[0];
     }
 
     function getClickedLocation(e) {
