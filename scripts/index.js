@@ -13,10 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
                       { name: "Work", lat: 51.485925, lon: -3.176533, address: "1 Work Street, Cardiff" },
                       { name: "Dentist", lat: 51.519471, lon: -3.117880, address: "1 Dentist Street, Cardiff" }];
     
+    // custom markers
+    startMarkerUrl = '../images/marker_start.png';
+    endMarkerUrl =  '../images/marker_end.png';
+
+    const startMarker = L.icon({
+        iconUrl: startMarkerUrl,
+        iconSize: [50, 50],
+        iconAnchor: [25, 50], // location of marker's tip 
+        popupAnchor: [0, -50], // where a popup would open relative to the iconAnchor
+    });
+
+    const endMarker = L.icon({
+        iconUrl: endMarkerUrl,
+        iconSize: [50, 50],
+        iconAnchor: [25, 50], // location of marker's tip 
+        popupAnchor: [0, -50], // where a popup would open relative to the iconAnchor
+    });
+
     // IDs of the divs to hide when the user searches for location
-    const divs_to_hide = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "other-selection-options", "map"];
-    const divs_to_hide_2 = ["device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options", "map"];
-    const divs_to_hide_3 = ["device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
+    const divs_to_hide = ["header", "start-location-display", "destination-location-display", "other-selection-options", "map"];
+    const divs_to_hide_2 = ["start-location-display", "destination-location-display", "waypoint-selection-options", "map"];
+    const divs_to_hide_3 = ["start-location-display", "destination-location-display", "waypoint-selection-options"];
 
             
     // Initialise Leaflet map
@@ -67,15 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // add popup at bottom of screen, below map, and get its height
         popupHeight = showFixedPopup(popupContent);
-        expandMap(popupHeight);
+        expandMap();
 
-        // TODO: change this to remove only existing markers for current waypoint
-        // remove any existing markers
-        MM.map.eachLayer((layer) => {
-            if (layer instanceof L.Marker) {
-                MM.map.removeLayer(layer);
-            }
-        });
+        // remove any existing markers that aren't a start or destination marker 
+        removeExistingMarkers();
 
         // TODO: change this to link marker to current waypoint
         // add marker at clicked location
@@ -208,12 +221,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
-    function expandMap(divHeight) {
+    function removeExistingMarkers() {
+        // remove any existing markers that aren't a start or destination marker
+        MM.map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+                // check its not a start or end marker, if not then remove it
+                layer.options.icon.options.iconUrl in [startMarkerUrl, endMarkerUrl] ? null : MM.map.removeLayer(layer);
+            }
+        })
+    }
+
+    function showElements(arr) {
+    arr.forEach((divId) => {
+        const element = document.getElementById(divId);
+        if (element) {
+            element.classList.remove('hidden'); // Remove the `hidden` class if present
+            element.classList.add('sliding-down'); // Add the `sliding-down` class to trigger the animation
+
+            // Remove the animation class after the animation ends
+            element.addEventListener('animationend', () => {
+                element.classList.remove('sliding-down');
+            }, { once: true }); // Ensure the listener runs only once
+        }
+    });
+}
+    function expandMap() {
         // hide all elements except the map and footer
         hideElements(divs_to_hide_3);
         // resizes map to fit the new container size
         MM.map.invalidateSize();
     }
+    
 
     // Get current user's location using Leaflet's locate method
     async function locateUser() {
@@ -315,9 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
             switch (btnID) {
                 case "start-here":
                     outputDivId = "currentStart";
+                    // change the marker to a start marker
+                    L.marker([lat, lon], { icon: startMarker }).addTo(MM.map);
+                    //addRouteMarker(lat, lon, startMarkerUrl);
                     break;
                 case "end-here":
                     outputDivId = "currentDestination";
+                    // change the marker to an end marker
+                    L.marker([lat, lon], { icon: endMarker }).addTo(MM.map);
+                    //addRouteMarker(lat, lon, endMarkerUrl);
                     break;
             }
             // add lat and lon to global coordinates 
@@ -327,18 +371,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // add coordinates as a data attribute to the div
             document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
             // Remove the popup
-            document.getElementById('fixed-popup').remove();
+            removePopupWithSlide()
+            //document.getElementById('fixed-popup').remove();
             // return the map to its original size
             exitMapFullScreen(lat, lon);
         });
     };
 
+
+
     function exitMapFullScreen(lat, lon) {
         // show hidden divs
-        showElements(divs_to_hide_3);
-        // Return the map to its original size
-        document.getElementById("map").style.height = "300px";
-        //document.getElementById("map").classList.remove("map-fullscreen");
+        showElementsSlide();
+        //showElements(divs_to_hide_3);
         // Ensure map resizes to fit the new container size
         MM.map.invalidateSize();
         // reset view to center on selected location
@@ -348,6 +393,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             window.scrollTo({ top: 0, left: 0, behavior: 'auto' });  // Scroll to the top of the page
         }, 5000);
+    }
+
+    function addRouteMarker(lat, lon, markerUrl = startMarkerUrl) {
+        // markerType = startMarker or endMarker
+        // add a start location marker at the given lat lon
+        L.marker([lat, lon], { icon: markerUrl }).addTo(MM.map);
     }
 
     function addCoordinates(lon, lat, outputDivId) {
@@ -379,6 +430,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayLocationOnMap(lat, lon, zoom) {
         // Add a marker at given location
         L.marker([lat, lon]).addTo(MM.map);
+        MM.map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+                console.log('Marker layer', layer);
+            }
+        });
+        // Center the map on the given location
         MM.map.setView([lat, lon], zoomLevel = zoom);
     };
 
@@ -392,15 +449,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // show elements in the input array
-    function showElements(arr) {
-        arr.forEach((divId) => { 
-            // check if the div exists
-            if (document.getElementById(divId)) {
-                document.getElementById(divId).classList.remove('hidden');
+    function removePopupWithSlide() {
+        const popup = document.getElementById('fixed-popup');
+    
+        if (popup) {
+            // Add a class to trigger the slide-down animation
+            popup.classList.add('slide-down');
+    
+            // Wait for the animation to complete before removing the element
+            popup.addEventListener('animationend', () => {
+                popup.remove();
+                //MM.map.invalidateSize();
+            }, { once: true }); // Use `{ once: true }` to ensure the event listener is only triggered once
+
+            
+        }
+    }
+
+    function showElementsSlide() {
+        const arr = ["start-location-display", "destination-location-display","map"];
+        arr.forEach((divId) => {
+            const element = document.getElementById(divId);
+            if (element) {
+                element.classList.remove('hidden'); // Remove the `hidden` class if present
+                element.classList.add('sliding-down'); // Add the `sliding-down` class to trigger the animation
+    
+                // Remove the animation class after the animation ends
+                element.addEventListener('animationend', () => {
+                    element.classList.remove('sliding-down');
+                }, { once: true }); // Ensure the listener runs only once
             }
         });
     }
+
+    // show elements in the input array
+    // function showElements(arr) {
+    //     arr.forEach((divId) => { 
+    //         // check if the div exists
+    //         if (document.getElementById(divId)) {
+    //             document.getElementById(divId).classList.remove('hidden');
+    //         }
+    //     });
+    // }
 
     async function searchLocationNominatim(locationText) {
         // Query the Nominatim API for the location input by the user
@@ -495,7 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const lon = e.currentTarget.dataset.lon;
         const loc = e.currentTarget.dataset.location;
         return [lon, lat, loc];
-    };
+    }
 
     function capitaliseWords(str) {
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');

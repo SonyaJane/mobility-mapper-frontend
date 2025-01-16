@@ -205,6 +205,35 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     width: 100%;
 }
 
+.slide-down {
+    animation: slideDown 5s linear; /* Triggers the slide-down animation */
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.sliding-down {
+    animation: slidingDown 5s linear; /* Slide down over 0.5 seconds */
+}
+
+/* Sliding-down animation */
+@keyframes slidingDown {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
 .btn-use-this {
     background-color: var(--color-orange-4);
     color: white;

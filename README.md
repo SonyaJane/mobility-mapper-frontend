@@ -159,6 +159,8 @@ Test installation
 response doesn't return okay. 
 11. Use the formData object to get the form data
 
+Add start or end coords to global MM object on selection
+
 TODO:
 
-Add start or end coords to global MM object on selection
+Add start/finish marker when location selected as start/destination location
