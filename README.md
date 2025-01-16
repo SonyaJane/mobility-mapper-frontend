@@ -158,3 +158,7 @@ Test installation
 12. Create a function to display the data: turn the response into json and then call the appropriate function or throw an error if the  
 response doesn't return okay. 
 11. Use the formData object to get the form data
+
+TODO:
+
+Add start or end coords to global MM object on selection

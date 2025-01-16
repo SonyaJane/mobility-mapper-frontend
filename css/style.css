@@ -201,7 +201,7 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     background-color: white;
     border: solid 1px var(--color-orange-1);
     z-index: 1000;  /* Ensure it stays above the map */
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: 100%;
 }
 
@@ -211,6 +211,7 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    font-size: 1.2rem;
 }
 
 #text-search-input {
@@ -247,4 +248,13 @@ footer i {
 
 footer span {
     font-size: 0.8rem; /* Label size */
+}
+
+#saved-places-list {
+    overflow-y: auto; /* Add scrollbar when content overflows */
+}
+
+#saved-places-list p {
+    margin: 0;
+    padding: 0;
 }

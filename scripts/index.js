@@ -5,18 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialise global variables
     MM.currentDevice = null;
-    MM.waypoints = [];
     MM.coordinates = []; // Coordinates for the route
     MM.userLocation = null;
 
     // User saved places
-    MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759 },
-                      { name: "Work", lat: 51.485925, lon: -3.176533 },
-                      { name: "Dentist", lat: 51.519471, lon: -3.117880 }];
+    MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759, address: "1 Home Street, Cardiff" },
+                      { name: "Work", lat: 51.485925, lon: -3.176533, address: "1 Work Street, Cardiff" },
+                      { name: "Dentist", lat: 51.519471, lon: -3.117880, address: "1 Dentist Street, Cardiff" }];
     
     // IDs of the divs to hide when the user searches for location
     const divs_to_hide = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "other-selection-options", "map"];
-    const divs_to_hide_2 = ["header", "device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options", "map"];
+    const divs_to_hide_2 = ["device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options", "map"];
     const divs_to_hide_3 = ["device-select", "start-location-display", "destination-location-display", "generate-route-container", "waypoint-selection-options"];
 
             
@@ -56,13 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create popup content with the location and a button
         const popupContent = `
         <div class="p-2 text-center">
-            <p class="mb-1">${placeName}
+            <p class="mb-1">${placeName}</p>
             <hr class="my-2">
-            ${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
+            <p class="mb-1">${lat.toFixed(6)}, ${lon.toFixed(6)}</p>
             <button id="start-here" class="btn btn-use-this m-2">
             Start Here</button>
-            <button id="add-waypoint" class="btn btn-use-this m-2">
-            Add as Waypoint</button>
             <button id="end-here" class="btn btn-use-this m-2">
             Set as Destination</button>
         </div>
@@ -91,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         MM.map.setView([lat, lon], Math.max(15, zoom));
 
         // Add click event listeners to the buttons in the popup
-        ["start-here", "add-waypoint", "end-here"].forEach(btnId => {
+        ["start-here", "end-here"].forEach(btnId => {
             addEventListenerToUseLocationButton(lat, lon, placeName, btnId);
         })
     });
@@ -214,14 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function expandMap(divHeight) {
         // hide all elements except the map and footer
         hideElements(divs_to_hide_3);
-        // exapnd map to fill the remaining space on the screen
-        // make map take up all the space on the screen above the popup
-        // get height of screen minus the height of the popup and the height of the footer
-        //const mapHeight = window.innerHeight - divHeight;    
-        // set the height of the map to the calculated height
-        //document.getElementById("map").style.height = `${mapHeight}px`;
-        //document.getElementById("map").classList.add("map-fullscreen");
-        // Ensure map resizes to fit the new container size
+        // resizes map to fit the new container size
         MM.map.invalidateSize();
     }
 
@@ -272,11 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // create a new div with id #saved-places-list
         const savedPlacesDiv = document.createElement('div');
         savedPlacesDiv.id = 'saved-places-list';
-        savedPlacesDiv.classList.add('container', 'px-1');
+        savedPlacesDiv.classList.add('px-2');
 
         // Add a title
         const titleDiv = document.createElement('div');
-        titleDiv.innerHTML = `<h1>Select a saved place</h1>`;
+        titleDiv.innerHTML = `<h2 class="mb-0 pt-3 pb-2 border-bottom border-top-orange">Select a saved place</h2>`;
         savedPlacesDiv.appendChild(titleDiv);
 
         // Iterate through the saved places
@@ -284,10 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create a new div for each result
             const placeDiv = document.createElement('div');
             // add html to the div
-            placeDiv.innerHTML = `<p>${capitaliseWords(place.name)}</p>
-                              <p>${place.lat}, ${place.lon}</p>`;
+            placeDiv.innerHTML = `<p>${place.name}</p>
+                                    <p>${place.address}</p>
+                                    <p>${place.lat}, ${place.lon}</p>`;
             // add css classes to the div
-            placeDiv.classList.add('border-bottom', 'py-1', 'cursor-pointer');
+            placeDiv.classList.add('border-bottom', 'py-2', 'cursor-pointer');
             // add data attributes to the div
             placeDiv.dataset.location = place.name;
             placeDiv.dataset.lat = place.lat;
@@ -295,14 +286,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // add an event listener to the div for choosing the location
             placeDiv.addEventListener('click', e => {
-                let [lon, lat, placeName] = getClickedLocation(e);
-                setLocationText(placeName, outputDivId);
-                // add coordinates as a data attribute to the div
-                document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
-
+                // add lat and lon to global coordinates 
+                addCoordinates(place.lat, place.lon, outputDivId);
+                // Display the place name
+                setLocationText(place.name, outputDivId);                
                 // Display the location on the map
-                displayLocationOnMap(lat, lon, zoom = 15)
-
+                displayLocationOnMap(place.lat, place.lon, zoom = 15);
                 // Remove the saved places div
                 document.querySelector('#saved-places-list').remove();
                 // Show the hidden elements
@@ -313,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
             savedPlacesDiv.appendChild(placeDiv);
         }
 
-        // Append the new div to the body
-        document.body.appendChild(savedPlacesDiv);
+        // Append the new div to the main element
+        document.querySelector('main').appendChild(savedPlacesDiv);
     }
 
 
@@ -330,11 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 case "end-here":
                     outputDivId = "currentDestination";
                     break;
-                case "add-waypoint":
-                    // create a new waypoint div
-                    outputDivId = createWaypointDiv().id;
-                    break;
             }
+            // add lat and lon to global coordinates 
+            addCoordinates(lat, lon, outputDivId);
             // Display the place name in the start location div
             setLocationText(placeName, outputDivId);
             // add coordinates as a data attribute to the div
@@ -345,20 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
             exitMapFullScreen(lat, lon);
         });
     };
-
-    // create a new waypoint div
-    function createWaypointDiv() {
-        const waypointDiv = document.createElement('div');
-        waypointDiv.classList.add('row', 'px-1', 'py-3', 'border-bottom', 'cursor-pointer', 'location-selection', 'flex-center', 'border-top-orange');
-        waypointDiv.id = `waypoint-location-display-${MM.waypoints.length}`;
-        waypointDiv.innerHTML = `
-    <div class="col-4">
-        <img src="./images/marker_narrow.png" alt="Mobility Mapper marker" class="mm-marker">
-        Waypoint
-    </div>
-    <div class="col-8 text-end" id="currentDestination">Choose location</div>`;
-        return waypointDiv;
-    }
 
     function exitMapFullScreen(lat, lon) {
         // show hidden divs
@@ -375,6 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             window.scrollTo({ top: 0, left: 0, behavior: 'auto' });  // Scroll to the top of the page
         }, 5000);
+    }
+
+    function addCoordinates(lon, lat, outputDivId) {
+        if (outputDivId === "currentStart") {
+            MM.coordinates[0] = [lon, lat];
+        } else {
+            MM.coordinates[1] = [lon, lat];
+        }
+        console.log("New coordinates added to MM.coordinates: ", MM.coordinates);
     }
 
     async function latLonToAddress(lat, lon) {
@@ -481,6 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setLocationText(placeName, outputDivId);
                 // add coordinates as a data attribute to the div
                 document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
+                // add lat and lon to global coordinates 
+                addCoordinates(lat, lon, outputDivId);
                 // Display the location on the map
                 displayLocationOnMap(lat, lon, zoomLevel = 15)
                 // Remove the search results div
