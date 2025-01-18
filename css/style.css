@@ -20,6 +20,9 @@
     /* Header height */
     --header-height: 3rem;
 
+    /* Location selection div */
+    --waypoint-height: 65px;
+
     /* Footer height */
     --footer-height: 70px;
 
@@ -151,6 +154,10 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     background-color: var(--color-orange-1);
 }
 
+.waypoint {
+    height: var(--waypoint-height);
+}
+
 .square-box {
     border: solid 1px var(--color-coffee-6);
     border-radius: 5px;
@@ -205,11 +212,11 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     width: 100%;
 }
 
-.slide-down {
-    animation: slideDown 5s linear; /* Triggers the slide-down animation */
+.slide-down-1 {
+    animation: slideDown1 5s linear; /* Triggers the slide-down animation */
 }
 
-@keyframes slideDown {
+@keyframes slideDown1 {
     0% {
         transform: translateY(0%);
     }
@@ -218,17 +225,35 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     }
 }
 
-.sliding-down {
-    animation: slidingDown 5s linear; /* Slide down over 0.5 seconds */
+/* Start.End location display - slide down into view */
+.slide-down-2 {
+    animation: slideDown2 5s linear; /* Triggers the slide-down animation */
 }
 
 /* Sliding-down animation */
-@keyframes slidingDown {
+@keyframes slideDown2 {
     0% {
+        position: absolute;
         transform: translateY(-100%);
     }
     100% {
+        position: relative;
         transform: translateY(0);
+    }
+}
+
+/* Slide the map down as the Start.End location display slides down */
+.slide-down-map {
+    animation: slideDownMap 5s linear; /* Triggers the slide-down animation */
+}
+
+/* Sliding-down animation */
+@keyframes slideDownMap {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(var(--waypoint-height));
     }
 }
 

@@ -1,0 +1,16 @@
+export default async function latLonToAddress(lat, lon) {
+    // Get the address from the latitude and longitude
+    // define the api url
+    const api_url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;
+    // fetch the data
+    const response = await fetch(api_url);
+    // convert the response to json
+    const data = await response.json();
+    // if the response is ok, display the search results
+    if (response.ok) {
+        //console.log(data);
+        return data.display_name;
+    } else {
+        throw new Error(data.error);
+    }
+}
