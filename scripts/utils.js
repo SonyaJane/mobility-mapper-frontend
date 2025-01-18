@@ -1,3 +1,5 @@
+import { startMarker, endMarker } from './markers.js';
+
 export function getClickedLocation(e) {
     // When user clicks on a location div (created as a result of a search or saved places)
     // Get the latitude and longitude, and place name from the clicked div
@@ -12,9 +14,19 @@ export function addRouteMarker(lat, lon, markerUrl = startMarkerUrl) {
     L.marker([lat, lon], { icon: markerUrl }).addTo(MM.map);
 }
 
-export function displayLocationOnMap(lat, lon, zoom) {
+export function displayLocationOnMap(lat, lon, zoom, markerType) {
     // Add a marker at given location
-    L.marker([lat, lon]).addTo(MM.map);
+    switch (markerType) {
+        case 'startMarker':
+            MM.startMarker = L.marker([lat, lon], { icon: startMarker }).addTo(MM.map);
+            break;
+        case 'endMarker':
+            MM.endMarker = L.marker([lat, lon], { icon: endMarker }).addTo(MM.map);
+            break;
+        default:
+            MM.marker = L.marker([lat, lon],).addTo(MM.map);
+            break;
+    }
     // Center the map on the given location
     MM.map.setView([lat, lon], zoom);
 };

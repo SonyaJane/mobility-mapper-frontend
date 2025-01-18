@@ -24,7 +24,7 @@ export default function addEventListenersToWaypointDivs() {
                 // If it exists for this waypoint, remove it and finish
                 if (existingDiv.previousElementSibling === e.currentTarget) {
                     existingDiv.remove();
-                    return;
+                    //return;
                 } else { // if it exists for another waypoint, remove it and add it for this waypoint
                     existingDiv.remove();
                     // add the location selection options div for this waypoint

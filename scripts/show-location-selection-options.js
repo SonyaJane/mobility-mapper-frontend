@@ -21,6 +21,7 @@ export default function showLocationSelectionOptions(e) {
     // get id of last child div of div that was clicked 
     // (requred to display the selected location, and store the coordinates)
     const lastChildId = e.currentTarget.lastElementChild.id;
+    console.log("lastChildId: ", lastChildId);
     // add click event listeners to the location selection options
     addEventListenersToLocationSelectionOptions(lastChildId);
 };

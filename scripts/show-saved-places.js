@@ -1,3 +1,7 @@
+import addCoordinatesToRoute from './add-coordinates-to-route.js';
+import setStartEndLocationText from './set-start-end-location-text.js';
+import { displayLocationOnMap, showElements } from './utils.js';
+
 export default function showSavedPlaces(outputDivId) {
     // create a new div with id #saved-places-list
     const savedPlacesDiv = document.createElement('div');
@@ -15,8 +19,8 @@ export default function showSavedPlaces(outputDivId) {
         const placeDiv = document.createElement('div');
         // add html to the div
         placeDiv.innerHTML = `<p>${place.name}</p>
-                                    <p>${place.address}</p>
-                                    <p>${place.lat}, ${place.lon}</p>`;
+                                <p>${place.address}</p>
+                                <p>${place.lat}, ${place.lon}</p>`;
         // add css classes to the div
         placeDiv.classList.add('border-bottom', 'py-2', 'cursor-pointer');
         // add data attributes to the div
@@ -31,11 +35,19 @@ export default function showSavedPlaces(outputDivId) {
             // Display the place name
             setStartEndLocationText(place.name, outputDivId);
             // Display the location on the map
-            displayLocationOnMap(place.lat, place.lon, zoom = 15);
+            if (outputDivId == "currentStart") {
+                // remove current start marker
+                if (MM.startMarker) MM.startMarker.remove();
+                displayLocationOnMap(place.lat, place.lon, 15, 'startMarker');
+            } else if (outputDivId == "currentEnd") {   
+                // remove current end marker
+                if (MM.endMarker) MM.endMarker.remove();        
+                displayLocationOnMap(place.lat, place.lon, 15, 'regularMarker');
+            }
             // Remove the saved places div
             document.querySelector('#saved-places-list').remove();
             // Show the hidden elements
-            showElements(divs_to_hide_2);
+            showElements(["start-end-display", "map"]);
         });
 
         // Append the div to the new div

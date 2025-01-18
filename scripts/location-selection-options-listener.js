@@ -51,13 +51,25 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         const lon = MM.userLocation.lon;
 
         // Display the user's location on the map
-        displayLocationOnMap(lat, lon, 15);
+        
+        if (outputDivId == "currentStart") {
+            // remove existing start marker
+            if (MM.startMarker) MM.startMarker.remove();
+            displayLocationOnMap(lat, lon, 15, 'startMarker');
+        } else if (outputDivId == "currentDestination") {
+            // remove existing end marker
+            if (MM.endMarker) MM.endMarker.remove();
+            displayLocationOnMap(lat, lon, 15, 'endMarker');
+        }
+
         // get place name from lat and lon
         const placeName = await latLonToAddress(lat, lon);
-        // Display the place name in the start location div
+        // Display the place name in the start/destination location div
         // get the string before the first comma
+        console.log("Adding place name to div ", outputDivId);
         document.getElementById(outputDivId).textContent = placeName.split(",")[0];
         // add coordinates as a data attribute to the div
+        console.log("Adding coordinates to div ", outputDivId);
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
 
     });

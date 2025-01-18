@@ -42,7 +42,7 @@ export default function displaySearchLocationResults(data, outputDivId) {
             // add lat and lon to global coordinates 
             addCoordinatesToRoute(lat, lon, outputDivId);
             // Display the location on the map
-            displayLocationOnMap(lat, lon, zoomLevel = 15)
+            displayLocationOnMap(lat, lon, 15, 'regularMarker');
             // Remove the search results div
             document.querySelector('#location-search-results').remove();
             // Show the hidden elements
