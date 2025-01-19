@@ -39,10 +39,10 @@ export default function showSavedPlaces(outputDivId) {
                 // remove current start marker
                 if (MM.startMarker) MM.startMarker.remove();
                 displayLocationOnMap(place.lat, place.lon, 15, 'startMarker');
-            } else if (outputDivId == "currentEnd") {   
+            } else if (outputDivId == "currentDestination") {   
                 // remove current end marker
                 if (MM.endMarker) MM.endMarker.remove();        
-                displayLocationOnMap(place.lat, place.lon, 15, 'regularMarker');
+                displayLocationOnMap(place.lat, place.lon, 15, 'endMarker');
             }
             // Remove the saved places div
             document.querySelector('#saved-places-list').remove();

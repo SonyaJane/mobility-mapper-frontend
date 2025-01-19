@@ -4,7 +4,6 @@ import addEventListenersToLocationSelectionOptions from './location-selection-op
 import waypointSelectionOptionsContent from './waypoint-selection-options-content.js';
 
 export default function showLocationSelectionOptions(e) {
-    console.log("In function showLocationSelectionOptions(), event:", e);
     // Create a new div element
     const newDiv = document.createElement('div');
     // Add multiple classes to the new div
@@ -13,15 +12,12 @@ export default function showLocationSelectionOptions(e) {
     // Add the text from the locationOptions.html file
     newDiv.innerHTML = waypointSelectionOptionsContent;
     // get next sibling of e.target and insert newDiv before it
-    console.log("Current target, div clicked: ", e.currentTarget);
-    console.log("Parent node: ", e.currentTarget.parentNode);    
     e.currentTarget.parentNode.insertBefore(newDiv, e.currentTarget.nextSibling);
 
     // add click event listeners to the location selection options
     // get id of last child div of div that was clicked 
     // (requred to display the selected location, and store the coordinates)
     const lastChildId = e.currentTarget.lastElementChild.id;
-    console.log("lastChildId: ", lastChildId);
     // add click event listeners to the location selection options
     addEventListenersToLocationSelectionOptions(lastChildId);
 };

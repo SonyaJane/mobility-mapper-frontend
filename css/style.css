@@ -146,11 +146,12 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border-top: solid 1px #eabaa5;
 }
 
-.device-row:hover, #start-location-display:hover {
-    background-color: var(--color-orange-2);
+.waypoint:hover,
+#waypoint-selection-options {
+    background-color: var(--color-orange-1);
 }
 
-.option {
+.background-orange {
     background-color: var(--color-orange-1);
 }
 

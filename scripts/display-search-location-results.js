@@ -1,7 +1,6 @@
-import { displayLocationOnMap } from './utils.js';
+import { displayLocationOnMap, showElements, hideElements, capitaliseWords, getClickedLocation } from './utils.js';
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
 import setStartEndLocationText from './set-start-end-location-text.js';
-import { showElements, hideElements, capitaliseWords } from './utils.js';
 
 export default function displaySearchLocationResults(data, outputDivId) {
     // Displays the results of a search for a place or address 
@@ -42,19 +41,29 @@ export default function displaySearchLocationResults(data, outputDivId) {
             // add lat and lon to global coordinates 
             addCoordinatesToRoute(lat, lon, outputDivId);
             // Display the location on the map
-            displayLocationOnMap(lat, lon, 15, 'regularMarker');
+            if (outputDivId == "currentStart") {
+                // remove existing start marker
+                if (MM.startMarker) MM.startMarker.remove();
+                displayLocationOnMap(lat, lon, 15, 'startMarker');
+            } else if (outputDivId == "currentDestination") {
+                // remove existing end marker
+                if (MM.endMarker) MM.endMarker.remove();
+                displayLocationOnMap(lat, lon, 15, 'endMarker');
+            }
             // Remove the search results div
             document.querySelector('#location-search-results').remove();
             // Show the hidden elements
-            showElements(divs_to_hide);
-            // hide the start options
-            hideElements(["waypoint-selection-options"]);
+            showElements(["start-location-display", "destination-location-display", "other-selection-options", "map"]);
+            // remove the waypoint-selection-options div
+            document.getElementById("waypoint-selection-options").remove();
+            // reset the map
+            MM.map.invalidateSize();
         });
 
         // Append the div to the new div
         resultsDiv.appendChild(placeDiv);
     }
         
-    // Append the new div to the body
-    document.body.appendChild(resultsDiv);
+    // Append the new div to the main element
+    document.querySelector('main').appendChild(resultsDiv);
 }

@@ -14,8 +14,7 @@ export default async function searchLocationNominatim(locationText) {
 
         // Convert the response to json
         const data = await response.json();
-
-        console.log(data);
+        
         return data;
     } catch (error) {
         // Log the error

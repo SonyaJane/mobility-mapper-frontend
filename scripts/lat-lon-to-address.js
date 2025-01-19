@@ -8,7 +8,6 @@ export default async function latLonToAddress(lat, lon) {
     const data = await response.json();
     // if the response is ok, display the search results
     if (response.ok) {
-        //console.log(data);
         return data.display_name;
     } else {
         throw new Error(data.error);

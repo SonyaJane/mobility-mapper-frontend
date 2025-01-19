@@ -66,10 +66,8 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         const placeName = await latLonToAddress(lat, lon);
         // Display the place name in the start/destination location div
         // get the string before the first comma
-        console.log("Adding place name to div ", outputDivId);
         document.getElementById(outputDivId).textContent = placeName.split(",")[0];
         // add coordinates as a data attribute to the div
-        console.log("Adding coordinates to div ", outputDivId);
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
 
     });

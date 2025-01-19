@@ -3,7 +3,6 @@
 import showLocationSelectionOptions from './show-location-selection-options.js';
 
 export default function addEventListenersToWaypointDivs() { 
-    console.log("In addEventListenersToWaypointDivs(), Adding click event listeners to waypoint divs");
     // get all elements with class .waypoint
     document.querySelectorAll('.waypoint').forEach(waypoint => {
         waypoint.addEventListener('click', e => {
@@ -20,15 +19,24 @@ export default function addEventListenersToWaypointDivs() {
             if (!existingDiv) {
                 // add the location selection options div for this waypoint
                 showLocationSelectionOptions(e);
+                // add orange background to clicked div
+                e.currentTarget.classList.add('background-orange');
+
             } else {
-                // If it exists for this waypoint, remove it and finish
+                // If it exists for this waypoint, remove it
                 if (existingDiv.previousElementSibling === e.currentTarget) {
                     existingDiv.remove();
-                    //return;
+                    e.currentTarget.classList.remove('background-orange');
                 } else { // if it exists for another waypoint, remove it and add it for this waypoint
                     existingDiv.remove();
+                    // remove orange background from other waypoint div
+                    document.querySelectorAll('.waypoint').forEach(waypoint => {
+                        waypoint.classList.remove('background-orange');
+                    });
                     // add the location selection options div for this waypoint
                     showLocationSelectionOptions(e);
+                    // add orange background to clicked div
+                    e.currentTarget.classList.add('background-orange');
                 }
             }
             // reset map size
