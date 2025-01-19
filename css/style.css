@@ -190,6 +190,13 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     display: none;      
 }
 
+#zoom-to-location {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    border-color: grey;;
+} 
+
 .red-placeholder::placeholder {
     color: red;
 }
