@@ -32,19 +32,11 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
 
     // Add click event listener to "Current Location" square
     document.getElementById("use-current-location").addEventListener('click', async e => {
-        // Get the user's location
-        // check if user location is already stored in MM.userLocation
-        // if not try to get it again
-        if (!MM.userLocation) {
-            locateUser().then(userLocation => {
-                MM.userLocation = userLocation;
-                // if user location is still not available, alert the user
-                if (!MM.userLocation) {
-                    alert("Could not get your location. Please allow location access.");
-                    // exit the function
-                    return;
-                }
-            });
+        // Update user's location
+        try {                 
+            MM.userLocation = await locateUser(MM.map);
+        } catch (error) {
+            console.error("Error getting user location: ", error);
         }
 
         const lat = MM.userLocation.lat;
