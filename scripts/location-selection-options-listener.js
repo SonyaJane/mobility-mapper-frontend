@@ -5,6 +5,7 @@ import { displayLocationOnMap, hideElements } from './utils.js';
 import showSavedPlaces from './show-saved-places.js';
 import latLonToAddress from './lat-lon-to-address.js';
 import locateUser from './locate-user.js';
+import addCoordinatesToRoute from './add-coordinates-to-route.js';
 
 export default function addEventListenersToLocationSelectionOptions(outputDivId) {
 
@@ -48,11 +49,17 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
             // remove existing start marker
             if (MM.startMarker) MM.startMarker.remove();
             displayLocationOnMap(lat, lon, 15, 'startMarker');
+            
         } else if (outputDivId == "currentDestination") {
             // remove existing end marker
             if (MM.endMarker) MM.endMarker.remove();
             displayLocationOnMap(lat, lon, 15, 'endMarker');
+            // add coordinates to global MM.coordinates
+            MM.coordinates[1] = [lat, lon];
         }
+
+        // add coordinates to route (MM.coordinates)
+        addCoordinatesToRoute(lat, lon, outputDivId);
 
         // get place name from lat and lon
         const placeName = await latLonToAddress(lat, lon);

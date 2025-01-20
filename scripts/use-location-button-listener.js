@@ -21,7 +21,7 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
             case "end-here":
                 outputDivId = "currentDestination";
                 // remove other end marker
-                if (MM.startMarker) { MM.map.removeLayer(MM.endMarker) };
+                if (MM.endMarker) { MM.map.removeLayer(MM.endMarker) };
                 // change the marker to a end marker
                 MM.endMarker = L.marker([lat, lon], { icon: endMarker }).addTo(MM.map);
                 // remove marker we've replaced with an end marker

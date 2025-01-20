@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 2393.6254 1897.2717"
+   width="2393.6255"
+   height="1897.2716"
+   version="1.1"
+   id="svg43"
+   sodipodi:docname="device.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   inkscape:export-filename="wheel_300_x_300.png"
+   inkscape:export-xdpi="2.9690361"
+   inkscape:export-ydpi="2.9690361"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview43"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="1357.645"
+     inkscape:cy="619.42552"
+     inkscape:window-width="946"
+     inkscape:window-height="857"
+     inkscape:window-x="623"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g43"
+     showguides="false"
+     inkscape:export-bgcolor="#ffffff00" />
+  <desc
+     id="desc1">Logo_Mobility_Mapper.dxf - scale = 25.400000, origin = (0.000000, 0.000000), method = file</desc>
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect19"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect18"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect17"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect10"
+       is_visible="true"
+       lpeversion="1" />
+    <marker
+       id="DistanceX"
+       orient="auto"
+       refX="0"
+       refY="0"
+       style="overflow:visible">
+      <path
+         d="M 3,-3 -3,3 M 0,-5 V 5"
+         style="stroke:#000000;stroke-width:0.5"
+         id="path1" />
+    </marker>
+    <pattern
+       id="Hatch"
+       patternUnits="userSpaceOnUse"
+       width="8"
+       height="8"
+       x="0"
+       y="0">
+      <path
+         d="M8 4 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path2" />
+      <path
+         d="M6 2 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path3" />
+      <path
+         d="M4 0 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path4" />
+    </pattern>
+    <symbol
+       id="*MODEL_SPACE" />
+    <symbol
+       id="*PAPER_SPACE" />
+    <inkscape:path-effect
+       effect="fill_between_many"
+       method="originald"
+       linkedpaths="#path35,0,1|#path34,0,1|#path36,0,1|#path5,0,1"
+       id="path-effect81"
+       is_visible="true"
+       lpeversion="0"
+       join="true"
+       close="true"
+       autoreverse="true" />
+    <inkscape:path-effect
+       effect="fill_between_many"
+       method="originald"
+       linkedpaths="#g82,0,1|#path38,0,1"
+       id="path-effect82"
+       is_visible="true"
+       lpeversion="0"
+       join="true"
+       close="true"
+       autoreverse="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect17-7"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect18-6"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect17-4"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect19-6"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect19-6-6"
+       is_visible="true"
+       lpeversion="1" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="0"
+     id="g43"
+     transform="translate(2250.1121,-2376.7525)">
+    <path
+       style="fill:none;stroke:#845444;stroke-width:160.174;stroke-linecap:round;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M -1843.2993,2963.9172 H 323.7596"
+       id="path10"
+       inkscape:path-effect="#path-effect10"
+       inkscape:original-d="m -1843.2993,2963.9172 c 722.353,0 1444.7059,0 2167.0589,0"
+       transform="matrix(0.76396369,0,0,1,-427.03997,903.29436)" />
+    <path
+       style="fill:none;stroke:#845444;stroke-width:160.87;stroke-linecap:round;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1843.2993,2963.9172 v -1739.75"
+       id="path17"
+       inkscape:original-d="m -1843.2993,2963.9172 c 0,-579.9167 0,-1159.8333 0,-1739.75"
+       inkscape:path-effect="#path-effect17"
+       transform="matrix(1,0,0,0.65303319,1.0166961e-4,1629.8575)" />
+    <path
+       style="fill:none;stroke:#845444;stroke-width:158.159;stroke-linecap:round;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1843.2993,2963.9172 v -1739.75"
+       id="path17-7"
+       inkscape:original-d="m -1843.2993,2963.9172 c 0,-579.9167 0,-1159.8333 0,-1739.75"
+       inkscape:path-effect="#path-effect17-4"
+       transform="matrix(0.98306621,-0.1832507,0.10549229,0.56592363,1222.9653,1776.6147)" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#845444;stroke-width:254.536;stroke-linecap:round;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       id="path5"
+       cx="448"
+       cy="4088"
+       r="448"
+       transform="matrix(0.70717006,0,0,0.70717006,-2160.1121,976.30036)" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#845444;stroke-width:180;stroke-linecap:round;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       id="path5-8"
+       cx="-263.29877"
+       cy="3867.2119"
+       r="316.81219" />
+    <path
+       style="fill:#000000;stroke:#845444;stroke-width:160;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M -291.9799,1903.8914 H -624.2993"
+       id="path19"
+       inkscape:path-effect="#path-effect19"
+       inkscape:original-d="m -291.9799,1903.8914 c -110.7731,0 -221.5463,0 -332.3194,0"
+       transform="translate(-173.9999,903.29436)" />
+    <path
+       style="fill:#000000;stroke:#845444;stroke-width:169.544;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M -291.9799,1903.8914 H -624.2993"
+       id="path19-7"
+       inkscape:path-effect="#path-effect19-6"
+       inkscape:original-d="m -291.9799,1903.8914 c -110.7731,0 -221.5463,0 -332.3194,0"
+       transform="matrix(1.1271428,0,0,1,-1035.7664,1159.7162)" />
+    <path
+       style="fill:#000000;stroke:#845444;stroke-width:163.144;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M -291.9799,1903.8914 H -624.2993"
+       id="path19-7-8"
+       inkscape:path-effect="#path-effect19-6-6"
+       inkscape:original-d="m -291.9799,1903.8914 c -110.7731,0 -221.5463,0 -332.3194,0"
+       transform="matrix(1.5028571,0,0,1,-773.63678,1509.7162)" />
+  </g>
+</svg>

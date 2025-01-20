@@ -12,13 +12,16 @@
     --bs-body-font-size: 1.4rem;
 
     /* Colours */
-    --color-coffee-6: rgb(67, 43, 32); 	/* main font-color */
+    --color-coffee-6: #432b20; 	/* main font-color */
     --color-orange-1: #f5ddd2;
     --color-orange-2: #eabaa5;
+	--color-orange-3: #e09878;  	
     --color-orange-4: #bd582c; 	/* main colour */
+	--color-coffee-4: #865640;
+	--color-green-4: #637052; 
 
     /* Header height */
-    --header-height: 3rem;
+    --header-height: 65px;
 
     /* Location selection div */
     --waypoint-height: 65px;
@@ -29,6 +32,17 @@
     html {
         font-size: 16px; /* Ensure 1rem is equal to 16px */
     }
+}
+
+.colour-coffee-2 {
+    color: var(--color-coffee-2); 	
+}
+.colour-coffee-4 {
+    color: var(--color-coffee-4); 	
+}
+
+.colour-orange-4 {
+    color: var(--color-orange-4); 	
 }
 
 body {
@@ -51,21 +65,6 @@ main {
     height: calc(100vh - var(--header-height) - var(--footer-height)); /* Full viewport height minus header and footer heights */
 }
 
-.map {
-    flex-grow: 1; /* Allow the map to grow and take up available space */
-}
-
-header {
-    height: var(--header-height);
-    width: 100%;
-    justify-content: space-between; /* Aligns content to left and right */}
-
-header > h1 {
-    font-size: 1.5rem;
-    letter-spacing: -1px; /* Reduce space between letters */
-    padding-bottom: 5px;
-    margin: 0;
-}
 
 a {
     text-decoration: none;
@@ -95,7 +94,7 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 /* Buttons */
 .btn {
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    transition: var(--color-orange-1) 0.3s ease; /* Smooth transition on hover */
     font-family: var(--primary-font), sans-serif;
 }
 
@@ -114,10 +113,6 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     cursor: pointer;
 }
 
-#logo {
-    height: 1.4rem;
-}
-
 .row {
     margin: 0;
     padding: 0;
@@ -127,6 +122,29 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .row>* {
     padding: 0;
     margin: 0
+}
+
+
+/* Header */
+
+header {
+    height: var(--header-height);
+    width: 100%;
+    justify-content: space-between; /* Aligns content to left and right */}
+
+header > h1 {
+    font-size: 25px;
+    letter-spacing: -1px; /* Reduce space between letters */
+    margin: 0;
+}
+
+#logo {
+    height: 30px;
+    padding-top: 5px;
+}
+
+.map {
+    flex-grow: 1; /* Allow the map to grow and take up available space */
 }
 
 #current-device-container {
@@ -157,6 +175,9 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .waypoint {
     height: var(--waypoint-height);
+    display: flex;        /* Vertically center */
+    align-items: center;
+    justify-content: space-between; /* Aligns content to left and right */
 }
 
 .square-box {
@@ -171,15 +192,9 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     font-size: clamp(1.1rem, 1vw, 1.5rem); /* Font size scales between 0.8rem and 1.5rem based on viewport */
 }
 
-.wheel-icon {
-    width: 24px; 
-    height: 24px;
-    margin-top: 5px;
-    margin-bottom: 10px; 
-}
-
 .mm-marker {
     height: 1.4rem;
+    padding-right: 5px; /* space between marker and text */
 }
 
 .orange {
@@ -220,53 +235,6 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     width: 100%;
 }
 
-.slide-down-1 {
-    animation: slideDown1 5s linear; /* Triggers the slide-down animation */
-}
-
-@keyframes slideDown1 {
-    0% {
-        transform: translateY(0%);
-    }
-    100% {
-        transform: translateY(100%);
-    }
-}
-
-/* Start.End location display - slide down into view */
-.slide-down-2 {
-    animation: slideDown2 5s linear; /* Triggers the slide-down animation */
-}
-
-/* Sliding-down animation */
-@keyframes slideDown2 {
-    0% {
-        position: absolute;
-        transform: translateY(-100%);
-    }
-    100% {
-        position: relative;
-        transform: translateY(0);
-    }
-}
-
-/* Slide the map down as the Start.End location display slides down */
-.slide-down-map {
-    animation: slideDownMap 5s linear; /* Triggers the slide-down animation */
-}
-
-/* Sliding-down animation */
-@keyframes slideDownMap {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(var(--waypoint-height));
-    }
-}
-
-
-
 .btn-use-this {
     background-color: var(--color-orange-4);
     color: white;
@@ -298,18 +266,25 @@ footer {
     height: var(--footer-height);
 } 
 
-footer button {
-    border: none; /* Remove button border */
-    background-color: transparent; /* Transparent background */
-    flex-grow: 1; /* Make all buttons equal width */
+.footer-icon-container {
+    /* width: 42px;  */
+    /* height: 42px; */
+} 
+
+.footer-icon {
+    height: 40px;  
 }
 
-footer i {
-    font-size: 1.5rem; /* Icon size */
+.centered-flex {
+    display: flex; /* Enables Flexbox */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
 }
 
-footer span {
-    font-size: 0.8rem; /* Label size */
+.current-page {
+    border: 1px solid var(--color-orange-4);
+    border-radius: 10px;
+    padding: 3px 0;
 }
 
 #saved-places-list {
