@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Initialise Leaflet map
     await initialiseMap();
-    console.log("MM.userLocation", MM.userLocation);
 
     // add click event listener to the map
     addMapClickListener();
