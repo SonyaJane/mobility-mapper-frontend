@@ -7,7 +7,6 @@
 :root {
     /* Fonts */
 	--primary-font: 'Open Sans', sans-serif;
-	--secondary-font: 'Bitter', serif;
 
     --bs-body-font-size: 1.4rem;
 
@@ -26,9 +25,6 @@
     /* Location selection div */
     --waypoint-height: 65px;
 
-    /* Footer height */
-    --footer-height: 70px;
-
     html {
         font-size: 16px; /* Ensure 1rem is equal to 16px */
     }
@@ -37,6 +33,7 @@
 .colour-coffee-2 {
     color: var(--color-coffee-2); 	
 }
+
 .colour-coffee-4 {
     color: var(--color-coffee-4); 	
 }
@@ -45,11 +42,23 @@
     color: var(--color-orange-4); 	
 }
 
+.border-bottom-orange {
+    border-bottom: solid 1px #eabaa5;
+}
+
+.border-top-orange {
+    border-top: solid 1px #eabaa5;
+}
+
+.background-orange {
+    background-color: var(--color-orange-1);
+}
+
 body {
     /* Font family and colour */
     font-family: var(--primary-font), sans-serif;
     color: var(--color-coffee-6);
-    /* max-width: 420px; */
+    max-width: 991px;
 }
 
 body, html {
@@ -58,13 +67,30 @@ body, html {
     margin: 0;
 }
 
+/* Header */
+
+header {
+    height: var(--header-height);
+    width: 100%;
+    justify-content: space-between; /* Aligns content to left and right */}
+
+header > h1 {
+    font-size: 25px;
+    letter-spacing: -1px; /* Reduce space between letters */
+    margin: 0;
+}
+
+#logo {
+    height: 30px;
+    padding-top: 5px;
+}
+
 main {
     /* Make main>a flex container with vertical stacking. */
     display: flex;
     flex-direction: column;
-    height: calc(100vh - var(--header-height) - var(--footer-height)); /* Full viewport height minus header and footer heights */
+    height: calc(100vh - var(--header-height)); /* Full viewport height minus header height */
 }
-
 
 a {
     text-decoration: none;
@@ -72,23 +98,9 @@ a {
     cursor: pointer;
 }
 
-h1, .h1 {
+h1, .h1, h2, .h2 {
     font-family: var(--primary-font), sans-serif;
     font-weight: 700;
-}
-
-h2, .h2 {
-    font-family: var(--primary-font), sans-serif;
-    font-weight: 700;
-}
-
-h3, .h3 {
-    font-family: var(--secondary-font), sans-serif;
-    font-weight: 600;
-}
-
-h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    font-weight: 400;
 }
 
 /* Buttons */
@@ -124,25 +136,6 @@ h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin: 0
 }
 
-
-/* Header */
-
-header {
-    height: var(--header-height);
-    width: 100%;
-    justify-content: space-between; /* Aligns content to left and right */}
-
-header > h1 {
-    font-size: 25px;
-    letter-spacing: -1px; /* Reduce space between letters */
-    margin: 0;
-}
-
-#logo {
-    height: 30px;
-    padding-top: 5px;
-}
-
 .map {
     flex-grow: 1; /* Allow the map to grow and take up available space */
 }
@@ -156,20 +149,8 @@ header > h1 {
     align-items: center;
 }
 
-.border-bottom-orange {
-    border-bottom: solid 1px #eabaa5;
-}
-
-.border-top-orange {
-    border-top: solid 1px #eabaa5;
-}
-
 .waypoint:hover,
 #waypoint-selection-options {
-    background-color: var(--color-orange-1);
-}
-
-.background-orange {
     background-color: var(--color-orange-1);
 }
 
@@ -197,14 +178,6 @@ header > h1 {
     padding-right: 5px; /* space between marker and text */
 }
 
-.orange {
-    color: var(--color-orange-4);
-}
-
-.leaflet-popup-tip {
-    display: none;      
-}
-
 #zoom-to-location {
     width: 35px;
     height: 35px;
@@ -226,8 +199,8 @@ header > h1 {
 
 /* Pop up for selecting location on map */
 .fixed-popup {
-    /* at the bottom of the screen, above the footer */
-    bottom: var(--footer-height);
+    /* at the bottom of the screen */
+    bottom: 0;
     background-color: white;
     border: solid 1px var(--color-orange-1);
     z-index: 1000;  /* Ensure it stays above the map */
@@ -262,29 +235,10 @@ header > h1 {
     border-radius: 5px;
 }
 
-footer {
-    height: var(--footer-height);
-} 
-
-.footer-icon-container {
-    /* width: 42px;  */
-    /* height: 42px; */
-} 
-
-.footer-icon {
-    height: 40px;  
-}
-
 .centered-flex {
     display: flex; /* Enables Flexbox */
     justify-content: center; /* Centers content horizontally */
     align-items: center; /* Centers content vertically */
-}
-
-.current-page {
-    border: 1px solid var(--color-orange-4);
-    border-radius: 10px;
-    padding: 3px 0;
 }
 
 #saved-places-list {
