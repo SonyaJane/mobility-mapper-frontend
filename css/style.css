@@ -54,17 +54,21 @@
     background-color: var(--color-orange-1);
 }
 
-body {
-    /* Font family and colour */
-    font-family: var(--primary-font), sans-serif;
-    color: var(--color-coffee-6);
-    max-width: 991px;
+/* Asterisk wildcard selector to override default styles added by the browser */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
 }
 
-body, html {
-    /*  Ensure the body and html span the full viewport height. */
-    height: 100%;
-    margin: 0;
+body {
+    min-height: 100vh;      /* Ensure the body takes the full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;    /* Horizontally centre the content */
+    justify-content: flex-start; /* Start content at the top */    min-height: 100vh; 
+    font-family: var(--primary-font), sans-serif;
+    color: var(--color-coffee-6);
 }
 
 /* Header */
@@ -72,11 +76,10 @@ body, html {
 header {
     height: var(--header-height);
     width: 100%;
-    justify-content: space-between; /* Aligns content to left and right */}
+    justify-content: space-between; /* Aligns content to left and right */
+}
 
 header > h1 {
-    font-size: 25px;
-    letter-spacing: -1px; /* Reduce space between letters */
     margin: 0;
 }
 
@@ -89,6 +92,7 @@ main {
     /* Make main>a flex container with vertical stacking. */
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: calc(100vh - var(--header-height)); /* Full viewport height minus header height */
 }
 
@@ -101,6 +105,8 @@ a {
 h1, .h1, h2, .h2 {
     font-family: var(--primary-font), sans-serif;
     font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -1px;
 }
 
 /* Buttons */
@@ -108,13 +114,6 @@ h1, .h1, h2, .h2 {
     cursor: pointer;
     transition: var(--color-orange-1) 0.3s ease; /* Smooth transition on hover */
     font-family: var(--primary-font), sans-serif;
-}
-
-/* Asterisk wildcard selector to override default styles added by the browser */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
 }
 
 .hidden {
@@ -248,4 +247,13 @@ h1, .h1, h2, .h2 {
 #saved-places-list p {
     margin: 0;
     padding: 0;
+}
+
+@media (min-width: 992px) {
+    body {
+      max-width: 991px; /* Keep the content width constrained */
+      margin: 0 auto; /* Centre-align the content on large screens */
+      border: var(--color-coffee-6) solid 1px;
+      box-shadow: var(--color-coffee-6) 0px 0px 10px;
+    }
 }

@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (target.length > 1) {
                 // Generate the route and display it on the map
                 generateRoute("wheelchair", "false");
+                // Remove the orange background from the waypoint divs
+                document.querySelectorAll('.waypoint').forEach(waypoint => {
+                    waypoint.classList.remove('background-orange');
+                });
             }
             return true; // Indicate the operation was successful
         }

@@ -7,7 +7,7 @@ export default function showLocationSelectionOptions(e) {
     // Create a new div element
     const newDiv = document.createElement('div');
     // Add multiple classes to the new div
-    newDiv.classList.add('px-2', 'pt-1', 'pb-2');
+    newDiv.classList.add('px-2', 'px-md-3', 'pt-1', 'pb-2');
     newDiv.id = 'waypoint-selection-options';
     // Add the text from the locationOptions.html file
     newDiv.innerHTML = waypointSelectionOptionsContent;

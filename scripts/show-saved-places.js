@@ -10,7 +10,7 @@ export default function showSavedPlaces(outputDivId) {
     // create a new div with id #saved-places-list
     const savedPlacesDiv = document.createElement('div');
     savedPlacesDiv.id = 'saved-places-list';
-    savedPlacesDiv.classList.add('px-2');
+    savedPlacesDiv.classList.add('px-2', 'px-md-3');
 
     // Add a title
     const titleDiv = document.createElement('div');

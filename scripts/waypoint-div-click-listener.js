@@ -21,7 +21,6 @@ export default function addEventListenersToWaypointDivs() {
                 showLocationSelectionOptions(e);
                 // add orange background to clicked div
                 e.currentTarget.classList.add('background-orange');
-
             } else {
                 // If it exists for this waypoint, remove it
                 if (existingDiv.previousElementSibling === e.currentTarget) {
