@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Check if the length of the array is greater than 1
             if (target.length > 1) {
                 // Generate the route and display it on the map
-                generateRoute("driving-car", "false");
+                generateRoute("wheelchair", "false");
             }
             return true; // Indicate the operation was successful
         }

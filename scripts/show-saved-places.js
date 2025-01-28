@@ -2,6 +2,10 @@ import addCoordinatesToRoute from './add-coordinates-to-route.js';
 import setStartEndLocationText from './set-start-end-location-text.js';
 import { displayLocationOnMap, showElements } from './utils.js';
 
+/**
+ * Description of what fn does
+ * 
+ */
 export default function showSavedPlaces(outputDivId) {
     // create a new div with id #saved-places-list
     const savedPlacesDiv = document.createElement('div');

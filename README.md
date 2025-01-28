@@ -1,3 +1,37 @@
+Profile parameter restrictions for the wheelchair profile
+
+options.profile_params.restrictions
+An object specifying restrictions for cycling-* or wheelchair profiles.
+https://github.com/GIScience/openrouteservice/blob/main/ors-engine/src/main/java/org/heigit/ors/routing/parameters/WheelchairParameters.java
+
+Restrictions on the of characteristics or features, of a way
+
+|Parameter          | Type   | Description                               | Options  | Default |
+|----               |----    |----                                       |----      |----|
+|minimum_width      | Number | Minimum width in meters                   |          |           |
+|maximum_incline    | Integer| Maximum incline as a percentage           | 3, 6, 10, 15 or any | 6 |
+|maximum_sloped_kerb| Number | Maximum height of a sloped kerb in meters | 0.03, 0.06, 0.1, 0.15 or any| 0.06 |
+|surface_type       | String | Minimum surface type                      |Ordered list in increasing order of difficulty: "paved" "asphalt" "concrete" "paving_stones" "concrete:plates" ["cobblestone:flattened", "sett", "unhewn_cobblestone"] "concrete:lanes" "cobblestone" "unpaved" "fine_gravel" "compacted" "metal" "ice" "grass_paver" "sand" "dirt" "earth" "grass" "gravel" "ground" "mud" "pebblestone" "salt" "snow" "wood" "woodchips" | "cobblestone:flattened"|
+|smoothness_type    | String | Minimum smoothness                        |"excellent" "good" "intermediate" "bad" "very_bad" "horrible" "very_horrible" "impassable" |"good"|
+|track_type         | String | Minimum quality (grade)                   |"grade1" "grade2" "grade3" "grade4" "grade5"|"grade1"|
+
+Determined by device type:
+
+- minimum_width
+
+- track_type 
+    - grade1 for manual wheelchair and class 2 mobility scooter (default for wheelchair profile)
+    - grade2 for Class 3 mobility scooter, powered wheelchairs, and tricycles
+
+- smoothness
+    - good for manual wheelchair and class 2 mobility scooter (default for wheelchair profile)
+    - intermediate for Class 3 mobility scooter, powered wheelchairs, and tricycles
+
+https://github.com/GIScience/openrouteservice/blob/main/ors-api/src/main/java/org/heigit/ors/api/requests/routing/RequestProfileParamsRestrictions.java
+
+You can return information about the edges in the route, and elevation at the nodes.
+
+
 # Mobility Mapper Frontend
 
 Mobility Mapper is a route finder and navigation app for users of wheelchairs, mobility scooters, tricycles and other wheeled mobility devices (referred to as wheelers). 
