@@ -1,5 +1,14 @@
 export default function setStartEndLocationText(placeName, divId) {
-    // TODO: Needs improvement incase clicks in middle of sea, or address with number
+    console.log("Place name:", placeName);
     // Display the name of the seleted location in the div with the given id
-    document.getElementById(divId).textContent = placeName.split(",")[0];
+    let div = document.getElementById(divId);
+    if (placeName) {
+        if (placeName.split(",").length > 1) {
+            div.textContent = placeName.split(",")[0];
+        } else {
+            div.textContent = placeName;
+        }
+    } else {
+        div.textContent = "Unknown location";
+    }
 }

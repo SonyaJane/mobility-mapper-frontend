@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     MM.coordinates = new Proxy([], {
         set(target, property, value) {
             target[property] = value; // Update the array
-            // Check if the length of the array is greater than 1
-            if (target.length > 1) {
+            // check if target contains 2 sets of coordinates:
+            if (target[0] && target[1]) {
+                console.log("Coordinates set to", target);
                 // Generate the route and display it on the map
                 generateRoute("wheelchair", "false");
                 // Remove the orange background from the waypoint divs

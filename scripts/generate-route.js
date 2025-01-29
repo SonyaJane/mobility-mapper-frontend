@@ -1,10 +1,16 @@
+import displayRouteGenerationError from "./display-route-generation-error.js";
+
 const OPENROUTESERVICE_API_KEY = "5b3ce3597851110001cf6248f31ca2fd5da04a70b84fb4fe327c3588";
 const OPENROUTESERVICE_API_URL = "https://api.openrouteservice.org/v2/directions/";
 
 
 export default async function generateRoute(profile = "wheelchair", instructions = "false") {
+    removeExistingRoute();
+    removeWaypointOptionsDiv();
+    expandMapToIncludeBothMarkers();
+
     const url = `${OPENROUTESERVICE_API_URL}${profile}/json`;
-        const body = `{"coordinates":${JSON.stringify([...MM.coordinates])},"instructions":"${instructions}"}`;
+    const body = `{"coordinates":${JSON.stringify([...MM.coordinates])},"instructions":"${instructions}"}`;
 
     try {
         // Fetch the route from the OpenRouteService API
@@ -21,12 +27,12 @@ export default async function generateRoute(profile = "wheelchair", instructions
         });
 
         const data = await response.json();
-
+        console.log("Response from OpenRouteService API: ", data);
         if (response.ok) {
             displayRoute(data);
         } else {
-            // displayException(data);
-            throw new Error(data.error);
+            displayRouteGenerationError(data.error);
+            throw new Error(data.error.message);
         }
 
     } catch (error) {
@@ -34,19 +40,6 @@ export default async function generateRoute(profile = "wheelchair", instructions
     }
 
     function displayRoute(data) {
-        // Remove any existing route from the map
-        MM.map.eachLayer((layer) => {
-            if (layer instanceof L.Polyline) {
-                MM.map.removeLayer(layer);
-            }
-        });
-
-        // remove the waypoint options div
-        const waypointOptionsDiv = document.getElementById("waypoint-selection-options");
-        if (waypointOptionsDiv) {
-            waypointOptionsDiv.remove();
-            MM.map.invalidateSize();
-        }
 
         // Get the polyline (series of coordinates) from the response
         const encodedPolyline = data.routes[0].geometry;
@@ -68,13 +61,10 @@ export default async function generateRoute(profile = "wheelchair", instructions
             routeCoordinates[routeCoordinates.length - 1][0],
             routeCoordinates[routeCoordinates.length - 1][1]
         ); // Last route point
-        console.log("startMarkerLatLng", startMarkerLatLng);
-        console.log("endMarkerLatLng", endMarkerLatLng);
 
         // extend the bounds to include the start and end markers
         bounds.extend(startMarkerLatLng);
         bounds.extend(endMarkerLatLng);
-        console.log("Extended bounds", bounds);
 
         // Check if the route start differs from the start marker location
         if (!startMarkerLatLng.equals(routeStartLatLng)) {
@@ -101,6 +91,36 @@ export default async function generateRoute(profile = "wheelchair", instructions
         myFGMarker.addLayer(MM.startMarker);
         myFGMarker.addLayer(MM.endMarker);
         bounds.extend(myFGMarker.getBounds());
+
+        // Adjust map to fit the extended bounds
+        MM.map.fitBounds(bounds);
+    }
+
+    function removeExistingRoute() {
+        // Remove any existing route from the map
+        MM.map.eachLayer((layer) => {
+            if (layer instanceof L.Polyline) {
+                MM.map.removeLayer(layer);
+            }
+        });
+    }
+
+    function removeWaypointOptionsDiv() {
+        // remove the waypoint options div
+        const waypointOptionsDiv = document.getElementById("waypoint-selection-options");
+        if (waypointOptionsDiv) {
+            waypointOptionsDiv.remove();
+            MM.map.invalidateSize();
+        }
+    }
+
+    function expandMapToIncludeBothMarkers() {
+        // Extend bounds to include the start and end markers
+        let myFGMarker = new L.FeatureGroup();
+        myFGMarker.addLayer(MM.startMarker);
+        myFGMarker.addLayer(MM.endMarker);
+        // Get bounds of the FeatureGroup
+        let bounds = myFGMarker.getBounds();
 
         // Adjust map to fit the extended bounds
         MM.map.fitBounds(bounds);

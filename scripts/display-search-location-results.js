@@ -35,6 +35,10 @@ export default function displaySearchLocationResults(data, outputDivId) {
         placeDiv.addEventListener('click', e => {
             // Get the latitude, longitude and place name from the clicked div
             let [lon, lat, placeName] = getClickedLocation(e);
+            // check the placename is not undefined
+            if (!placeName) {
+                placeName = "Selected location";
+            }
             setStartEndLocationText(placeName, outputDivId);
             // add coordinates as a data attribute to the div
             document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
