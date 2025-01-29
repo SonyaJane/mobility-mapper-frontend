@@ -1,6 +1,7 @@
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
 import setStartEndLocationText from './set-start-end-location-text.js';
-import { displayLocationOnMap, showElements } from './utils.js';
+import { showElements } from './utils.js';
+import displayLocationOnMap from './display-location-on-map.js';
 
 /**
  * Description of what fn does
@@ -34,8 +35,6 @@ export default function showSavedPlaces(outputDivId) {
 
         // add an event listener to the div for choosing the location
         placeDiv.addEventListener('click', e => {
-            // add lat and lon to global coordinates 
-            addCoordinatesToRoute(place.lat, place.lon, outputDivId);
             // Display the place name
             setStartEndLocationText(place.name, outputDivId);
             // Display the location on the map
@@ -52,6 +51,8 @@ export default function showSavedPlaces(outputDivId) {
             document.querySelector('#saved-places-list').remove();
             // Show the hidden elements
             showElements(["start-end-display", "map"]);
+            // add lat and lon to global coordinates 
+            addCoordinatesToRoute(place.lat, place.lon, outputDivId);
         });
 
         // Append the div to the new div

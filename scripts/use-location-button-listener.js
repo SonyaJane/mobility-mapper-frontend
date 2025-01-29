@@ -29,9 +29,7 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
                 //addRouteMarker(lat, lon, endMarkerUrl);
                 break;
         }
-        // add lat and lon to global coordinates 
-        addCoordinatesToRoute(lat, lon, outputDivId);
-
+        
         // Display the place name in the start location div
         setStartEndLocationText(placeName, outputDivId);
 
@@ -52,5 +50,8 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
         MM.map.invalidateSize();
         // reset view to center on selected location
         MM.map.setView([lat, lon]), undefined, { animate: false };
+
+        // add lat and lon to global coordinates 
+        addCoordinatesToRoute(lat, lon, outputDivId);
     });
 };

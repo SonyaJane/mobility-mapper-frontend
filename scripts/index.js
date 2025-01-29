@@ -1,7 +1,6 @@
 import addMapClickListener from './map-click-listener.js';
 import addEventListenersToWaypointDivs from './waypoint-div-click-listener.js';
 import initialiseMap from './initialise-map.js';
-import generateRoute from './generate-route.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -16,22 +15,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Add a Proxy to MM.coordinates to detect when the array length = 2
     // and trigger route generation
-    MM.coordinates = new Proxy([], {
-        set(target, property, value) {
-            target[property] = value; // Update the array
-            // check if target contains 2 sets of coordinates:
-            if (target[0] && target[1]) {
-                console.log("Coordinates set to", target);
-                // Generate the route and display it on the map
-                generateRoute("wheelchair", "false");
-                // Remove the orange background from the waypoint divs
-                document.querySelectorAll('.waypoint').forEach(waypoint => {
-                    waypoint.classList.remove('background-orange');
-                });
-            }
-            return true; // Indicate the operation was successful
-        }
-    });
+    // MM.coordinates = new Proxy([], {
+    //     set(target, property, value) {
+    //         target[property] = value; // Update the array
+    //         // check if target contains 2 sets of coordinates:
+    //         if (target[0] && target[1]) {
+    //             console.log("Coordinates set to", target);
+    //             startRoutePlanning();
+    //         }
+    //         return true; // Indicate the operation was successful
+    //     }
+    // });
     
     // User saved places
     MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759, address: "1 Home Street, Cardiff" },

@@ -1,4 +1,5 @@
-import { displayLocationOnMap, showElements, hideElements, capitaliseWords, getClickedLocation } from './utils.js';
+import {showElements, hideElements, capitaliseWords, getClickedLocation } from './utils.js';
+import displayLocationOnMap from './display-location-on-map.js';
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
 import setStartEndLocationText from './set-start-end-location-text.js';
 
@@ -42,8 +43,6 @@ export default function displaySearchLocationResults(data, outputDivId) {
             setStartEndLocationText(placeName, outputDivId);
             // add coordinates as a data attribute to the div
             document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
-            // add lat and lon to global coordinates 
-            addCoordinatesToRoute(lat, lon, outputDivId);
             // Display the location on the map
             if (outputDivId == "currentStart") {
                 // remove existing start marker
@@ -62,6 +61,8 @@ export default function displaySearchLocationResults(data, outputDivId) {
             document.getElementById("waypoint-selection-options").remove();
             // reset the map
             MM.map.invalidateSize();
+            // add lat and lon to global coordinates 
+            addCoordinatesToRoute(lat, lon, outputDivId);
         });
 
         // Append the div to the new div

@@ -1,7 +1,8 @@
 // add event listeners to the four location selection options
 import searchLocationNominatim from './search-location-nominatim.js';
 import displaySearchLocationResults from './display-search-location-results.js';
-import { displayLocationOnMap, hideElements } from './utils.js';
+import { hideElements } from './utils.js';
+import displayLocationOnMap from './display-location-on-map.js';
 import showSavedPlaces from './show-saved-places.js';
 import latLonToAddress from './lat-lon-to-address.js';
 import locateUser from './locate-user.js';
@@ -49,17 +50,11 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
             // remove existing start marker
             if (MM.startMarker) MM.startMarker.remove();
             displayLocationOnMap(lat, lon, 15, 'startMarker');
-            
         } else if (outputDivId == "currentDestination") {
             // remove existing end marker
             if (MM.endMarker) MM.endMarker.remove();
             displayLocationOnMap(lat, lon, 15, 'endMarker');
-            // add coordinates to global MM.coordinates
-            MM.coordinates[1] = [lat, lon];
         }
-
-        // add coordinates to route (MM.coordinates)
-        addCoordinatesToRoute(lat, lon, outputDivId);
 
         // get place name from lat and lon
         const placeName = await latLonToAddress(lat, lon);
@@ -69,6 +64,9 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         // add coordinates as a data attribute to the div
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
 
+        // add coordinates to route (MM.coordinates) and fetch the route
+        console.log("Adding coordinates to route: ", lat, lon);
+        addCoordinatesToRoute(lat, lon, outputDivId);
     });
 
     // Add click event listener to select on map div
