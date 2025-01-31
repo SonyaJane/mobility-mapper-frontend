@@ -85,7 +85,8 @@ header > h1 {
 
 #logo {
     height: 30px;
-    padding-top: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 main {
@@ -169,7 +170,7 @@ h1, .h1, h2, .h2 {
 }
 
 .square-box p {
-    font-size: clamp(1.1rem, 1vw, 1.5rem); /* Font size scales between 0.8rem and 1.5rem based on viewport */
+    font-size: 1.2rem;
 }
 
 .mm-marker {
@@ -216,22 +217,27 @@ h1, .h1, h2, .h2 {
     font-size: 1.2rem;
 }
 
+#text-search {
+    display: flex;
+    align-items: center;
+}
+
 #text-search-input {
-    width: auto;
-    font-size: inherit; /* overrides the font-size set by Bootstrap */
-    flex-grow: 1;       /* Make the input take the remaining space */
+    font-size: inherit; /* Overrides the font-size set by Bootstrap */
+    flex-grow: 1;       /* Makes the input take the remaining space */
     margin-right: 5px;
+    height: 47px;       /* Ensures consistent height */
 }
 
 #text-search-submit {
-    /* Make button same height as input field */
-    height: 47px;
-    width: 47px; /* Make the button square */
-    padding: 0;    
-    display: flex; /* Center the icon inside */
+    height: 47px;        /* Matches input height */
+    width: 47px;         /* Ensures it's a square */
+    padding: 0;
+    display: flex;       /* Centers the icon */
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    flex-shrink: 0;      /* Prevents the button from shrinking */
 }
 
 .centered-flex {
@@ -249,6 +255,52 @@ h1, .h1, h2, .h2 {
     padding: 0;
 }
 
+.text-container span {
+    display: block; /* Forces each span onto a new line */
+}
+
+@media (min-width: 768px) {
+    .text-container span {
+        display: inline;
+    }
+
+    .icon-container {
+        margin-bottom: 10px; /* Adds spacing between icon and text */            
+    }
+}
+
+@media (min-width: 576px) {
+    .square-box {
+        width: 173px;
+    }
+}
+
+/* Media queries */
+
+@media (max-width: 349px) {
+    #logo {
+        padding-top: 0;
+        padding-right: 3px;
+    }
+}
+
+@media (min-width: 396px) {
+.square-box p {
+    font-size: var(--bs-body-font-size);
+}
+}
+
+@media (min-width: 768px) {
+    .square-box {
+        aspect-ratio: none; /* Remove aspect ratio */
+        width: 31%;
+        height: 70px;
+    }
+
+    .icon-container {
+        margin-right: 10px; /* Adds spacing between icon and text */
+    }
+}
 @media (min-width: 992px) {
     body {
       max-width: 991px; /* Keep the content width constrained */

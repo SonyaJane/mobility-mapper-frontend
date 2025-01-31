@@ -26,7 +26,13 @@
 <body>
     <header class="px-2 px-md-3 flex-center" id="header">
         <h1>Plan Route</h1>
-        <img id="logo" src="./images/logo_with_name_only.png" alt="Mobility Mapper logo">
+        <picture>
+            <!-- For small screens (less than 350px) -->
+            <source srcset="./images/marker_narrow.png" media="(max-width: 349px)">
+            
+            <!-- Default image for larger screens -->
+            <img id="logo" src="./images/logo_with_name_only.png" alt="Mobility Mapper logo">
+        </picture>
     </header>
 
     <main>
