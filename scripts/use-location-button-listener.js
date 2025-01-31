@@ -37,15 +37,11 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
         
         // Remove the popup
-        // TODO removePopupWithSlide();
         document.getElementById('fixed-popup').remove();
 
         // show hidden divs
         document.getElementById("start-end-display").classList.remove('hidden');
-        // TODO showElementsSlide();
 
-        // return the map to its original size
-        //exitMapFullScreen(lat, lon);
         // Ensure map resizes to fit the new container size
         MM.map.invalidateSize();
         // reset view to center on selected location

@@ -15,7 +15,7 @@ export default function showSavedPlaces(outputDivId) {
 
     // Add a title
     const titleDiv = document.createElement('div');
-    titleDiv.innerHTML = `<h2 class="mb-0 pt-3 pb-2 border-bottom border-top-orange">Select a saved place</h2>`;
+    titleDiv.innerHTML = `<h2 class="mb-0 py-3 border-bottom border-top-orange">Select a saved place</h2>`;
     savedPlacesDiv.appendChild(titleDiv);
 
     // Iterate through the saved places
@@ -27,7 +27,7 @@ export default function showSavedPlaces(outputDivId) {
                                 <p>${place.address}</p>
                                 <p>${place.lat}, ${place.lon}</p>`;
         // add css classes to the div
-        placeDiv.classList.add('border-bottom', 'py-2', 'cursor-pointer');
+        placeDiv.classList.add('border-bottom', 'py-2', 'cursor-pointer', 'saved-place');
         // add data attributes to the div
         placeDiv.dataset.location = place.name;
         placeDiv.dataset.lat = place.lat;

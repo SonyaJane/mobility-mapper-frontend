@@ -2,7 +2,8 @@ import latLonToAddress from "./lat-lon-to-address.js";
 import showClickedLocationDiv from "./show-clicked-location-div.js";
 import { hideElements } from "./utils.js";
 import addEventListenerToUseLocationButton from "./use-location-button-listener.js";    
-    
+import addEventListenerToExitButton from "./add-event-listener-to-exit-button.js";
+
 export default function addMapClickListener() {
 
     // add click event listener to the map
@@ -28,7 +29,6 @@ export default function addMapClickListener() {
         // remove any existing markers
         if (MM.marker) {MM.map.removeLayer(MM.marker)};
 
-        // TODO: change this to link marker to current waypoint
         // add marker at clicked location
         MM.marker = L.marker([lat, lon]).addTo(MM.map);
 
@@ -42,6 +42,9 @@ export default function addMapClickListener() {
         ["start-here", "end-here"].forEach(btnId => {
             addEventListenerToUseLocationButton(lat, lon, placeName, btnId);
         })
+        
+        // Add click event listener to the exit button
+        addEventListenerToExitButton();
     });
 
 }

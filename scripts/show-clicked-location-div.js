@@ -19,6 +19,8 @@ export default function showClickedLocationDiv(placeName, lat, lon) {
         Start Here</button>
         <button id="end-here" class="btn btn-use-this m-2">
         Set as Destination</button>
+        <button id="go-back" class="btn btn-use-this m-2">
+        Go Back</button>
     </div>
     `;
     // Add the popup below the map container

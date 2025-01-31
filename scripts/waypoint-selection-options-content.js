@@ -11,7 +11,7 @@ const waypointSelectionOptionsContent = `<!-- Text search for a place or address
     <div class="d-flex justify-content-between">
 
         <!-- Use current location -->
-        <div class="square-box d-flex flex-column justify-content-center" id="use-current-location">
+        <div class="square-box d-flex flex-column justify-content-center cursor-pointer" id="use-current-location">
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <div class="text-center icon-container mb-0"><i class="bi bi-crosshair m-0 p-0"></i></div>
                 <div class="text-center text-container mb-0 p-0"><p class="m-0 p-0"><span>Current</span> <span>Location</span></p></div>
@@ -19,7 +19,7 @@ const waypointSelectionOptionsContent = `<!-- Text search for a place or address
         </div>
 
         <!-- Select on map -->
-        <div class="square-box d-flex flex-column justify-content-center" id="select-on-map">
+        <div class="square-box d-flex flex-column justify-content-center cursor-pointer" id="select-on-map">
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <div class="text-center icon-container mb-0"><i class="bi bi-map m-0 p-0"></i></div>
                 <div class="text-center text-container mb-0 p-0"><p class="m-0 p-0"><span>Map</span> <span>Select</span></p></div>
@@ -27,7 +27,7 @@ const waypointSelectionOptionsContent = `<!-- Text search for a place or address
         </div>
 
         <!-- Select from saved places -->
-        <div class="square-box d-flex flex-column justify-content-center" id="select-from-saved-places">
+        <div class="square-box d-flex flex-column justify-content-center cursor-pointer" id="select-from-saved-places">
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <div class="text-center icon-container mb-0"><i class="bi bi-bookmark m-0 p-0"></i></div>
                 <div class="text-center text-container mb-0 p-0"><p class="m-0 p-0"><span>Saved</span> <span>Places</span></p></div>

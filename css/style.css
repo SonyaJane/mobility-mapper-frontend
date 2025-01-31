@@ -7,17 +7,12 @@
 :root {
     /* Fonts */
 	--primary-font: 'Open Sans', sans-serif;
-
     --bs-body-font-size: 1.4rem;
 
     /* Colours */
-    --color-coffee-6: #432b20; 	/* main font-color */
+    --color-coffee-6: #432b20;
     --color-orange-1: #f5ddd2;
-    --color-orange-2: #eabaa5;
-	--color-orange-3: #e09878;  	
-    --color-orange-4: #bd582c; 	/* main colour */
-	--color-coffee-4: #865640;
-	--color-green-4: #637052; 
+    --color-orange-4: #bd582c;
 
     /* Header height */
     --header-height: 65px;
@@ -30,17 +25,7 @@
     }
 }
 
-.colour-coffee-2 {
-    color: var(--color-coffee-2); 	
-}
-
-.colour-coffee-4 {
-    color: var(--color-coffee-4); 	
-}
-
-.colour-orange-4 {
-    color: var(--color-orange-4); 	
-}
+/* Coloured Borders */
 
 .border-bottom-orange {
     border-bottom: solid 1px #eabaa5;
@@ -49,6 +34,8 @@
 .border-top-orange {
     border-top: solid 1px #eabaa5;
 }
+
+/* Background colour for waypoint selection options */
 
 .background-orange {
     background-color: var(--color-orange-1);
@@ -62,11 +49,11 @@
 }
 
 body {
-    min-height: 100vh;      /* Ensure the body takes the full viewport height */
+    min-height: 100vh;     
     display: flex;
     flex-direction: column; /* Stack children vertically */
     align-items: center;    /* Horizontally centre the content */
-    justify-content: flex-start; /* Start content at the top */    min-height: 100vh; 
+    justify-content: flex-start; /* Start content at the top */  
     font-family: var(--primary-font), sans-serif;
     color: var(--color-coffee-6);
 }
@@ -89,25 +76,21 @@ header > h1 {
     padding-bottom: 3px;
 }
 
-main {
-    /* Make main>a flex container with vertical stacking. */
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: calc(100vh - var(--header-height)); /* Full viewport height minus header height */
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-coffee-6);
-    cursor: pointer;
-}
-
 h1, .h1, h2, .h2 {
     font-family: var(--primary-font), sans-serif;
     font-weight: 700;
     font-size: 26px;
     letter-spacing: -1px;
+}
+
+/* Main content */
+
+main {
+    /* flex container with vertical stacking. */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - var(--header-height)); /* Full viewport height minus header height */
 }
 
 /* Buttons */
@@ -150,7 +133,8 @@ h1, .h1, h2, .h2 {
 }
 
 .waypoint:hover,
-#waypoint-selection-options {
+#waypoint-selection-options,
+.saved-place:hover {
     background-color: var(--color-orange-1);
 }
 
@@ -241,9 +225,9 @@ h1, .h1, h2, .h2 {
 }
 
 .centered-flex {
-    display: flex; /* Enables Flexbox */
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
+    display: flex;
+    justify-content: center; /* Centre content horizontally */
+    align-items: center;     /* Centers content vertically */
 }
 
 #saved-places-list {
@@ -259,22 +243,6 @@ h1, .h1, h2, .h2 {
     display: block; /* Forces each span onto a new line */
 }
 
-@media (min-width: 768px) {
-    .text-container span {
-        display: inline;
-    }
-
-    .icon-container {
-        margin-bottom: 10px; /* Adds spacing between icon and text */            
-    }
-}
-
-@media (min-width: 576px) {
-    .square-box {
-        width: 173px;
-    }
-}
-
 /* Media queries */
 
 @media (max-width: 349px) {
@@ -285,12 +253,22 @@ h1, .h1, h2, .h2 {
 }
 
 @media (min-width: 396px) {
-.square-box p {
-    font-size: var(--bs-body-font-size);
-}
+    .square-box p {
+        font-size: var(--bs-body-font-size);
+    }
+    }
+
+@media (min-width: 576px) {
+    .square-box {
+        width: 173px;
+    }
 }
 
 @media (min-width: 768px) {
+    .text-container span {
+        display: inline;
+    }
+
     .square-box {
         aspect-ratio: none; /* Remove aspect ratio */
         width: 31%;
@@ -301,6 +279,7 @@ h1, .h1, h2, .h2 {
         margin-right: 10px; /* Adds spacing between icon and text */
     }
 }
+
 @media (min-width: 992px) {
     body {
       max-width: 991px; /* Keep the content width constrained */
