@@ -1,6 +1,10 @@
 const OPENROUTESERVICE_API_KEY = "5b3ce3597851110001cf6248f31ca2fd5da04a70b84fb4fe327c3588";
 const OPENROUTESERVICE_API_URL = "https://api.openrouteservice.org/v2/directions/";
 
+/**
+ * Generates a wheelchair accessible route using the OpenRouteService API using the coordinates stored in MM.coordinates.
+ * Calls displayRoute() to display the route on the map and extends the map bounds to include the start and end markers.
+ */
 
 export default async function generateRoute(profile = "wheelchair", instructions = "false") {
 
@@ -36,6 +40,9 @@ export default async function generateRoute(profile = "wheelchair", instructions
         console.error("Error generating route: ", error);
     }
 
+    /**
+     * Displays the route on the map and extends the map bounds to include the start and end markers
+     */
     function displayRoute(data) {
 
         // Get the polyline (series of coordinates) from the response
@@ -93,8 +100,10 @@ export default async function generateRoute(profile = "wheelchair", instructions
         MM.map.fitBounds(bounds);
     }
 
+    /**
+     * Display an route generation error message in a modal
+     */
     function displayRouteGenerationError() {
-        // Set message depending on the error code
         let title = document.getElementById('errorModalTitle');
         let message = document.getElementById('errorModalMessage');
         

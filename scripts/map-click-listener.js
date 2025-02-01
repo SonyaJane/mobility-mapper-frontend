@@ -4,6 +4,19 @@ import { hideElements } from "./utils.js";
 import addEventListenerToUseLocationButton from "./use-location-button-listener.js";    
 import addEventListenerToExitButton from "./add-event-listener-to-exit-button.js";
 
+/**
+ * Add a click event listener to the map. 
+ * 1. Gets the latitude and longitude of the clicked point.
+ * 2. Gets the address from the latitute and longitude using the nominatim API.
+ * 3. Shows the address, and user action buttons in a popup div below the map
+ * 4. Hides the start-end-display div that shows the currently selected start and end locations.
+ * 5. Resizes the map to fit the new container size.
+ * 6. Removes any existing markers.
+ * 7. Adds a marker at the clicked location.
+ * 8. Centers the map on the clicked point.
+ * 9. Adds click event listeners to the buttons in the popup.
+ */
+
 export default function addMapClickListener() {
 
     // add click event listener to the map

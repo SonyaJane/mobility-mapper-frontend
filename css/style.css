@@ -153,6 +153,7 @@ main {
     box-sizing: border-box;
 }
 
+/* Smaller font size for small screens */
 .square-box p {
     font-size: 1.2rem;
 }
@@ -173,15 +174,11 @@ main {
     color: red;
 }
 
-.leaflet-popup-content {
-    font-size: 1rem;
-}
-
 .leaflet-container {
     font-family: var(--primary-font), sans-serif;
 }
 
-/* Pop up for selecting location on map */
+/* Div for selecting location on map */
 .fixed-popup {
     /* at the bottom of the screen */
     bottom: 0;
@@ -224,6 +221,12 @@ main {
     flex-shrink: 0;      /* Prevents the button from shrinking */
 }
 
+#exit-button {
+    padding: 5px;
+    cursor: pointer;
+    color: var(--color-orange-4);
+    font-size: 30px;
+}
 .centered-flex {
     display: flex;
     justify-content: center; /* Centre content horizontally */
@@ -256,7 +259,7 @@ main {
     .square-box p {
         font-size: var(--bs-body-font-size);
     }
-    }
+}
 
 @media (min-width: 576px) {
     .square-box {

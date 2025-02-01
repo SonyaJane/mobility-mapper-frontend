@@ -1,3 +1,6 @@
+/**
+ * Search for a location using the Nominatim API with the given location text
+ */
 export default async function searchLocationNominatim(locationText) {
     // Query the Nominatim API for the location input by the user
     try {

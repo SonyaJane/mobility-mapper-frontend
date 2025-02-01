@@ -1,8 +1,9 @@
-// Create and show location selection options div below the clicked waypoint div
-// To be shown when user wants to select a start or destination location
 import addEventListenersToLocationSelectionOptions from './location-selection-options-listener.js';
 import waypointSelectionOptionsContent from './waypoint-selection-options-content.js';
-
+/**
+* Create and show location selection options div below the clicked waypoint div
+* To be shown when user wants to select a start or destination location
+*/ 
 export default function showLocationSelectionOptions(e) {
     // Create a new div element
     const newDiv = document.createElement('div');

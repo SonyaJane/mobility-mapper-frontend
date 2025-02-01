@@ -2,6 +2,12 @@ import { startMarker, endMarker } from './markers.js';
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
 import setStartEndLocationText from './set-start-end-location-text.js';
 
+/**
+ * Add event listener to the given use location button in the popup div.
+ * Removes the popup div and displays the selected location in the start or end location div.
+ * Changes the marker on the map to a start or end marker.
+ * Adds the coordinates to the global coordinates array.
+ */
 export default function addEventListenerToUseLocationButton(lat, lon, placeName, btnID) {
     // Add click event listener to the button in the popup
     document.getElementById(btnID).addEventListener('click', e => {

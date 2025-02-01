@@ -1,5 +1,7 @@
+/**
+ * Get the address from the latitude and longitude using the OpenStreetMap Nominatim API
+ */
 export default async function latLonToAddress(lat, lon) {
-    // Get the address from the latitude and longitude
     // define the api url
     const api_url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;
     // fetch the data

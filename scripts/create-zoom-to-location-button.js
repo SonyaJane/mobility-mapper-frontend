@@ -1,5 +1,10 @@
 import locateUser from "./locate-user.js";
 
+/**
+ * Creates a button on the map to zoom to the user's location 
+ * when clicked. The user's location is determined using the
+ * locateUser function.
+ */
 export default function createZoomToLocationButton() {
     const zoomButton = L.control({ position: 'topright' });
 

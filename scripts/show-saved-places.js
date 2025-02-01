@@ -4,8 +4,8 @@ import { showElements } from './utils.js';
 import displayLocationOnMap from './display-location-on-map.js';
 
 /**
- * Description of what fn does
- * 
+ * Show list of saved places in a new div.
+ * Add click event listener to each saved place.
  */
 export default function showSavedPlaces(outputDivId) {
     // create a new div with id #saved-places-list

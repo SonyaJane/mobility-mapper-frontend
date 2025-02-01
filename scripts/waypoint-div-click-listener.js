@@ -1,7 +1,8 @@
-// Add a click event listener to .waypoint (start and destination) divs
-// Adds a div below the waypoint div with ways to select or search for a location
 import showLocationSelectionOptions from './show-location-selection-options.js';
-
+/**
+* Add a click event listener to start and destination (.waypoint) divs
+* On click, a div is added below the clicked waypoint div with ways to select or search for a location
+*/
 export default function addEventListenersToWaypointDivs() { 
     // get all elements with class .waypoint
     document.querySelectorAll('.waypoint').forEach(waypoint => {

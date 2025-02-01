@@ -1,5 +1,10 @@
 import { startMarker, endMarker } from './markers.js';
 
+/**
+ * Display a location on the map with the given latitude and longitude and
+ * marker type (start or end marker), then zoom to the location with the given zoom level.
+ */
+
 export default function displayLocationOnMap(lat, lon, zoom, markerType) {
     // Add a marker at given location
     switch (markerType) {

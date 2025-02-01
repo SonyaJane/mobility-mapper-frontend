@@ -1,3 +1,6 @@
+/**
+ * Prepares the map for a new route by removing any existing route and extending the map bounds to include the start and end markers.
+ */
 export default async function prepareForNewRoute() {
     // Remove any existing route from the map
     MM.map.eachLayer((layer) => {

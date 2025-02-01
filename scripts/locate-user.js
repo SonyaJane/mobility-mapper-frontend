@@ -1,6 +1,9 @@
-// Get current user's location using Leaflet's locate method
+/**
+ * Get current user's location using Leaflet's locate method.
+ */
+
 export default async function locateUser(map) {
-    // need to explicitly wrap the locateUser() function in a Promise to return values        
+    // need to explicitly wrap the function in a Promise to return values        
     try {
         const latlon = await new Promise((resolve, reject) => {
             map.locate({ setView: false, enableHighAccuracy: true });

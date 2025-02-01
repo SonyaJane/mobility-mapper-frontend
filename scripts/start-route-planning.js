@@ -1,14 +1,14 @@
 import prepareForNewRoute from './prepare-for-new-route.js';
 import generateRoute from './generate-route.js';
 
+/**
+ * Prepare the map for a new route.
+ * Generate a route and display it on the map.
+ */
 export default async function startRoutePlanning() {
-    // Await prepareForNewRoute to complete before proceeding
-    console.log("Preparing for new route...");
-
+    // Prepare for a new route
     await prepareForNewRoute();
-    
-    console.log("Map is ready, generating route...");
-    
+      
     // Generate the route and display it on the map
     await generateRoute("wheelchair", "false");
 

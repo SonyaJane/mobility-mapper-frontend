@@ -8,16 +8,29 @@ import latLonToAddress from './lat-lon-to-address.js';
 import locateUser from './locate-user.js';
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
 
+/**
+ * Add event listeners to the four location selection options:
+ * 1. "Search for place or address" search button (magnifying glass icon) 
+ *     - Clicking this button will search for a location using the Nominatim API
+ * 2. "Current Location" square
+ *     - Clicking this button will use the user's current location as the start or destination location
+ * 3. "Select on map" button
+ *     - Clicking this button will allow the user to select a location on the map
+ * 4. "Select from saved places" button
+ *     - Clicking this button will allow the user to select a location from their saved places.
+ */
+
 export default function addEventListenersToLocationSelectionOptions(outputDivId) {
 
     // Add click event listener to button for "Search for place or address" text input
     // (Magnifying glass icon)
     document.getElementById("text-search-submit").addEventListener('click', async e => {
 
-        // check the input field contains text
         const locationText = document.getElementById("text-search-input").value;
-
-        if (locationText) {
+        // Regular expression to check if the input contains at least one word (letters)
+        let wordPattern = /[a-zA-Z0-9]/;
+        console.log(wordPattern.test(locationText))
+        if (wordPattern.test(locationText)) {
             // Hide everything except search text input, header and footer
             hideElements(["start-location-display", "destination-location-display", "other-selection-options", "map"]);
             // Use the search input to query the Nominatim API
@@ -26,7 +39,9 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
             displaySearchLocationResults(data, outputDivId);
         } else {
             // If the input field is empty, add placeholder text in red
-            document.getElementById("text-search-input").placeholder = "Please enter a location to search";
+            // First remove any existing text
+            document.getElementById("text-search-input").value = "";
+            document.getElementById("text-search-input").placeholder = "Enter text to search";
             document.getElementById("text-search-input").classList.add("red-placeholder");
         }
 
@@ -63,7 +78,6 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         document.getElementById(outputDivId).textContent = placeName.split(",")[0];
         // add coordinates as a data attribute to the div
         document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
-
         // add coordinates to route (MM.coordinates) and fetch the route
         console.log("Adding coordinates to route: ", lat, lon);
         addCoordinatesToRoute(lat, lon, outputDivId);

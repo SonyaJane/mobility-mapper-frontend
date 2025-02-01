@@ -1,8 +1,13 @@
 import locateUser from './locate-user.js';
 import createZoomToLocationButton from './create-zoom-to-location-button.js';
 
+/**
+ * Initialises the Leaflet map and adds OpenStreetMap tiles.
+ * If the user's location can be found, the map is centred on that location.
+ * Creates a button to zoom to the user's location.
+ */
 export default async function initialiseMap() {
-
+    
     console.log("Initialising map");
 
     // Initialise Leaflet map and add OpenStreetMap tiles

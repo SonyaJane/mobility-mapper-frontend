@@ -1,3 +1,9 @@
+/**
+ * Show a popup div at the bottom of the screen containing:
+ * - the location name 
+ * - buttons to set as start location or set as destination
+ * - a button to close the popup and return to the main screen
+ */
 export default function showClickedLocationDiv(placeName, lat, lon) {
     // Remove any existing popups
     const existingPopup = document.getElementById('fixed-popup');
