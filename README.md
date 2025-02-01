@@ -4,7 +4,6 @@ Open Route Service
 API Returns:
 An encoded polyline is a compressed format used to represent a series of geographic points (latitude and longitude) as a compact string of characters. This encoding significantly reduces the amount of space needed to store or transfer path information.
 
-Nominatim: Use API to get LatLon from text search
 
 
 ![Mobility Mapper fontend mockup images]()
@@ -59,7 +58,7 @@ The main font used on the website is Open Sans with Sans Serif as the backup in 
 ### Wireframes
 
 Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the design of the web application.
-![Mobile view wireframe]/readme-files/wireframe.png)
+![Mobile view wireframe](/readme-files/wireframe.png)
 
 [Back to top ⇧](#mobility-mapper)
 
@@ -97,6 +96,42 @@ When the user has seletced a location using the section described below, it is d
 
 ### 3. Location selection options
 
+When a user clicks on either the start or destination location section, the section shown below is created below the clicked section. this is referred to as the location selection options section. It is highlighted with a light orange background to indicate that this is what the user is currently working on.
+
+![Location selection options section](/readme-files/location-selection-options.png)
+
+A user can then choose a location using one of the following four methods.
+
+#### a) Text search 
+
+The user can type in the text input and then click on the magnifying glass button to search for a location. The input is first validated. If it does not contain any letters or whole numbers, the input is cleared and an error message in red font is added to the input field as a placeholder.
+
+![Red placeholder text for invalid input](/readme-files/text-search-error.png)
+
+If the input contains letters and or whole numbers, it is sent to the Open Street Maps (Nominatim search API)[https://nominatim.org/release-docs/latest/api/Search/] to look up a location. We use the parameter `format=json` to obtain the response in json format, and `addressdetails=1` to include a breakdown of the address. 
+
+From the response, for each search result, we:
+
+1. Extract the addresstype attribute, which tells us the type of place the result represents, such as a building, street, village, or administrative region.
+2. Extract the display_name attributes, which is the full, comma separated address in a single string. 
+3. Extract the longitude and latitude, which will be required for the route generation process.
+4. Diplay both the addresstype and display_name in a div, and attach to the div the latitude, longitude, and display_name as data attributes. This enables the required information to be picked up if that search result is selected by the user.
+
+The javascript code that carries out this function can be found [here](/scripts/search-location-nominatim.js). If the request is a success, the results are displayed in a new section, as shown in the image below. Meanwhile, all other sections are hidden except the header and the text search input row. 
+
+![text search results](/readme-files/search-results.png)
+
+If the request was unsuccessful, 
+
+
+get LatLon from text search
+
+
+#### b) Current location
+
+#### c) Map select
+
+#### d) Saved places
 
 
 #### Error Modal

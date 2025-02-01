@@ -20,7 +20,7 @@ export default function displaySearchLocationResults(data, outputDivId) {
     // create a new div with id #location-search-results
     const resultsDiv = document.createElement('div');
     resultsDiv.id = 'location-search-results';
-    resultsDiv.classList.add('container', 'px-1');
+    resultsDiv.classList.add('px-2', 'px-md-3');
 
     // Add a div for the Search results title and an exit button
     const titleDiv = document.createElement('div');
