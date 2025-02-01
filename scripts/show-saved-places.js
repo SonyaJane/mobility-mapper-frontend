@@ -51,9 +51,7 @@ export default function showSavedPlaces(outputDivId) {
 
         // add an event listener to the div for choosing the location
         placeDiv.addEventListener('click', e => {
-            // Display the place name
-            console.log(place.name);
-            console.log(outputDivId);
+            // Display the place name in the start or destination div
             setStartEndLocationText(place.name, outputDivId);
             // Display the location on the map
             if (outputDivId == "currentStart") {

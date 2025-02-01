@@ -52,201 +52,56 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 
 The primary colour used on the webb application is burnt orange, which is the same colour used for the app logo. Orange was chosen because it is associated with energy, happiness, and vitality. It is complemented with a coffee brown, and a lighter shade of burnt orange for background colours. These colours are a small subset of the general Mobility Mapper theme, as used in the [introductory website](https://sonyajane.github.io/mobility-mapper/).
 
-
 ### Typography
 
 The main font used on the website is Open Sans with Sans Serif as the backup in case the former is not imported successfully. Since the application is small, there was no need for a second font. A second font was trailled, but consistency of the main font made for a more professional appearance.
 
 ### Wireframes
 
-Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the design of the website for mobile, tablet and desktop screens.
-Page | Mobile | Tablet | Desktop
---- | --- | --- | ---
-Home | ![Home mobile wireframe image](assets/readme-files/wireframes/home-mobile.png) | ![Home Tablet wireframe image](assets/readme-files/wireframes/home-tablet.png) | ![Home desktop wireframe image](assets/readme-files/wireframes/home-desktop.png)
+Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the design of the web application.
+![Mobile view wireframe]/readme-files/wireframe.png)
 
 [Back to top ⇧](#mobility-mapper)
 
 ## Features
 
-Please note that this is a two-page website, where the home page has three distinct areas, and the partnerships page has eight distinct areas.
-
 ### General
+* Single page app
 * Responsive design across all device sizes.
-* Similar colour scheme and design throughout both pages to effectively structure, categorise and present the information to the visitors.
-* Hovering over a link or button changes the cursor to a pointer to let the user know it is clickable.
-* Since the partnerships page is so long, to prevent the need to manually scroll  all the way back to the top of the page, an orange back to top up arrow icon appears on the bottom right of the screen. Clicking it scrolls to the top. 
+* Hovering over a button or clickable section changes the cursor to a pointer to let the user know it is clickable.
 
-### Navbar
+### 1. Header 
 
-The navbar contains the Mobility Mapper logo on the left, which functions as a link to the home page.
+The header indicates that the app is a route planner. The Mobility Mapper logo is on the right. On very small screens (<350px) the logo is replaced with the Mobility Mapper route marker, as the full logo does not fit.
 
-Responsive navigation links are on the right of the navbar. On tablets and desktop screens the navigation links are visible, with the current page indicated by bold font. A hover effect that changes the link text colour to orange, to provide feedback to the user for a better user experience.
-
-<img src="assets/readme-files/navbar-expanded.png" height="40">
-
-On mobile screens the navigation links can be revealed by clicking a toggle button with a hamburger icon:
-
-|  |  |
+| Screens < 350px | Screens >= 350px |  
 | --- | --- |
-|<img src="assets/readme-files/navbar.png" width="270"> | toggle button unclicked |
-|<img src="assets/readme-files/navbar-active.png" width="270"> | toggle button clicked |
+| ![Header for small screens](/readme-files/header-small.png) | ![Header for regular screens](/readme-files/header.png) |
 
-The navigation bar is the same on both pages. It contains links to both pages to facilitate navigation across the site. It also contains a link to the contact form on the same page, i.e. the contact link on the home page takes you to the personal contact form at the bottom of the home page, and the contact link on the partnerships page takes you to the business contact form at the bottom of the partnerships page. 
+### 2. Start location and destination location sections
 
-### Footer
+This section invites the user to select a start and destination location. There is a section for the start location, followed by one for the destination location. 
 
-The footers on both pages contain links to the social media channels, and convenient, relevant links for easy navigation.
+![Select start or destination location](/readme-files/select-start-destination.png)
 
-The home page footer contains links to the top of the page, the email subscription modal, the home contact form, and the partnerships page.
+The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
 
-![Home footer image](assets/readme-files/footer-home.png)
+Hovering over either section changes the mouse cursor to a pointer, and the section background changes to a light orange, to indicate that the section is clickable.
 
-The partnerships page footer contains links to the home page, the top of the page, and the partnerships contact form.
+![Select start or destination location - on hover](/readme-files/waypoint-div-hover.png)
 
-![Partnerships footer image](assets/readme-files/footer-partnerships.png)
+When the user has seletced a location using the section described below, it is displayed in place of the invitation to choose a location.
 
-[Back to top ⇧](#mobility-mapper)
+![Selected location displayed](/readme-files/search-displayed.png)
 
-### Home Page
 
-The home page consists of four sections and a subscribe modal.
+### 3. Location selection options
 
-#### 1. Hero cover image and text
 
-Visitors are greeted by a light and sunny hero image, which stretches with the screen width.
 
-On mobile screens the image is accompanied by a prominent cover title, and the cover text sits below it, followed by two call-to-action buttons and a set of social media links. These features sit on top of the hero image on tablet and desktop screens.
+#### Error Modal
 
-- The hero image shows a happy wheelchair user using the app on her mobile phone.
-
-- The cover text consists of a concise overview of the purpose of Mobility Mapper and how it benefits users of wheeled mobility devices. 
-
-- The first call-to-action button invites the visitor to subscribe to email updates, and the second to learn more about how they can help fund the development of the app.
-
-- The social media buttons take the visitor to the Mobility Mapper Facebook page, Instagram account, or X page.
-
-| Desktop and tablet | Mobile |
-| --- | --- |
-| ![Home page cover image](assets/readme-files/home-cover.png) | ![Home page cover image](assets/readme-files/home-cover-mobile.png) <br> |
-
-#### 2. Key features section
-
-This section describes the key features of the app. It consists of introductory text, and then six cards, one for each feature, with an image, feature title and description. The cards are followed by an invitation to learn more about the app by visiting the partnerships page.
-
-![Home page key features section](assets/readme-files/home-key-features.png)
-
-#### 3. Seeking partnerships section
-
-The purpose of this section is to guide potential partners and funders to the partnerships page.
-
-![Home page seeking partnerships](assets/readme-files/home-seeking-partnerships.png)
-
-#### 4. Contact section
-
-This contact form is for potential users of the app to get in touch with us, with the option to subscribe to the email updates.
-
-The message text area has a maximum length of 750 characters. A [Javascript event listener](assets/js/contact-personal.js#L1) counts the number of characters and displays that number below the text box, providing helpful feedback to the visitor.
-
-When the "Submit contact form" button is clicked, the inputs are validated and another [Javascript event listener](assets/js/contact-personal.js#L11) gets the form inputs and posts them to a Google Sheets spreadsheet via a Google Apps script.
-
-![Home page contact section](assets/readme-files/home-contact.png)
-
-#### Subscribe Modal
-
-This modal is opened when the "Subscribe to email updates" call-to-action button in the hero section is clicked, or the "subscribe" link in the footer is clicked.
-
-A small Mobility Mapper icon on the right of the header, and a submit button of the same colour reassures the visitor that the form belongs to the Mobility Mapper website.
-
-When the "Submit" button is clicked, the inputs are validated and a [Javascript event listener](assets/js/subscribe.js) gets the form inputs and posts them to a Google Sheets spreadsheet via a Google Apps script.
-
-![Home page subscribe modal](assets/readme-files/modal.png)
-
-[Back to top ⇧](#mobility-mapper)
-
-### Partnerships Page
-
-The partnerships consists of eight sections.
-
-#### 1. Hero cover image and text
-
-The hero image depicts people working together to solve a problem. 
-
-For consistency, tt behaves similarly to the home page hero image. It stretches with the screen width, and on mobile screens it is accompanied by a prominent cover title, with the cover text sitting below it, followed by a call-to-action button. These features sit on top of the hero image on tablet and desktop screens.
-
-- The cover text welcomes the visitor to the page and gives an overview of the contents of the page. 
-
-- The call-to-action button invites the visitor to contact us, and on clicking it takes them to the business contact form at the bottom of the page.
-
-| Desktop and tablet | Mobile |
-| --- | --- |
-| ![Partnerships page cover image](assets/readme-files/partnerships-cover.png) | ![Partnerships page cover image](assets/readme-files/partnerships-cover-mobile.png) |
-
-
-#### 2. Contents
-
-The contents section provides both a quick, easy to read overview of the contents of page, and enables the visitor to jump to a section of interest.
-
-On mobile screens the contents are shown in a single column, and on tablets and desktops in two columns.
-
-![Partnerships page contents image](assets/readme-files/partnerships-contents.png)
-
-#### 3. The Problem
-
-This section explains the problems that wheelers encounter when they follow routes generated by existing navigation platforms. 
-
-First, six types of barriers are presented as cards with an image and card title. On mobile screens the cards are shown in a single column, on tablets in two columns, and on desktops in three columns.
-
-This is followed by two paragraphs presented on a large image, which stretches with the screen size. The image shows a lady in a wheelchair looking out of the window, while stuck at home, due to a lack of knowledge of accessible routes. This form of presentation creates visual appeal and prevents the monotony 
-that would otherwise be caused by multiple contiguous, plain blocks of text.
-
-![Partnerships page problem image](assets/readme-files/partnerships-problem-1.png)
-![Partnerships page problem image](assets/readme-files/partnerships-problem-2.png)
-
-#### 4. Our Solution
-
-The solution section is presented as bullet points, with the Mobility Mapper wheel icon as the first level bullets. The width of the container is limited so that the bulk of the text remains centered and balanced on wide screens (long sentences that sit on one line cause the majority of the text to shift to the left-hand-side of the screen).
-
-![Partnerships page solution image](assets/readme-files/partnerships-solution.png)
-
-#### 5. Market
-
-Both the market size and validation sections are included here, since they are relatively small. On mobile screens the validation section sits below the market size section, and they appear side-by-side on tablets upwards.
-
-The green-filled, rounded rectangles highlight the market size statistics, making them both easy to find and visually appealing. The market validation text is contained in a speech bubble to represent the fact that disabled people were consulted on their view of the usefulness of an accessible way-finding app. 
-
-![Partnerships page market image](assets/readme-files/partnerships-market.png)
-
-#### 6. Key Differentiators
-
-The list of key differentiators explains what makes Mobility Mapper different from existing mapping platforms.
-
-To make the list more visually appealing, each list item is presented on one of four different background colours, with a corresponding icon to promote better understanding. 
-
-![Partnerships page key differentiators image](assets/readme-files/partnerships-key-differentiators.png)
-
-#### 7. Further Benefits
-
-This section showcases who else will benefit from the app, starting with four large-scale entities, followed by four different groups of people using wheeled devices.
-
-Both sets are displayed in a single column on mobile screens. The first set expands to two columns on desktops. The second set expands to two columns on tablets, and four on desktops.
-
-The large-scale entities are presented with large, complementary icons, and for variety, the user groups as cards with an image and title.
-
-![Partnerships page key differentiators image](assets/readme-files/partnerships-further-benefits.png)
-
-#### 8. Business contact section
-
-Similar to the contact section home page in location and style, the form sits above the footer. 
-
-The introductory text makes it clear that this form is for potential partners and funders (as opposed to potential users of the app) to get in touch to initiate a discussion about partnerships or funding. 
-
-The message text area has a maximum length of 750 characters. A [Javascript event listener](assets/js/contact-business.js#L1) counts the number of characters and displays that number below the text box, providing helpful feedback.
-
-When the "Submit contact form" button is clicked, the inputs are validated and another [Javascript event listener](assets/js/contact-business.js#L11) gets the form inputs and posts them to a Google Sheets spreadsheet via a Google Apps script.
-
-![Partnerships page cover image](assets/readme-files/partnerships-contact.png)
-
-[Back to top ⇧](#mobility-mapper)
+This modal is opened when the 
 
 ## Technologies Used
 
@@ -263,23 +118,22 @@ When the "Submit contact form" button is clicked, the inputs are validated and a
 
     Bootstrap’s compiled CSS and JS was included via CDN by placing the jsdeliver `link` tag in the `<head>` for the CSS, and the `<script>` tag for the JavaScript bundle before the closing `<body>` tag.
 
-* [Bootstrap Icons](https://icons.getbootstrap.com/) and [Font Awesome Icons](https://fontawesome.com/) were imported into the style.css file and used in both pages to create a better visual experience for UX purposes. 
+* [Bootstrap Icons](https://icons.getbootstrap.com/) were imported into the style.css file and used in both pages to create a better visual experience for UX purposes. 
 
 * [GIMP](https://www.gimp.org/) (GNU Image Manipulation Program) was used to:
     - reduce the file size of the images for the website;
     - crop and edit images.
 
-* [Inkscape](https://inkscape.org/) was used to create the Mobility Mapper logo, and the wheel bullet icons.
+* [Inkscape](https://inkscape.org/) was used to create the Mobility Mapper logo, and the route markers.
 
 * [GitHub](https://github.com/) was used as follows:
     - Together with Git for version control and code hosting.
-    - The projects tool was used to help manage tasks and organise feature development. 
     - This README file serves as the main documentation for the project. 
     - GitHub Pages hosts this website directly from this GitHub repository.
 
 * [Balsamiq](https://balsamiq.com/) was used to create the wireframes during the design phase of the project.
 
-* [Am I Responsive?](https://ui.dev/amiresponsive) was used to view the  responsiveness of the website throughout the development process.
+* [Am I Responsive?](https://ui.dev/amiresponsive) was used to view the responsiveness of the website throughout the development process.
 
 * [Am I Responsive (.co.uk)](https://amiresponsive.co.uk/) was used to generate the mockup images used at the top of this README.
 
@@ -529,29 +383,6 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 - Both pages
     - Mobility Mapper logo: Created by the developer in Inkscape
-
-- Home page images
-    - Home page cover: "Woman in wheelchair in the city using smartphone" by [Freepik]{www.freepik.com)
-    - Avoid Barriers: [Jewish Special Needs Blog](https://jewishspecialneeds.blogspot.com/)
-    - Tailor routes to your needs: GH Photography
-    - Locate dropped kerbs and ramps: Sonya Ridden
-    - Locate accessible points of interest: Torbay Council
-    - Report barriers and dropped kerbs: Created by Sonya Ridden in Inkscape with a screenshot from [Open Street Maps](https://www.openstreetmap.org/)
-    - Connect with other wheelers: by Matt Walker
-
-- Partnerships page images
-    - Partnerships page cover image: "Hands holding puzzle business problem solving concept" by [Freepik]{www.freepik.com)
-    - Steps: [Pixabay](https://pixabay.com/)
-    - Steep Hills: [Pexels](https://www.pexels.com/)
-    - Narrow paths: Sonya Ridden
-    - Rough Surfaces: [Pixabay](https://pixabay.com/)
-    - No Dropped Kerbs: [Pexels](https://www.pexels.com/)
-    - Motorised Vehicle Barriers: University of Westminster
-    - Stuck-at-home image: [Pexels](https://www.pexels.com/)
-    - Parents and carers with prams and pushchairs: [Pexels](https://www.pexels.com/)
-    - Cargo bike riders: [Pexels](https://www.pexels.com/)
-    - Travellers with wheeled suitcases: [Pexels](https://www.pexels.com/)
-    - Electric kick scooter: [Pexels](https://www.pexels.com/)
 
 ### Code
 

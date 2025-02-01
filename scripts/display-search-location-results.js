@@ -82,6 +82,10 @@ export default function displaySearchLocationResults(data, outputDivId) {
             document.querySelector('#location-search-results').remove();
             // Show the hidden elements
             showElements(["start-location-display", "destination-location-display", "other-selection-options", "map"]);
+            // Remove the orange background from the waypoint divs
+            document.querySelectorAll('.waypoint').forEach(waypoint => {
+                waypoint.classList.remove('background-orange');
+            });
             // remove the waypoint-selection-options div
             document.getElementById("waypoint-selection-options").remove();
             // reset the map
