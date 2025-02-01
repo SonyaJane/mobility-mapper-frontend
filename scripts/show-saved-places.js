@@ -13,9 +13,25 @@ export default function showSavedPlaces(outputDivId) {
     savedPlacesDiv.id = 'saved-places-list';
     savedPlacesDiv.classList.add('px-2', 'px-md-3');
 
-    // Add a title
+    // Add a title for the saved locations title and an exit button
     const titleDiv = document.createElement('div');
-    titleDiv.innerHTML = `<h2 class="mb-0 py-3 border-bottom border-top-orange">Select a saved place</h2>`;
+    // add html to the div    
+    titleDiv.innerHTML = `<h2 class="mb-0">Select a saved place</h2>
+                            <button class="btn exit-button"><i class="bi bi-x-square"></i></button>`;
+    // add css classes to the div
+    titleDiv.classList.add('border-bottom', 'py-1', 'd-flex', 'justify-content-between', 'align-items-center');
+    titleDiv.id = 'search-results-title';
+
+    // Add an event listener to the exit button
+    titleDiv.querySelector('.exit-button').addEventListener('click', e => {
+        // Remove the saved places div
+        document.querySelector('#saved-places-list').remove();
+        // Show the hidden elements
+        showElements(["start-end-display", "map"]);
+        // reset the map
+        MM.map.invalidateSize();
+    });
+
     savedPlacesDiv.appendChild(titleDiv);
 
     // Iterate through the saved places
@@ -36,6 +52,8 @@ export default function showSavedPlaces(outputDivId) {
         // add an event listener to the div for choosing the location
         placeDiv.addEventListener('click', e => {
             // Display the place name
+            console.log(place.name);
+            console.log(outputDivId);
             setStartEndLocationText(place.name, outputDivId);
             // Display the location on the map
             if (outputDivId == "currentStart") {

@@ -221,7 +221,7 @@ main {
     flex-shrink: 0;      /* Prevents the button from shrinking */
 }
 
-#exit-button {
+.exit-button {
     padding: 5px;
     cursor: pointer;
     color: var(--color-orange-4);

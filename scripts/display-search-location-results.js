@@ -25,13 +25,13 @@ export default function displaySearchLocationResults(data, outputDivId) {
     // Add a div for the Search results title and an exit button
     const titleDiv = document.createElement('div');
     titleDiv.innerHTML = `<h2 class="mb-0">Search results</h2>
-                            <button id="exit-button" class="btn"><i class="bi bi-x-square"></i></button>`;
+                            <button class="btn exit-button"><i class="bi bi-x-square"></i></button>`;
     // add css classes to the div
     titleDiv.classList.add('border-bottom', 'py-1', 'd-flex', 'justify-content-between', 'align-items-center');
     titleDiv.id = 'search-results-title';
 
     // Add an event listener to the exit button
-    titleDiv.querySelector('#exit-button').addEventListener('click', e => {
+    titleDiv.querySelector('.exit-button').addEventListener('click', e => {
         // Remove the search results div
         document.querySelector('#location-search-results').remove();
         // Show the hidden elements
