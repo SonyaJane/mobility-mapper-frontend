@@ -81,61 +81,191 @@ The header indicates that the app is a route planner. The Mobility Mapper logo i
 
 This section invites the user to select a start and destination location. There is a section for the start location, followed by one for the destination location. 
 
-<img src="/readme-files/select-start-destination.png" width="50">
+<img src="./readme-files/select-start-destination.png" width="185">
 
 The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
 
 Hovering over either section changes the mouse cursor to a pointer, and the section background changes to a light orange, to indicate that the section is clickable.
 
-![Select start or destination location - on hover](/readme-files/waypoint-div-hover.png)
+<img src="./readme-files/waypoint-div-hover.png" width="185">
 
 When the user has seletced a location using the section described below, it is displayed in place of the invitation to choose a location.
 
-![Selected location displayed](/readme-files/search-displayed.png)
-
+<img src="./readme-files/search-displayed.png" width="185">
 
 ### 3. Location selection options
 
 When a user clicks on either the start or destination location section, the section shown below is created below the clicked section. this is referred to as the location selection options section. It is highlighted with a light orange background to indicate that this is what the user is currently working on.
 
-![Location selection options section](/readme-files/location-selection-options.png)
+<img src="./readme-files/location-selection-options.png" width="185">
 
 A user can then choose a location using one of the following four methods.
 
 #### a) Text search 
 
-The user can type in the text input and then click on the magnifying glass button to search for a location. The input is first validated. If it does not contain any letters or whole numbers, the input is cleared and an error message in red font is added to the input field as a placeholder.
+The user can type in the text input and then click on the magnifying glass button to search for a location. 
 
-![Red placeholder text for invalid input](/readme-files/text-search-error.png)
+<img src="./readme-files/text-input-search.png" width="185">
+
+The input is first validated. If it does not contain any letters or whole numbers, the input is cleared and an error message in red font is added to the input field as a placeholder.
+
+<img src="./readme-files/text-search-error.png" width="185">
 
 If the input contains letters and or whole numbers, it is sent to the Open Street Maps (Nominatim search API)[https://nominatim.org/release-docs/latest/api/Search/] to look up a location. We use the parameter `format=json` to obtain the response in json format, and `addressdetails=1` to include a breakdown of the address. 
 
-If the request is a success, for each search result, we:
+If the request is a success, all sections except the header and the text search input row are hidden. 
+
+Then for each search result, we:
 
 1. Extract the addresstype attribute, which tells us the type of place the result represents, such as a building, street, village, or administrative region.
 2. Extract the display_name attributes, which is the full, comma separated address in a single string. 
 3. Extract the longitude and latitude, which will be required for the route generation process.
 4. Diplay both the addresstype and display_name in a div, and attach to the div the latitude, longitude, and display_name as data attributes. This enables the required information to be picked up if that search result is selected by the user.
 
-An example of the displayed results are shown in the image below. All other sections are hidden except the header and the text search input row. 
+An example of the displayed results are shown in the image below. 
 
-![text search results](/readme-files/search-results.png)
+<img src="./readme-files/search-results.png" width="185">
 
 If the request was unsuccessful, an error message is shown in the error modal, as shown in the image below.
 
-![Location request error modal](/readme-files/location-search-error.png)
+<img src="./readme-files/location-search-error.png" width="185">
 
+The user can then either select one of the return locations by clicking on the corresponding div, or exit and return to the previous screen by clicking the exit button. If they select one of the locations, then:
+(scripts/display-search-location-results.js)
+
+1. Get the latitude, longitude and place name from the clicked div by calling the function getClickedLocation
+2. Check the placename is not undefined, and if it is, replace with "Selected location"
+3. Set the text of the start or destination div to the given place name setStartEndLocationText
+4. The corresponding location marker is added to the map by calling the function displayLocationOnMap. Any existing markers of the same type are removed first.
+5. The latitude and longitude are added to the global route coordinates variable addCoordinatesToRoute
+6. Remove the search results div
+7. Show the hidden elements
+8. Remove the orange background from the waypoint divs
+9. remove the waypoint-selection-options div
+
+Resulting screen after a locating is selected:
+
+<img src="./readme-files/marker-added-to-map.png" width="185">
 
 #### b) Current location
 
+The user can click this button to set their current location as the start or destination location. 
+
+<img src="./readme-files/current-location-button.png" width="185">
+
+We get current user's location using Leaflet's locate method by calling locateUser, and if successful, we 
+
+1. Display the location on the map using a marker displayLocationOnMap. Any existing markers of the same type are removed first.
+2. Get place name from lat and lon by calling latLonToAddress, which calls Nominatims reverse geocoding API to generate an address from a latitude and longitude. If the response is not ok, we set the placename to "Unknown location".
+3. Display the place name in the start/destination location div
+4. The latitude and longitude are added to the global route coordinates variable addCoordinatesToRoute
+
 #### c) Map select
+
+The user can click the Map Select button, or click on the map at any time without going through the location selection options section. Doing so via the location selection options section hides everything except the header and the map, making more space for the map and making it easier for the user to view.
+
+<img src="./readme-files/map-select.png" width="185">
+
+On clicking on a location on the map, we
+
+1. Get the latitude and longitude of the clicked point
+2. Get place name from lat and lon by calling latLonToAddress, which calls Nominatims reverse geocoding API to generate an address from a latitude and longitude. If the response is not ok, we set the placename to "Unknown location".
+3. If not already hidden, hide everything except the map and header.
+4. Call showClickedLocationDiv to add a popup div at bottom of screen, below the map, which contains
+    - the location name 
+    - buttons to set as start location or set as destination
+    - a button to close the popup and return to the main screen
+
+<img src="./readme-files/clicked-location.png" width="185">
+
+5. Add click event listeners to the buttons addEventListenerToUseLocationButton, addEventListenerToExitButton.
+6. Remove any existing blue location markers and add a blue location marker at the clicked location.
+7. Center the map on the clicked point and zoom in to the location.
+
+If the user clicks 'Start here' 'Set as desination'), we:
+
+1. remove the start (destination) marker
+2. Change the blue location marker to a start (destination) marker
+3. Display the place name in the start (destination) location div setStartEndLocationText.
+4. Remove the popup div at the bottom of the screen.
+5. Show the previously hidden divs
+6. Resizes the map to fit the new container size
+7. Reset the map view to centre on the selected location
+8. The latitude and longitude are added to the global route coordinates variable addCoordinatesToRoute
+
+<img src="./readme-files/clicked-locatiion-selected.png" width="185">
 
 #### d) Saved places
 
+The user can click the Saved Places button to select a location from their list of saved places. Note that the list is an object defined in index.js as follows:
 
-#### Error Modal
+``` javascript
+MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759, address: "1 Home Street, Cardiff" },
+                      { name: "Work", lat: 51.485925, lon: -3.176533, address: "1 Work Street, Cardiff" },
+                      { name: "Dentist", lat: 51.519471, lon: -3.117880, address: "1 Dentist Street, Cardiff" }];
 
-This modal is opened when the 
+```
+
+<img src="./readme-files/saved-places.png" width="185">
+
+On clicking the Saved Places button, we:
+
+1. Hide everything except the header
+2. Call showSavedPlaces to show the list of user saved places.
+3. This creates a new 'saved places' div with a title and an exit button.
+4. Add an event listener to the exit button, which 
+    a) Removes the saved places div
+    b) Shows the hidden elements
+    c) Resets the map
+5. Iterate through the saved places:
+    a) Create a new div for each result.
+    b) Add the place name, address and latitude and longitude.
+    c) Include a classes that turn the cursor to a pointer, and the background to light orange on hovering over the div.
+    d) Add data attributes to the div, including place name and latitude and longitude.
+    e) Add an event listener to the div for clicking the location. 
+    f) Append the 'place' div to the 'saved places' div
+6. Append the 'saved places' div to the main element.
+
+Then the user can click on one of the places. On doing so, we
+
+1) Display the place name in the start or destination div setStartEndLocationText(place.name, outputDivId);
+2) Display the location on the map with a start or destination marker, first removing any existing markers of the same type.
+4) Remove the saved places div.
+5) Show the hidden elements.
+6) Add the lat and lon to global route coordinates.
+
+### 4. Map
+The map is initialised in index.js by calling initialiseMap. The map is created using the Leaflet library, using OpenStreetMap tiles. 
+
+<img src="./readme-files/map.png" width="185">
+
+We then get the user's location and centre the map on that location at zoom level 6. 
+
+We then add a button that enables the user to zoom to their current location. Wehn this button is clicked:
+
+1. We call locateUser to locate the user.
+2. If that is successful we set the map view to be centered on their coordinates. (If it is not successful locateUser displays an alert that says "Could not get your location. Please allow location access.".)
+3. Add a circle to the map (radius = aaccuracy in metres) for 2 seconds to indicate the accuracy of the location;
+
+A click event listener is added to the map by cliing addMapClickListener, so that the map can be clicked at any time it is visible. When clicked the same process will occur as described in section [c) Map select](# c) Map select).
+
+Note that we did not add a button to clear the map of the route and markers. because you can do this simply by refreshing the page.
+
+## 4. Route generation
+The route generation occurs at the end of the function addCoordinatesToRoute, where it checks if there are two sets of coordinates (start and end locations). The process is as follows:
+
+1. Prepare for a new route by calling prepareForNewRoute, which removes any existing route and extends the map bounds to include the start and end markers.
+2. Generate the route by calling generateRoute. This function generates a wheelchair accessible route by calling the [OpenRouteService API directions service](https://openrouteservice.org/dev/#/api-docs) using the global start and destination coordinates. We use a POST request, specifying "wheelchair" as the mode of transport in the API URL, and attaching the coordinates and settings in the `body` as a JSON object.
+3. If successful, we call displayRoute, and is unsuccessful we call displayRouteGenerationError. The latter displays a message in the error modal, with title "Route generation error" and message "No route found. Please try again with different locations."
+4. The displayRoute function processes the data, which is returned in JSON format, and displays the route on the map as follows:
+    a) Get the encoded polyline (series of coordinates) from the response
+    b) Decode the polyline into a series of [lat, lng] pairs.
+    c) Add the polyline to the map
+    d) Get the bounds of the route, and start and end markers and make sure they all fit on the map.
+    e) Check if the route start differs from the start marker location. This might happen if no path or road network coincides with the start or destination coordinates, thus creating a gap between their markers and the route polyline.
+    f) If there is a gap, add a dashed line between the marker and route start or end.
+
+<img src="./readme-files/route-with-dashed-line.png" width="185">
 
 ## Technologies Used
 
@@ -153,6 +283,8 @@ This modal is opened when the
     Bootstrap’s compiled CSS and JS was included via CDN by placing the jsdeliver `link` tag in the `<head>` for the CSS, and the `<script>` tag for the JavaScript bundle before the closing `<body>` tag.
 
 * [Bootstrap Icons](https://icons.getbootstrap.com/) were imported into the style.css file and used in both pages to create a better visual experience for UX purposes. 
+
+* [Leaflet]() Leaflet is a lightweight, open-source JavaScript library for interactive maps, with a user-friendly API, and mobile optimisation.
 
 * [GIMP](https://www.gimp.org/) (GNU Image Manipulation Program) was used to:
     - reduce the file size of the images for the website;

@@ -41,7 +41,6 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
             } else {
                 // If there is an error, display an error message in the modal
                 displayLocationSearchError();
-             
             }
         } else {
             // If the input field is empty, add placeholder text in red
@@ -79,13 +78,14 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
 
         // get place name from lat and lon
         const placeName = await latLonToAddress(lat, lon);
+        if (placeName == null) {
+            console.error("Error getting place name from lat and lon");
+            placeName = "Unknown location";
+        }
         // Display the place name in the start/destination location div
         // get the string before the first comma
         document.getElementById(outputDivId).textContent = placeName.split(",")[0];
-        // add coordinates as a data attribute to the div
-        document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
-        // add coordinates to route (MM.coordinates) and fetch the route
-        console.log("Adding coordinates to route: ", lat, lon);
+        // add coordinates to route (MM.coordinates)
         addCoordinatesToRoute(lat, lon, outputDivId);
     });
 

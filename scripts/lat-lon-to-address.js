@@ -13,5 +13,6 @@ export default async function latLonToAddress(lat, lon) {
         return data.display_name;
     } else {
         throw new Error(data.error);
+        return null;
     }
 }

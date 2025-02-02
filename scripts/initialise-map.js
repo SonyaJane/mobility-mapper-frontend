@@ -28,4 +28,5 @@ export default async function initialiseMap() {
 
     // Add a button to zoom to the user's current location
     createZoomToLocationButton();
+
 }

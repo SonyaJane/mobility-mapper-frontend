@@ -35,7 +35,6 @@ export default function createZoomToLocationButton() {
                 const circleBounds = accuracyCircle.getBounds();
                 // Set the map view and add the accuracy circle
                 MM.map.fitBounds(circleBounds);
-                //MM.map.fitBounds(circleBounds, { padding: [5, 5] });
 
                 // Remove the circle after 2 seconds
                 setTimeout(() => {

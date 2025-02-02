@@ -39,9 +39,6 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
         // Display the place name in the start location div
         setStartEndLocationText(placeName, outputDivId);
 
-        // add coordinates as a data attribute to the div
-        document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
-        
         // Remove the popup
         document.getElementById('fixed-popup').remove();
 

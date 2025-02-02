@@ -30,7 +30,7 @@ export default function addMapClickListener() {
         // get address from lat and lon
         const placeName = await latLonToAddress(lat, lon);
 
-        // add popup at bottom of screen, below map, and get its height
+        // add popup at bottom of screen, below map
         showClickedLocationDiv(placeName, lat, lon);
                     
         // hide start-end-display div

@@ -66,8 +66,6 @@ export default function displaySearchLocationResults(data, outputDivId) {
                 placeName = "Selected location";
             }
             setStartEndLocationText(placeName, outputDivId);
-            // add coordinates as a data attribute to the div
-            document.getElementById(outputDivId).dataset.latLon = `${lat}, ${lon}`;
             // Display the location on the map
             if (outputDivId == "currentStart") {
                 // remove existing start marker
