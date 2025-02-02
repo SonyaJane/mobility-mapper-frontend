@@ -7,6 +7,7 @@ import showSavedPlaces from './show-saved-places.js';
 import latLonToAddress from './lat-lon-to-address.js';
 import locateUser from './locate-user.js';
 import addCoordinatesToRoute from './add-coordinates-to-route.js';
+import displayLocationSearchError from './display-location-search-error.js';
 
 /**
  * Add event listeners to the four location selection options:
@@ -29,14 +30,19 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         const locationText = document.getElementById("text-search-input").value;
         // Regular expression to check if the input contains at least one word (letters)
         let wordPattern = /[a-zA-Z0-9]/;
-        console.log(wordPattern.test(locationText))
         if (wordPattern.test(locationText)) {
-            // Hide everything except search text input, header and footer
-            hideElements(["start-location-display", "destination-location-display", "other-selection-options", "map"]);
             // Use the search input to query the Nominatim API
             const data = await searchLocationNominatim(locationText);
-            // Display the search results
-            displaySearchLocationResults(data, outputDivId);
+            if (data) {
+                 // Hide everything except search text input, header and footer
+                hideElements(["start-location-display", "destination-location-display", "other-selection-options", "map"]);
+                // Display the search results
+                displaySearchLocationResults(data, outputDivId);
+            } else {
+                // If there is an error, display an error message in the modal
+                displayLocationSearchError();
+             
+            }
         } else {
             // If the input field is empty, add placeholder text in red
             // First remove any existing text

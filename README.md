@@ -110,21 +110,20 @@ The user can type in the text input and then click on the magnifying glass butto
 
 If the input contains letters and or whole numbers, it is sent to the Open Street Maps (Nominatim search API)[https://nominatim.org/release-docs/latest/api/Search/] to look up a location. We use the parameter `format=json` to obtain the response in json format, and `addressdetails=1` to include a breakdown of the address. 
 
-From the response, for each search result, we:
+If the request is a success, for each search result, we:
 
 1. Extract the addresstype attribute, which tells us the type of place the result represents, such as a building, street, village, or administrative region.
 2. Extract the display_name attributes, which is the full, comma separated address in a single string. 
 3. Extract the longitude and latitude, which will be required for the route generation process.
 4. Diplay both the addresstype and display_name in a div, and attach to the div the latitude, longitude, and display_name as data attributes. This enables the required information to be picked up if that search result is selected by the user.
 
-The javascript code that carries out this function can be found [here](/scripts/search-location-nominatim.js). If the request is a success, the results are displayed in a new section, as shown in the image below. Meanwhile, all other sections are hidden except the header and the text search input row. 
+An example of the displayed results are shown in the image below. All other sections are hidden except the header and the text search input row. 
 
 ![text search results](/readme-files/search-results.png)
 
-If the request was unsuccessful, 
+If the request was unsuccessful, an error message is shown in the error modal, as shown in the image below.
 
-
-get LatLon from text search
+![Location request error modal](/readme-files/location-search-error.png)
 
 
 #### b) Current location
