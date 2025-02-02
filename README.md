@@ -81,7 +81,7 @@ The header indicates that the app is a route planner. The Mobility Mapper logo i
 
 This section invites the user to select a start and destination location. There is a section for the start location, followed by one for the destination location. 
 
-![Select start or destination location](/readme-files/select-start-destination.png)
+<img src="/readme-files/select-start-destination.png" width="50">
 
 The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
 
