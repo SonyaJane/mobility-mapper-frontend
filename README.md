@@ -330,6 +330,7 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
 5. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
     - The user can click the "current location" button, which is visually enhanced with a crosshairs icon, to set their current location as the start or destination location. 
     - The location is displayed on the map using a marker, and the place name in the start/destination location div
+    - The user can also click the button in the top right hand corner of the map with the crosshairs icon, to pan to their location. A circle centred on their location has a radius representing the accuracy of that location.
 
 6. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
     - The user can click on the map at any time, even before clicking the start or destination display div.
@@ -412,56 +413,60 @@ Lenovo Legion Slim 7 | No appearance, responsiveness nor functionality issues. |
 iPad Pro 11" | No appearance, responsiveness nor functionality issues. | Pass
 Samsung Galaxy Ultra 22 | No appearance, responsiveness nor functionality issues. | Pass
 
-* Common Elements Testing
+* Elements Testing
 
-    - General
+**Loading screen**
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Navigation Bar | Hover effects and links are working as expected. | Pass
-    Social media links | Opens the corresponding website in a new tab. | | Pass
-    Back to top button | Scrolls up to the top of the page | Pass
-    Footer | Hover effects and links are working as expected. | Pass
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Start and destination display sections | Hover effects are working as expected. | Pass
+Map click | Clicking on the map shows a marker at the clicked location and shows a section below the map containing the address of the clicked location, and three buttons, which enable to user to set it as the start or destination location, or to go back | Pass
+Map get current location button (crosshairs icon) | Zooms to users location and displays a circle with radius equal to the accuracy of the location displayed for two seconds | Pass
 
-    - Contact Forms
+**Location Selection Options section**
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Input fields | All fields required and in the correct format before submission | Pass
-    Submit button | Hover effect works as expected and form data is submitted to Google Sheets when clicked | Pass
-    
-    - Home Page Header
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Search text input field | Field is required and must contain letters and or numbers before submission. Invalid characters result in red text placeholder warning. | Pass
+Current location button | Location of user is displayed on the map with the appropriate marker, and the location text is diplayed in the appropriate waypoint div. Map is centered on the location. | Pass 
+Map Select button | Map expands to full screen, except for the header, and the user can click the map to select a location | Pass 
+Saved places button | On click, the list of user saved places is shown and everthing else except the header is hidden | Pass 
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Subscribe button | Hover effects are working as expected, and opens subscribe modal when clicked | Pass
-    Help fund button  | Hover effects are working as expected, and navigates to partnerships page | Pass
+**Text search results**
 
-    - Key Features and Seeking Funding Section
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+List of search results | Displayed correctly, while everything else is hidden except the header and the search text input box  | Pass
+Individual search result | Clickable, and background turns light orange on hover  | Pass 
+Clicked search result  | Displays the location in the appropriate start or destination display section, and add the corresonding marker on the map, with the map centered at that location | Pass
+Exit button | Rmoves search results and returns to the prvious screen with the search location options still shown | Pass
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Funding and partnerships button  | Hover effects are working as expected, and navigates to partnerships page | Pass
- 
-    - Subscribe modal
+**Map Select screen**
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Input fields | All fields required and in the correct format before submission | Pass
-    Submit button | Hover effect works as expected and form is submitted to Google Sheets when clicked | Pass
-    Close button | Hover effect works as expected and closes modal when clicked. | Pass
-    
-    - Partnerships Page Header
-    
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Contact us button  | Hover effects are working as expected, and navigates to the business contact form at the bottom of the page | Pass
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Expanded map | On clicking on the map a marker is shown at the clicked location, and a section below the map is created containing the address of the clicked location, and three buttons, which enable to user to set it as the start or destination location, or to go back | 
 
-    - Contents section
+**Saved places screen**
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+List of saved places | Displayed correctly, while everything else is hidden except the header and the search text input box  | Pass
+Individual place | Clickable, and background turns light orange on hover  | Pass 
+Clicked saved place  | Displays the location in the appropriate start or destination display section, and add the corresonding marker on the map, with the map centered at that location | Pass
+Exit button | Removes saved places and returns to the prvious screen with the search location options still shown | Pass
 
-    Feature | Outcome | Pass/Fail
-    --- | --- | ---
-    Links  | Hover effects are working as expected, and navigates to the corresponding section of the page | Pass
+**Route generation**
+
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Route generation | Route generated when both the start and destination location have been chosen. Solid blue line showing the route on the map, with a dashed line between any non-routable waypoints and the actual route. | Pass
+
+**Error Modals**
+
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Route generation | Error modal shown when the OpenRouteService API returns an error, tells user to try again with different locations. Close button closes the modal. | Pass
+Text search Nominatim API request | Error modal with message to say the location search failed, and to try again | Pass
 
 
 [Back to top ⇧](#mobility-mapper)
@@ -510,11 +515,14 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 
 ## Finished Product
- | Page |  Mobile | Tablet | Desktop | 
- | --- | --- | --- | --- |
- | Home | ![Mobile home page image](assets/readme-files/home-mobile.png)  | ![Tablet home page image](assets/readme-files/home-tablet.png) | ![Desktop home page image](assets/readme-files/home-desktop.png) |
-| Partnerships | ![Mobile partnerships page image](assets/readme-files/partnerships-mobile.png)  | ![Tablet home partnerships image](assets/readme-files/partnerships-tablet.png) | ![Desktop partnerships page image](assets/readme-files/partnerships-desktop.png) |
-
+| Section | Mobile | Desktop | 
+| --- | --- | --- |
+| Loading Page | ![Mobile loading page image](./readme-files/loading-page.png)  | ![Desktop loading page page image](./readme-files/loading-page-desktop.png) |
+| Location Selection Options | ![Mobile selection options image](/readme-files/location-selection-options-mobile.png) | ![Desktop partnerships page image](/readme-files/location-selection-options-desktop.png) |
+| Map Select Screen | ![Mobile map select image](./readme-files/map-select-mobile.png) | ![Desktop map select image](./readme-files/map-select-desktop.png) |
+| Saved places | ![Mobile saved places image](./readme-files/saved-places-mobile.png) | ![Desktop saved places image](./readme-files/saved-places-desktop.png) |
+| Generated Route | ![Mobile generated route image](./readme-files/generated-route-mobile.png) | ![Desktop generated route image](./readme-files/generated-route-desktop.png) |
+| Map Clicked Screen | ![Mobile map clicked image](./readme-files/map-clicked-mobile.png) | ![Desktop map clicked image](./readme-files/map-clicked-desktop.png) |
 
 [Back to top ⇧](#mobility-mapper)
 
