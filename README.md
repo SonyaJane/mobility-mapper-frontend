@@ -37,7 +37,7 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 
 ### Colour Scheme
 
-<img src="./readme-files/palette.png" width="250
+<img src="./readme-files/palette.png" width="250">
 
 The primary colour used on the web application is burnt orange, which is the same colour used for the app logo. Orange was chosen because it is associated with energy, happiness, and vitality. It is complemented with a coffee brown, and a lighter shade of burnt orange for background colours. These colours are a small subset of the general Mobility Mapper theme, as used in the [introductory website](https://sonyajane.github.io/mobility-mapper/).
 
