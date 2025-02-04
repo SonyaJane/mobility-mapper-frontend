@@ -37,7 +37,7 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 
 ### Colour Scheme
 
-<img src="./readme-files/palette.png" width="250">
+<img src="./readme-files/palette.png" width="450">
 
 The primary colour used on the web application is burnt orange, which is the same colour used for the app logo. Orange was chosen because it is associated with energy, happiness, and vitality. It is complemented with a coffee brown, and a lighter shade of burnt orange for background colours. These colours are a small subset of the general Mobility Mapper theme, as used in the [introductory website](https://sonyajane.github.io/mobility-mapper/).
 
@@ -48,9 +48,10 @@ The main font used on the website is Open Sans with Sans Serif as the backup in 
 ### Wireframes
 
 Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the design of the web application.
+
 ![Mobile view wireframe](/readme-files/wireframe.png)
 
-[Back to top ⇧](#mobility-mapper)
+[Back to top ⇧](#mobility-mapper-frontend)
 
 ## Features
 
@@ -257,6 +258,8 @@ The route generation occurs at the end of the function addCoordinatesToRoute, wh
 
 <img src="./readme-files/route-with-dashed-line.png" width="185">
 
+[Back to top ⇧](#mobility-mapper-frontend)
+
 ## Technologies Used
 
 ### Languages Used
@@ -349,6 +352,8 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
 
 9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
     - When both a start and destination location have been selected, a an accessible wheelchair route is automatically generated, and then displayed on the map as a blue line. The map view is initially set to contain both the route and the start and destination markers. The user can then zoom in and out as desired to view the route in greater detail.
+
+[Back to top ⇧](#mobility-mapper-frontend)
 
 ### Code Validation
 
@@ -470,7 +475,7 @@ Route generation | Error modal shown when the OpenRouteService API returns an er
 Text search Nominatim API request | Error modal with message to say the location search failed, and to try again | Pass
 
 
-[Back to top ⇧](#mobility-mapper)
+[Back to top ⇧](#mobility-mapper-frontend)
 
 ## Deployment
 
@@ -525,7 +530,7 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 | Generated Route | ![Mobile generated route image](./readme-files/generated-route-mobile.png) | ![Desktop generated route image](./readme-files/generated-route-desktop.png) |
 | Map Clicked Screen | ![Mobile map clicked image](./readme-files/map-clicked-mobile.png) | ![Desktop map clicked image](./readme-files/map-clicked-desktop.png) |
 
-[Back to top ⇧](#mobility-mapper)
+[Back to top ⇧](#mobility-mapper-frontend)
 
 ## Credits 
 
@@ -537,8 +542,4 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 - Mobility Mapper logo: Created by the developer in Inkscape
 
-### Code
-
-* [Bootstrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/) was consulted on a regular basis for inspiration.
-
-[Back to top ⇧](#mobility-mapper)
+[Back to top ⇧](#mobility-mapper-frontend)
