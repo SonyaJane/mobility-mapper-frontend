@@ -1,6 +1,6 @@
 // custom start and destination markers
-const startMarkerUrl = '../images/marker_start.png';
-const endMarkerUrl =  '../images/marker_end.png';
+const startMarkerUrl = './images/marker_start.png';
+const endMarkerUrl =  './images/marker_end.png';
 
 const startMarker = L.icon({
     iconUrl: startMarkerUrl,

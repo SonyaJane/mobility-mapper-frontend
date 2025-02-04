@@ -370,18 +370,12 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
 Lighthouse in Chrome DevTools was used to confirm that the website is accessible. We have ensured that there is:
 
  - sufficient contrast between the text and background
- - meaningful alt text for images
- - semantic HTML (e.g., `header`, `nav`, `section`)
- - consistent navigation and interface design across pages
+ - semantic HTML (e.g., `header`)
  - valid and well-structured HTML to ensure compatibility with screen readers
- - appropriate form labels
- - strategically incorporated ARIA attributes
 
-**Lighthouse Reports**
+**Lighthouse Report**
 
-| Home page | Partnerships page |
-| --- | --- |
-| ![Home page Lighthouse report](assets/readme-files/lighthouse_home.png) | ![Partnerships page Lighthouse report](assets/readme-files/lighthouse_partnerships.png) |
+| ![Lighthouse report](/readme-files/lighthouse-report.png) | 
 
 
 [Back to top ⇧](#mobility-mapper)
@@ -396,13 +390,8 @@ Lighthouse in Chrome DevTools was used to confirm that the website is accessible
 
 * Responsiveness
     
-    - [Am I Responsive?](http://ami.responsivedesign.is/#) was used to check responsiveness of the pages across different devices. The tool revealed the following issues:
+    - [Am I Responsive?](http://ami.responsivedesign.is/#) was used to check responsiveness of the pages across different devices.
 
-      - the cover title overlapped the head of the person in the home page hero image at screen size 320px. To fix this, we created a media query for screen sizes < 380px and repositioned the image slightly, and the cover title text was made smaller.
-      - the hamburger menu did not fit on same line as the logo at screen size 320px. To fix this the we added to the new media query created above, such that the right hand margin was removed from the navbar-brand, and the logo size was reduced.
-
-    - [Responsive Design Checker](https://www.responsivedesignchecker.com/) was used to check responsiveness of the pages on different screen sizes.
-    
     - Chrome DevTools was used to test responsiveness on different screen sizes during the development process.
     
 ### Manual Testing
@@ -497,23 +486,15 @@ To deploy this website to GitHub Pages from its GitHub repository, take followin
 Forking a GitHub Repository makes a copy of the original repository on your GitHub account, which you can view and/or make changes without affecting the original repository. To fork a repository:
 
 1. Log into [GitHub](https://github.com/login) or [create an account](https://github.com/join).
-2. Locate the [GitHub Repository](https://github.com/SonyaJane/mobility-mapper).
+2. Locate the [GitHub Repository](https://github.com/SonyaJane/mobility-mapper-frontend).
 3. At the top of the repository, on the right side of the page, select "Fork"
 4. You should now have a copy of the original repository in your GitHub account.
 
 ### Creating a Clone
-How to run this project locally:
-1. Install the [GitPod Browser](https://www.gitpod.io/docs/browser-extension/ "Link to Gitpod Browser extension download") Extension for Chrome.
-2. After installation, restart the browser.
-3. Log into [GitHub](https://github.com/login "Link to GitHub login page") or [create an account](https://github.com/join "Link to GitHub create account page").
-2. Locate the [GitHub Repository](https://github.com/SonyaJane/mobility-mapper).
-5. Click the green "GitPod" button in the top right corner of the repository.
-This will trigger a new gitPod workspace to be created from the code in github where you can work locally.
-
 How to run this project within a local IDE, such as VSCode:
 
 1. Log into [GitHub](https://github.com/login) or [create an account](https://github.com/join).
-2. Locate the [GitHub Repository](https://github.com/SonyaJane/mobility-mapper).
+2. Locate the [GitHub Repository](https://github.com/SonyaJane/mobility-mapper-frontend).
 3. Under the repository name, click "Clone or download".
 4. In the Clone under the HTTPs section, copy the clone URL for the repository.
 5. In your local IDE open the terminal.
@@ -521,7 +502,7 @@ How to run this project within a local IDE, such as VSCode:
 7. Type 'git clone', and then paste the URL you copied in Step 3.
 
 ```
-git clone https://github.com/SonyaJane/mobility-mapper
+git clone https://github.com/SonyaJane/mobility-mapper-frontend
 ```
 8. Press Enter. Your local clone will be created.
 
@@ -545,11 +526,10 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 ### Media
 
-- Both pages
-    - Mobility Mapper logo: Created by the developer in Inkscape
+- Mobility Mapper logo: Created by the developer in Inkscape
 
 ### Code
 
-* [Bootstrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/) and [W3Schools](https://www.w3schools.com/) were consulted on a regular basis for inspiration.
+* [Bootstrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/) was consulted on a regular basis for inspiration.
 
 [Back to top ⇧](#mobility-mapper)
