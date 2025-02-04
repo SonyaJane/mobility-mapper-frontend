@@ -17,21 +17,21 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
             case "start-here":
                 outputDivId = "currentStart";
                 // remove other start marker
-                if (MM.startMarker) { MM.map.removeLayer(MM.startMarker) };
+                if (MM.startMarker) { MM.map.removeLayer(MM.startMarker); }
                 // change the marker to a start marker
                 MM.startMarker = L.marker([lat, lon], { icon: startMarker }).addTo(MM.map);
                 // remove marker we've replaced with a start marker
-                if (MM.marker) { MM.map.removeLayer(MM.marker) };
+                if (MM.marker) { MM.map.removeLayer(MM.marker); }
                 //addRouteMarker(lat, lon, startMarkerUrl);
                 break;
             case "end-here":
                 outputDivId = "currentDestination";
                 // remove other end marker
-                if (MM.endMarker) { MM.map.removeLayer(MM.endMarker) };
+                if (MM.endMarker) { MM.map.removeLayer(MM.endMarker); }
                 // change the marker to a end marker
                 MM.endMarker = L.marker([lat, lon], { icon: endMarker }).addTo(MM.map);
                 // remove marker we've replaced with an end marker
-                if (MM.marker) { MM.map.removeLayer(MM.marker) };
+                if (MM.marker) { MM.map.removeLayer(MM.marker); }
                 //addRouteMarker(lat, lon, endMarkerUrl);
                 break;
         }
@@ -48,7 +48,7 @@ export default function addEventListenerToUseLocationButton(lat, lon, placeName,
         // Ensure map resizes to fit the new container size
         MM.map.invalidateSize();
         // reset view to center on selected location
-        MM.map.setView([lat, lon]), undefined, { animate: false };
+        MM.map.setView([lat, lon]);
 
         // add lat and lon to global coordinates 
         addCoordinatesToRoute(lat, lon, outputDivId);

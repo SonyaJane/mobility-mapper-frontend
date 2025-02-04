@@ -40,7 +40,7 @@ export default function addMapClickListener() {
         MM.map.invalidateSize();
 
         // remove any existing markers
-        if (MM.marker) {MM.map.removeLayer(MM.marker)};
+        if (MM.marker) {MM.map.removeLayer(MM.marker);}
 
         // add marker at clicked location
         MM.marker = L.marker([lat, lon]).addTo(MM.map);
@@ -54,7 +54,7 @@ export default function addMapClickListener() {
         // Add click event listeners to the buttons in the popup
         ["start-here", "end-here"].forEach(btnId => {
             addEventListenerToUseLocationButton(lat, lon, placeName, btnId);
-        })
+        });
         
         // Add click event listener to the exit button
         addEventListenerToExitButton();

@@ -19,10 +19,6 @@
 
     /* Location selection div */
     --waypoint-height: 65px;
-
-    html {
-        font-size: 16px; /* Ensure 1rem is equal to 16px */
-    }
 }
 
 /* Coloured Borders */
@@ -96,7 +92,6 @@ main {
 /* Buttons */
 .btn {
     cursor: pointer;
-    transition: var(--color-orange-1) 0.3s ease; /* Smooth transition on hover */
     font-family: var(--primary-font), sans-serif;
 }
 
@@ -273,7 +268,7 @@ main {
     }
 
     .square-box {
-        aspect-ratio: none; /* Remove aspect ratio */
+        aspect-ratio: auto; /* Remove aspect ratio */
         width: 31%;
         height: 70px;
     }

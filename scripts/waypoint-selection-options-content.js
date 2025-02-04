@@ -34,6 +34,6 @@ const waypointSelectionOptionsContent = `<!-- Text search for a place or address
             </div>
         </div>
     </div>
-</div>`
+</div>`;
 
 export default waypointSelectionOptionsContent;

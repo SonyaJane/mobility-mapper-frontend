@@ -1,19 +1,8 @@
 # Mobility Mapper Frontend
 
-Open Route Service
-API Returns:
-An encoded polyline is a compressed format used to represent a series of geographic points (latitude and longitude) as a compact string of characters. This encoding significantly reduces the amount of space needed to store or transfer path information.
+![Mobility Mapper fontend mockup images](/readme-files/mock-up.png)
 
-
-
-![Mobility Mapper fontend mockup images]()
-
-Mobility Mapper is a route finder and navigation app for users of wheelchairs, mobility scooters, tricycles and other wheeled mobility devices. 
-
-This repository is the frontend of Mobility Mapper.
-
-Sends a POST request to the OpenRouteService API with inputs in JSON format. 
-Gets a route with details...
+Mobility Mapper is a route finder and navigation app for users of wheelchairs. This website is a basic frontend. It allows users to select a start and destination location, using one of four different methods. It then obtains a wheelchair accessible route from the [OpenRouteService API](https://openrouteservice.org/dev/#/api-docs).
 
 Visit the deployed website [here](https://sonyajane.github.io/mobility-mapper-frontend/).
 
@@ -21,11 +10,11 @@ Visit the deployed website [here](https://sonyajane.github.io/mobility-mapper-fr
 
 ## User Experience (UX)
 
-### Business Goals
+### Project Goals
 
-The Mobility Mapper frontend is designed to deliver an intuitive user experience, ensuring that wheelers can plan safe an accessible routes. The primary business goals are: 
+The Mobility Mapper frontend is designed to deliver an intuitive user experience, ensuring that wheelchair users can plan accessible routes. The primary project goals are: 
 
-* Provide a frontend to a server-based route-finding engine for wheelchair users
+* Provide a frontend to a server-based route-finding engine for wheelchair users.
 * Enable users to select a start and destination location and obtain a route optimised for wheelers.
 * Provide the following ways of selecting a start or destination location:
     - Text search for a place or address
@@ -35,21 +24,21 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 
 ### User Stories
 
-* As a wheelchair user, I want to enter a start and destination location, so that I can find an optimised accessible route.
-* As a wheelchair user, I want to view my selected route on an interactive map, so that I can visually confirm the accessibility.
-* As a user, I want to search for a place or address, so that I can select it as my start or destination location.
-* As a user, I want to use my current GPS location, so that I can set it as my start or destination location.
-* As a user, I want to click on a location on the map, so that I can select it as my start or destination.
-* As a user, I want to select a location from my saved places, so that I can quickly choose frequently used locations.
-* As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
-* As a user, I want the frontend to work on mobile and desktop, so that I can use it on any device.
+1. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
+2. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
+3. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
+4. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
+5. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
+6. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
+7. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used 8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
+9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
 
 [Back to top ⇧](#mobility-mapper-frontend)
 
 ### Colour Scheme
 ![Colour scheme image](assets/readme-files/palette.png)
 
-The primary colour used on the webb application is burnt orange, which is the same colour used for the app logo. Orange was chosen because it is associated with energy, happiness, and vitality. It is complemented with a coffee brown, and a lighter shade of burnt orange for background colours. These colours are a small subset of the general Mobility Mapper theme, as used in the [introductory website](https://sonyajane.github.io/mobility-mapper/).
+The primary colour used on the web application is burnt orange, which is the same colour used for the app logo. Orange was chosen because it is associated with energy, happiness, and vitality. It is complemented with a coffee brown, and a lighter shade of burnt orange for background colours. These colours are a small subset of the general Mobility Mapper theme, as used in the [introductory website](https://sonyajane.github.io/mobility-mapper/).
 
 ### Typography
 
@@ -66,6 +55,7 @@ Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the desi
 
 ### General
 * Single page app
+* Designed from a mobile first perspective.
 * Responsive design across all device sizes.
 * Hovering over a button or clickable section changes the cursor to a pointer to let the user know it is clickable.
 
@@ -203,7 +193,6 @@ The user can click the Saved Places button to select a location from their list 
 MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759, address: "1 Home Street, Cardiff" },
                       { name: "Work", lat: 51.485925, lon: -3.176533, address: "1 Work Street, Cardiff" },
                       { name: "Dentist", lat: 51.519471, lon: -3.117880, address: "1 Dentist Street, Cardiff" }];
-
 ```
 
 <img src="./readme-files/saved-places.png" width="185">
@@ -276,19 +265,13 @@ The route generation occurs at the end of the function addCoordinatesToRoute, wh
 
 ### Frameworks, Libraries and Programs Used
 
-* [Google Fonts](https://fonts.google.com/) was used to import the fonts Open Sans and Bitter into the style.css file. Bitter was used for headings, and Open Sans for other text, including regular paragraphs, labels and links. 
+* [Google Fonts](https://fonts.google.com/) was used to import the fonts Open Sans into the style.css file. Open Sans was used throught the web application.
 
-* [Bootstrap](https://getbootstrap.com/) is an extensive library of CSS and JavaScript utilities. This website makes use of a wide range of pre-styled components such as buttons, forms, a modal, and navigation bar, along with a responsive grid system that simplifies the development of layouts for different screen sizes. Bootstrap enables consistent styling and behaviour across browsers, while also reducing the time and effort required to write custom code. 
+* [Bootstrap](https://getbootstrap.com/) is an extensive library of CSS and JavaScript utilities. It was used throughout the web application for efficient styling and responsiveness.
 
-    Bootstrap’s compiled CSS and JS was included via CDN by placing the jsdeliver `link` tag in the `<head>` for the CSS, and the `<script>` tag for the JavaScript bundle before the closing `<body>` tag.
+* [Bootstrap Icons](https://icons.getbootstrap.com/) were imported into the style.css file and used to create a better visual experience for UX purposes. 
 
-* [Bootstrap Icons](https://icons.getbootstrap.com/) were imported into the style.css file and used in both pages to create a better visual experience for UX purposes. 
-
-* [Leaflet]() Leaflet is a lightweight, open-source JavaScript library for interactive maps, with a user-friendly API, and mobile optimisation.
-
-* [GIMP](https://www.gimp.org/) (GNU Image Manipulation Program) was used to:
-    - reduce the file size of the images for the website;
-    - crop and edit images.
+* [Leaflet](https://leafletjs.com/) Leaflet is a lightweight, open-source JavaScript library for creating interactive maps, with a user-friendly API, and mobile optimisation. It was used to create and interact with the map in the web application.
 
 * [Inkscape](https://inkscape.org/) was used to create the Mobility Mapper logo, and the route markers.
 
@@ -299,12 +282,7 @@ The route generation occurs at the end of the function addCoordinatesToRoute, wh
 
 * [Balsamiq](https://balsamiq.com/) was used to create the wireframes during the design phase of the project.
 
-* [Am I Responsive?](https://ui.dev/amiresponsive) was used to view the responsiveness of the website throughout the development process.
-
-* [Am I Responsive (.co.uk)](https://amiresponsive.co.uk/) was used to generate the mockup images used at the top of this README.
-
-* [Responsive Design Checker](https://www.responsivedesignchecker.com/)
-    - Responsive Design Checker was used in the testing process to check responsiveness on various devices.
+* [Am I Responsive?](https://ui.dev/amiresponsive) was used to view the responsiveness of the website throughout the development process, and to generate the mockup images used at the top of this README.
 
 * [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used during the development process to:
     - view how the code renders in a web browser
@@ -318,54 +296,74 @@ The route generation occurs at the end of the function addCoordinatesToRoute, wh
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
     - W3C CSS Validator was used to validate the CSS code.
 
+* [JSHint](https://jshint.com/)
+
+The JSHints JavaScript Code Quality Tool was used to validate the JavaScript code.    
+
 [Back to top ⇧](#mobility-mapper)
 
 ## Testing
 
 ### Testing User Stories
 
-1. As a first-time visitor, I need a user-friendly design with a responsive layout for my device so that I can easily access information and browse the site without frustration, regardless of the device or screen size I'm using.
+1. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
     - The website is fully responsive across various devices and screen sizes.
 
-2. As a first-time visitor, I need clear, easy-to-use navigation so I can find the information I need quickly.
-    - Navigation is intuitive and easy to understand, allowing users to quickly access key sections.
-    - The navigation structure is consistent across all pages and does not require more than two clicks to reach important information.
-    - The navigation is accessible on both desktop and mobile, with a responsive design that adapts to different screen sizes (including a hamburger menu for mobile).
-    - The navigation links and buttons are clearly labeled and distinguishable, making it easy to navigate even for first-time visitors.
+2. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
+    - The UI is intuitive and easy to understand, allowing users to quickly access the app's features.
+    - Icons are used to enhance the user experience and make it easier to identify the purpose of features.
 
-3. As a busy carer of a mobility impaired person, I want to quick overview of mobility mapper so that I can determine if it's the kind of tool I'm looking for, and if it's worth my time learning more about it.
-    - The top of the home page features a concise overview that explains the app’s purpose and how it benefits users of wheeled mobility devices.
-    - A prominent call-to-action is available to enable the visitor to subscribe to email updates, which will provide them with both more information about Mobility Mapper, and a reminder to return to the website when they have more time to dive deeper.
+3. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
+    - On loading, the first two rows of the application invite the user to select a start and destination location. The first is section for the start location, and the second is for the destination location.
+    - The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
+    - Hovering over either section changes the mouse cursor to a pointer, and the section background changes to a light orange, to indicate that the section is clickable.
+    - When the user has selected a location it is displayed in place of the invitation to choose a location.
+    - The start location is shown on the map with a green marker labelled with an "A".
+    - The destination location is shown on the map with a red marker labelled with an "B".
+    - There are four different ways of selecting a start and destination location. They are shown on clicking the start or destination div, keeping the UI tidy.
 
-4. As a user of a wheeled mobility device, I want to learn about all the features of Mobility Mapper so that I can decide if the app will suit my needs.
-    - The home page includes a description of the app's key features followed by an invitation to read further details on the partnerships page.
-    - The partnerships page provides further details on the problems the app solves, including a list of features that make Mobility Mapper different from existing mapping apps.
+4. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
+    - The user can type in the text input, as indicated by the placeholder text "Search for place", and then click on the magnifying glass button to search for the location. 
+    - The user can select one of the returned locations.
+    - The selected location is displayed in the start or destination div and a location marker is added to the map.
 
-5. As a potential funder, partner, or stakeholder, I want to understand the value, impact, and business potential of the Mobility Mapper app so that I can evaluate whether it aligns with my goals and is worth my support or aligns with our funding objectives.
-    - A dedicated page on the website provides a clear and compelling pitch for Mobility Mapper.
-    - An introduction describes the problems the app solves for wheelers and how it solves them
-    - There is a section on market potential and validation,
-    - There is content differentiating Mobility Mapper from other navigation apps.
-    - A section outlines the app's expected social and economic impact
-    - The page includes clear, compelling visuals that highlight the app’s purpose and impact.
-    - Clear calls to action for funding inquiries and contact information are present
-    - Clear links on the homepage inviting the visitor to go to the partnerships page
+5. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
+    - The user can click the "current location" button, which is visually enhanced with a crosshairs icon, to set their current location as the start or destination location. 
+    - The location is displayed on the map using a marker, and the place name in the start/destination location div
 
-6. As a potential user or supporter, I want to sign up for updates about the app's progress and launch so I can stay informed and be notified when the app is available.
-    - A prominent call-to-action is available to enable the visitor to subscribe to email updates.
-    - A confirmation of subscription is shown on clicking the submit button
+6. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
+    - The user can click on the map at any time, even before clicking the start or destination display div.
+    - The user can also click on the map after clicking in the start or destination display div to display the location selection options, and then click on the "Map Select" button, whose purpose is higlighted by the use of a map icon. On doing so, the map expands and all sections other than the header are hidden to enable maximum viewing of the map.
+    - On clicking on a location on the map, a blue marker is placed at the click location, and a popup div is shown at the bottom of screen, below the map, containing the location name, and buttons to set it as the start or destination location.
+    - when the user clicks on one of these buttons, the place name is displayed in the corresponding location div, and the blue marker is changed to the corresponding start/destination marker.
 
-7. As a social media user, I want to easily follow the Mobility Mapper app’s progress on platforms like Facebook so I can engage with the community and get regular updates.
-    - Clear, visible social media buttons (e.g., Facebook) are placed on the homepage and partnerships page.
+7. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used locations.
+    - The user can click the "Saved Places" button, visually enhanced with a bookmark icon, to select a location from their list of saved places. 
+    - On clicking the Saved Places button, the list of user saved places is shown.
+    - The user can select a saved place by clicking on it, then it is displayed in the corresponding start or destination div, and a marker indicates the location on the map.
 
+8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
+    - The Leaflet Javascript automatically includes zoom functionality, including a plus '+' minus '-' icon in the top left of the map.
+
+9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
+    - When both a start and destination location have been selected, a an accessible wheelchair route is automatically generated, and then displayed on the map as a blue line. The map view is initially set to contain both the route and the start and destination markers. The user can then zoom in and out as desired to view the route in greater detail.
 
 ### Code Validation
 
-* The [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) website was used to validate the CSS style.css file to ensure there were no syntax errors. No errors or warnings were found.
+* The [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) website was used to validate the CSS style.css file to ensure there were no syntax errors. The following errors were found and corrected:
 
-* The [W3C Markup Validator](https://validator.w3.org/) website was used to validate the HTML files to ensure there were no syntax errors. The validator found the following errors, which were corrected:
-    - An unclosed `div` tag 
-    - A rogue \" was found next to a closing one
+![CSS errors](/readme-files/css-validator-errors.png)
+
+* The [W3C Markup Validator](https://validator.w3.org/) website was used to validate the HTML files to ensure there were no syntax errors. The validator found the following error, which was corrected:
+    - An unnecessary "\" was found before a closing ">" at the end of a stylesheet link.
+
+* The [JSHint](https://jshint.com/) website was used to validate the Javascript files to ensure there were no syntax errors.
+
+ -  The following warning was returned for files that contain async functions: 'async functions' is only available in ES8 (use 'esversion: 8'). This warning was ignored because the latest fully ratified version is ECMAScript 2022 – the 13th edition of the specification. This version is widely accepted and implemented in modern browsers.
+- Unnecessary semicolons - removed
+- Missing semicolons - added
+- Unnessary 'return' after 'throw Error' - removed
+- "Attempting to override 'placeName' which is a constant." - const replaced with let
 
 ### Accessibility
 

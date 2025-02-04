@@ -12,7 +12,6 @@ export default async function latLonToAddress(lat, lon) {
     if (response.ok) {
         return data.display_name;
     } else {
-        throw new Error(data.error);
-        return null;
+        throw new Error(data.error || 'An error occurred while retrieving the address.');
     }
 }

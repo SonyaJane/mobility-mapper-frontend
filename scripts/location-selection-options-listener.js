@@ -77,7 +77,7 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         }
 
         // get place name from lat and lon
-        const placeName = await latLonToAddress(lat, lon);
+        let placeName = await latLonToAddress(lat, lon);
         if (placeName == null) {
             console.error("Error getting place name from lat and lon");
             placeName = "Unknown location";
@@ -105,4 +105,4 @@ export default function addEventListenersToLocationSelectionOptions(outputDivId)
         showSavedPlaces(outputDivId);
     });
 
-};
+}

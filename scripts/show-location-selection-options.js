@@ -21,4 +21,4 @@ export default function showLocationSelectionOptions(e) {
     const lastChildId = e.currentTarget.lastElementChild.id;
     // add click event listeners to the location selection options
     addEventListenersToLocationSelectionOptions(lastChildId);
-};
+}

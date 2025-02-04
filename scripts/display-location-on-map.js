@@ -17,9 +17,9 @@ export default function displayLocationOnMap(lat, lon, zoom, markerType) {
             MM.endMarker.addTo(MM.map);
             break;
         default:
-            MM.marker = L.marker([lat, lon],).addTo(MM.map);
+            MM.marker = L.marker([lat, lon]).addTo(MM.map);
             break;
     }
     // Center the map on the given location
     MM.map.setView([lat, lon], zoom);
-};
+}
