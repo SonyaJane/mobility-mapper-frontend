@@ -8,6 +8,44 @@ Visit the deployed website [here](https://sonyajane.github.io/mobility-mapper-fr
 
 ## Table of Contents
 
+- [Mobility Mapper Frontend](#mobility-mapper-frontend)
+  - [Table of Contents](#table-of-contents)
+  - [User Experience (UX)](#user-experience-ux)
+    - [Project Goals](#project-goals)
+    - [User Stories](#user-stories)
+    - [Colour Scheme](#colour-scheme)
+    - [Typography](#typography)
+    - [Wireframes](#wireframes)
+  - [Features](#features)
+    - [General](#general)
+    - [Header](#header)
+    - [Start location and destination location sections](#start-location-and-destination-location-sections)
+    - [Location selection options](#location-selection-options)
+      - [Text search](#text-search)
+      - [Current location](#current-location)
+      - [Map select](#map-select)
+      - [Saved places](#saved-places)
+    - [Map](#map)
+    - [Route generation](#route-generation)
+  - [Technologies Used](#technologies-used)
+    - [Languages Used](#languages-used)
+    - [Frameworks, Libraries and Programs Used](#frameworks-libraries-and-programs-used)
+  - [Testing](#testing)
+    - [Testing User Stories](#testing-user-stories)
+    - [Code Validation](#code-validation)
+    - [Accessibility](#accessibility)
+    - [Tools Testing](#tools-testing)
+    - [Manual Testing](#manual-testing)
+  - [Deployment](#deployment)
+    - [Deploying on GitHub Pages](#deploying-on-github-pages)
+    - [Forking the Repository](#forking-the-repository)
+    - [Creating a Clone](#creating-a-clone)
+  - [Finished Product](#finished-product)
+  - [Credits](#credits)
+    - [Content](#content)
+    - [Media](#media)
+
+
 ## User Experience (UX)
 
 ### Project Goals
@@ -56,12 +94,13 @@ Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the desi
 ## Features
 
 ### General
+
 * Single page app
 * Designed from a mobile first perspective.
 * Responsive design across all device sizes.
 * Hovering over a button or clickable section changes the cursor to a pointer to let the user know it is clickable.
 
-### 1. Header 
+### Header 
 
 The header indicates that the app is a route planner. The Mobility Mapper logo is on the right. On very small screens (<350px) the logo is replaced with the Mobility Mapper route marker, as the full logo does not fit.
 
@@ -69,7 +108,7 @@ The header indicates that the app is a route planner. The Mobility Mapper logo i
 | --- | --- |
 | ![Header for small screens](/readme-files/header-small.png) | ![Header for regular screens](/readme-files/header.png) |
 
-### 2. Start location and destination location sections
+### Start location and destination location sections
 
 This section invites the user to select a start and destination location. There is a section for the start location, followed by one for the destination location. 
 
@@ -85,7 +124,7 @@ When the user has seletced a location using the section described below, it is d
 
 <img src="./readme-files/search-displayed.png" width="185">
 
-### 3. Location selection options
+### Location selection options
 
 When a user clicks on either the start or destination location section, the section shown below is created below the clicked section. this is referred to as the location selection options section. It is highlighted with a light orange background to indicate that this is what the user is currently working on.
 
@@ -93,7 +132,7 @@ When a user clicks on either the start or destination location section, the sect
 
 A user can then choose a location using one of the following four methods.
 
-#### a) Text search 
+#### Text search 
 
 The user can type in the text input and then click on the magnifying glass button to search for a location. 
 
@@ -139,7 +178,7 @@ Resulting screen after a locating is selected:
 
 <img src="./readme-files/marker-added-to-map.png" width="185">
 
-#### b) Current location
+#### Current location
 
 The user can click this button to set their current location as the start or destination location. 
 
@@ -152,7 +191,7 @@ We get current user's location using Leaflet's locate method by calling locateUs
 3. Display the place name in the start/destination location div
 4. The latitude and longitude are added to the global route coordinates variable addCoordinatesToRoute
 
-#### c) Map select
+#### Map select
 
 The user can click the Map Select button, or click on the map at any time without going through the location selection options section. Doing so via the location selection options section hides everything except the header and the map, making more space for the map and making it easier for the user to view.
 
@@ -187,15 +226,9 @@ If the user clicks 'Start here' 'Set as desination'), we:
 
 <img src="./readme-files/clicked-locatiion-selected.png" width="185">
 
-#### d) Saved places
+#### Saved places
 
-The user can click the Saved Places button to select a location from their list of saved places. Note that the list is an object defined in index.js as follows:
-
-``` javascript
-MM.savedPlaces = [{ name: "Home", lat: 51.463913, lon: -3.162759, address: "1 Home Street, Cardiff" },
-                      { name: "Work", lat: 51.485925, lon: -3.176533, address: "1 Work Street, Cardiff" },
-                      { name: "Dentist", lat: 51.519471, lon: -3.117880, address: "1 Dentist Street, Cardiff" }];
-```
+The user can click the 'Saved Places' button to select a location from their list of saved places. Note that the list is an object defined in index.js.
 
 <img src="./readme-files/saved-places.png" width="185">
 
@@ -225,7 +258,8 @@ Then the user can click on one of the places. On doing so, we
 5) Show the hidden elements.
 6) Add the lat and lon to global route coordinates.
 
-### 4. Map
+### Map
+
 The map is initialised in index.js by calling initialiseMap. The map is created using the Leaflet library, using OpenStreetMap tiles. 
 
 <img src="./readme-files/map.png" width="185">
@@ -242,7 +276,8 @@ A click event listener is added to the map by cliing addMapClickListener, so tha
 
 Note that we did not add a button to clear the map of the route and markers. because you can do this simply by refreshing the page.
 
-## 4. Route generation
+### Route generation
+
 The route generation occurs at the end of the function addCoordinatesToRoute, where it checks if there are two sets of coordinates (start and end locations). The process is as follows:
 
 1. Prepare for a new route by calling prepareForNewRoute, which removes any existing route and extends the map bounds to include the start and end markers.
@@ -502,6 +537,7 @@ Forking a GitHub Repository makes a copy of the original repository on your GitH
 4. You should now have a copy of the original repository in your GitHub account.
 
 ### Creating a Clone
+
 How to run this project within a local IDE, such as VSCode:
 
 1. Log into [GitHub](https://github.com/login) or [create an account](https://github.com/join).
@@ -521,6 +557,7 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 
 ## Finished Product
+
 | Section | Mobile | Desktop | 
 | --- | --- | --- |
 | Loading Page | ![Mobile loading page image](./readme-files/loading-page.png)  | ![Desktop loading page page image](./readme-files/loading-page-desktop.png) |
