@@ -42,6 +42,7 @@ Visit the deployed website [here](https://sonyajane.github.io/mobility-mapper-fr
     - [Forking the Repository](#forking-the-repository)
     - [Creating a Clone](#creating-a-clone)
   - [Finished Product](#finished-product)
+  - [Future Features](#future-features)
   - [Credits](#credits)
     - [Content](#content)
     - [Media](#media)
@@ -70,8 +71,8 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 5. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
 6. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
 7. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
-8. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used 8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
-9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
+8. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used 9. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
+10. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
 
 [Back to top ⇧](#mobility-mapper-frontend)
 
@@ -123,23 +124,23 @@ The header indicates that the app is a route planner. The Mobility Mapper logo i
 
 This section invites the user to select a start and destination location. There is a section for the start location, followed by one for the destination location. 
 
-<img src="./readme-files/select-start-destination.png" width="185">
+<img src="./readme-files/select-start-destination.png" width="375">
 
 The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
 
 Hovering over either section changes the mouse cursor to a pointer, and the section background changes to a light orange, to indicate that the section is clickable.
 
-<img src="./readme-files/waypoint-div-hover.png" width="185">
+<img src="./readme-files/waypoint-div-hover.png" width="375">
 
 When the user has seletced a location using the section described below, it is displayed in place of the invitation to choose a location.
 
-<img src="./readme-files/search-displayed.png" width="185">
+<img src="./readme-files/search-displayed.png" width="375">
 
 ### Location selection options
 
 When a user clicks on either the start or destination location section, the section shown below is created below the clicked section. this is referred to as the location selection options section. It is highlighted with a light orange background to indicate that this is what the user is currently working on.
 
-<img src="./readme-files/location-selection-options.png" width="185">
+<img src="./readme-files/location-selection-options.png" width="375">
 
 A user can then choose a location using one of the following four methods.
 
@@ -147,11 +148,11 @@ A user can then choose a location using one of the following four methods.
 
 The user can type in the text input and then click on the magnifying glass button to search for a location. 
 
-<img src="./readme-files/text-input-search.png" width="185">
+<img src="./readme-files/text-input-search.png" width="375">
 
 The input is first validated. If it does not contain any letters or whole numbers, the input is cleared and an error message in red font is added to the input field as a placeholder.
 
-<img src="./readme-files/text-search-error.png" width="185">
+<img src="./readme-files/text-search-error.png" width="375">
 
 If the input contains letters and or whole numbers, it is sent to the Open Street Maps (Nominatim search API)[https://nominatim.org/release-docs/latest/api/Search/] to look up a location. We use the parameter `format=json` to obtain the response in json format, and `addressdetails=1` to include a breakdown of the address. 
 
@@ -166,11 +167,11 @@ Then for each search result, we:
 
 An example of the displayed results are shown in the image below. 
 
-<img src="./readme-files/search-results.png" width="185">
+<img src="./readme-files/search-results.png" width="320">
 
 If the request was unsuccessful, an error message is shown in the error modal, as shown in the image below.
 
-<img src="./readme-files/location-search-error.png" width="185">
+<img src="./readme-files/location-search-error.png" width="275">
 
 The user can then either select one of the return locations by clicking on the corresponding div, or exit and return to the previous screen by clicking the exit button. If they select one of the locations, then:
 (scripts/display-search-location-results.js)
@@ -187,13 +188,13 @@ The user can then either select one of the return locations by clicking on the c
 
 Resulting screen after a locating is selected:
 
-<img src="./readme-files/marker-added-to-map.png" width="185">
+<img src="./readme-files/marker-added-to-map.png" width="320">
 
 #### Current location
 
 The user can click this button to set their current location as the start or destination location. 
 
-<img src="./readme-files/current-location-button.png" width="185">
+<img src="./readme-files/current-location-button.png" width="100">
 
 We get current user's location using Leaflet's locate method by calling locateUser, and if successful, we 
 
@@ -206,7 +207,7 @@ We get current user's location using Leaflet's locate method by calling locateUs
 
 The user can click the Map Select button, or click on the map at any time without going through the location selection options section. Doing so via the location selection options section hides everything except the header and the map, making more space for the map and making it easier for the user to view.
 
-<img src="./readme-files/map-select.png" width="185">
+<img src="./readme-files/map-select.png" width="100">
 
 On clicking on a location on the map, we
 
@@ -218,7 +219,7 @@ On clicking on a location on the map, we
     - buttons to set as start location or set as destination
     - a button to close the popup and return to the main screen
 
-<img src="./readme-files/clicked-location.png" width="185">
+<img src="./readme-files/clicked-location.png" width="320">
 
 5. Add click event listeners to the buttons addEventListenerToUseLocationButton, addEventListenerToExitButton.
 6. Remove any existing blue location markers and add a blue location marker at the clicked location.
@@ -235,13 +236,13 @@ If the user clicks 'Start here' 'Set as desination'), we:
 7. Reset the map view to centre on the selected location
 8. The latitude and longitude are added to the global route coordinates variable addCoordinatesToRoute
 
-<img src="./readme-files/clicked-locatiion-selected.png" width="185">
+<img src="./readme-files/clicked-locatiion-selected.png" width="320">
 
 #### Saved places
 
 The user can click the 'Saved Places' button to select a location from their list of saved places. Note that the list is an object defined in index.js.
 
-<img src="./readme-files/saved-places.png" width="185">
+<img src="./readme-files/saved-places.png" width="100">
 
 On clicking the Saved Places button, we:
 
@@ -273,7 +274,7 @@ Then the user can click on one of the places. On doing so, we
 
 The map is initialised in index.js by calling initialiseMap. The map is created using the Leaflet library, using OpenStreetMap tiles. 
 
-<img src="./readme-files/map.png" width="185">
+<img src="./readme-files/map.png" width="320">
 
 We then get the user's location and centre the map on that location at zoom level 6. 
 
@@ -302,7 +303,7 @@ The route generation occurs at the end of the function addCoordinatesToRoute, wh
     e) Check if the route start differs from the start marker location. This might happen if no path or road network coincides with the start or destination coordinates, thus creating a gap between their markers and the route polyline.
     f) If there is a gap, add a dashed line between the marker and route start or end.
 
-<img src="./readme-files/route-with-dashed-line.png" width="185">
+<img src="./readme-files/route-with-dashed-line.png" width="320">
 
 [Back to top ⇧](#mobility-mapper-frontend)
 
@@ -408,7 +409,7 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
 
 * The [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) website was used to validate the CSS style.css file to ensure there were no syntax errors. The following errors were found and corrected:
 
-![CSS errors](/readme-files/css-validator-errors.png)
+<img src="./readme-files/css-validator-errors.png" width="450">
 
 * The [W3C Markup Validator](https://validator.w3.org/) website was used to validate the HTML files to ensure there were no syntax errors. The validator found the following error, which was corrected:
     - An unnecessary "\" was found before a closing ">" at the end of a stylesheet link.
@@ -582,7 +583,7 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 | Section | Mobile | Desktop | 
 | --- | --- | --- |
 | ![Landing page on a mobile](/readme-files/landing-page-mobile.png) | ![Landing page on a desktop](/readme-files/landing-page-desktop.png) |
-| Main App Page | ![Mobile loading page image](./readme-files/loading-page.png)  | ![Desktop loading page page image](./readme-files/loading-page-desktop.png) |
+| Main App Page | ![Mobile main page image](./readme-files/loading-page.png)  | ![Desktop main page image](./readme-files/loading-page-desktop.png) |
 | Location Selection Options | ![Mobile selection options image](/readme-files/location-selection-options-mobile.png) | ![Desktop partnerships page image](/readme-files/location-selection-options-desktop.png) |
 | Map Select Screen | ![Mobile map select image](./readme-files/map-select-mobile.png) | ![Desktop map select image](./readme-files/map-select-desktop.png) |
 | Saved places | ![Mobile saved places image](./readme-files/saved-places-mobile.png) | ![Desktop saved places image](./readme-files/saved-places-desktop.png) |
@@ -590,6 +591,10 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 | Map Clicked Screen | ![Mobile map clicked image](./readme-files/map-clicked-mobile.png) | ![Desktop map clicked image](./readme-files/map-clicked-desktop.png) |
 
 [Back to top ⇧](#mobility-mapper-frontend)
+
+## Future Features
+
+Currently the user saved places are stored in a Javascript object. We would like to be able to save these places on a backend server, and enable to the user to add, edit and delete them.
 
 ## Credits 
 
