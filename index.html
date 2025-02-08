@@ -36,6 +36,28 @@
     </header>
 
     <main>
+        <!-- Landing overlay: shown on page load -->
+        <div id="landingOverlay" class="p-2">
+            <div>
+                <img src="./images/logo_with_name_no_background.png" alt="Mobility Mapper logo">
+            </div>
+            <div>
+                <h2>Welcome to Mobility Mapper</h2>
+            </div>
+            <div>
+                <p>This web application allows you to find a wheelchair accessible route between two
+                    locations.</p>
+                <p>Click or tap the section labelled <span>A</span> to reveal four different ways of selecting a
+                    start
+                    location. Similarly, tap section <span>B</span> to choose a destination.</p>
+                <p>When you have selected both a start and destination location, a wheelchair route will
+                    automatically
+                    be generated, and displayed on the map.</p>
+            </div>
+            <div>
+                <button id="continue-button" class="btn btn-use-this">OK, let's use the app!</button>
+            </div>
+        </div>
 
         <!-- Display Start and Destination Locations -->
         <div id="start-end-display">

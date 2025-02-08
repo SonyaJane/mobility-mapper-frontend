@@ -417,7 +417,7 @@ Lighthouse in Chrome DevTools was used to confirm that the website is accessible
 
 **Lighthouse Report**
 
-| ![Lighthouse report](/readme-files/lighthouse-report.png) | 
+![Lighthouse report](/readme-files/lighthouse-report.png) | 
 
 
 [Back to top ⇧](#mobility-mapper)

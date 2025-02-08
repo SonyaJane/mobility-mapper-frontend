@@ -6,7 +6,7 @@
 
 :root {
     /* Fonts */
-	--primary-font: 'Open Sans', sans-serif;
+    --primary-font: 'Open Sans', sans-serif;
     --bs-body-font-size: 1.4rem;
 
     /* Colours */
@@ -41,15 +41,19 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box; /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
+    box-sizing: border-box;
+    /* Ensures that when we set the height or width to an element, it will be applied to the entire element, including the border. */
 }
 
 body {
-    min-height: 100vh;     
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center;    /* Horizontally centre the content */
-    justify-content: flex-start; /* Start content at the top */  
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Horizontally centre the content */
+    justify-content: flex-start;
+    /* Start content at the top */
     font-family: var(--primary-font), sans-serif;
     color: var(--color-coffee-6);
 }
@@ -59,10 +63,11 @@ body {
 header {
     height: var(--header-height);
     width: 100%;
-    justify-content: space-between; /* Aligns content to left and right */
+    justify-content: space-between;
+    /* Aligns content to left and right */
 }
 
-header > h1 {
+header>h1 {
     margin: 0;
 }
 
@@ -72,7 +77,10 @@ header > h1 {
     padding-bottom: 3px;
 }
 
-h1, .h1, h2, .h2 {
+h1,
+.h1,
+h2,
+.h2 {
     font-family: var(--primary-font), sans-serif;
     font-weight: 700;
     font-size: 26px;
@@ -82,11 +90,13 @@ h1, .h1, h2, .h2 {
 /* Main content */
 
 main {
+    position: relative;
     /* flex container with vertical stacking. */
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - var(--header-height)); /* Full viewport height minus header height */
+    height: calc(100vh - var(--header-height));
+    /* Full viewport height minus header height */
 }
 
 /* Buttons */
@@ -115,7 +125,56 @@ main {
 }
 
 .map {
-    flex-grow: 1; /* Allow the map to grow and take up available space */
+    flex-grow: 1;
+    /* Allow the map to grow and take up available space */
+}
+
+/* The overlay covers the main content on landing */
+#landingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+    text-align: center;
+  
+    /* Create a radial gradient centered in the viewport that covers the whole screen */
+    background: linear-gradient(135deg,
+    var(--color-orange-1) 0%,
+    #eabaa5 50%,
+    #e09878 100%);
+}
+
+#landingOverlay img { 
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 0.05vh;
+}
+
+#landingOverlay h2 {
+    font-size: 1.4rem;
+}
+
+#landingOverlay p {
+    font-size: 1.2rem;
+    color: var(--color-coffee-6);
+    text-align: left;
+    max-width: 600px;
+}
+
+#landingOverlay span {
+    font-weight: 700;
+}
+
+#landingOverlay button {
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 #current-device-container {
@@ -123,7 +182,8 @@ main {
 }
 
 .flex-center {
-    display: flex;        /* Vertically center */
+    display: flex;
+    /* Vertically center */
     align-items: center;
 }
 
@@ -135,9 +195,11 @@ main {
 
 .waypoint {
     height: var(--waypoint-height);
-    display: flex;        /* Vertically center */
+    display: flex;
+    /* Vertically center */
     align-items: center;
-    justify-content: space-between; /* Aligns content to left and right */
+    justify-content: space-between;
+    /* Aligns content to left and right */
 }
 
 .square-box {
@@ -155,15 +217,17 @@ main {
 
 .mm-marker {
     height: 1.4rem;
-    padding-right: 5px; /* space between marker and text */
+    padding-right: 5px;
+    /* space between marker and text */
 }
 
 #zoom-to-location {
     width: 35px;
     height: 35px;
     font-size: 1.2rem;
-    border-color: grey;;
-} 
+    border-color: grey;
+    ;
+}
 
 .red-placeholder::placeholder {
     color: red;
@@ -179,7 +243,8 @@ main {
     bottom: 0;
     background-color: white;
     border: solid 1px var(--color-orange-1);
-    z-index: 1000;  /* Ensure it stays above the map */
+    z-index: 1000;
+    /* Ensure it stays above the map */
     font-size: 1.2rem;
     width: 100%;
 }
@@ -199,21 +264,28 @@ main {
 }
 
 #text-search-input {
-    font-size: inherit; /* Overrides the font-size set by Bootstrap */
-    flex-grow: 1;       /* Makes the input take the remaining space */
+    font-size: inherit;
+    /* Overrides the font-size set by Bootstrap */
+    flex-grow: 1;
+    /* Makes the input take the remaining space */
     margin-right: 5px;
-    height: 47px;       /* Ensures consistent height */
+    height: 47px;
+    /* Ensures consistent height */
 }
 
 #text-search-submit {
-    height: 47px;        /* Matches input height */
-    width: 47px;         /* Ensures it's a square */
+    height: 47px;
+    /* Matches input height */
+    width: 47px;
+    /* Ensures it's a square */
     padding: 0;
-    display: flex;       /* Centers the icon */
+    display: flex;
+    /* Centers the icon */
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    flex-shrink: 0;      /* Prevents the button from shrinking */
+    flex-shrink: 0;
+    /* Prevents the button from shrinking */
 }
 
 .exit-button {
@@ -222,14 +294,18 @@ main {
     color: var(--color-orange-4);
     font-size: 30px;
 }
+
 .centered-flex {
     display: flex;
-    justify-content: center; /* Centre content horizontally */
-    align-items: center;     /* Centers content vertically */
+    justify-content: center;
+    /* Centre content horizontally */
+    align-items: center;
+    /* Centers content vertically */
 }
 
 #saved-places-list {
-    overflow-y: auto; /* Add scrollbar when content overflows */
+    overflow-y: auto;
+    /* Add scrollbar when content overflows */
 }
 
 #saved-places-list p {
@@ -238,7 +314,8 @@ main {
 }
 
 .text-container span {
-    display: block; /* Forces each span onto a new line */
+    display: block;
+    /* Forces each span onto a new line */
 }
 
 /* Media queries */
@@ -268,21 +345,25 @@ main {
     }
 
     .square-box {
-        aspect-ratio: auto; /* Remove aspect ratio */
+        aspect-ratio: auto;
+        /* Remove aspect ratio */
         width: 31%;
         height: 70px;
     }
 
     .icon-container {
-        margin-right: 10px; /* Adds spacing between icon and text */
+        margin-right: 10px;
+        /* Adds spacing between icon and text */
     }
 }
 
 @media (min-width: 992px) {
     body {
-      max-width: 991px; /* Keep the content width constrained */
-      margin: 0 auto; /* Centre-align the content on large screens */
-      border: var(--color-coffee-6) solid 1px;
-      box-shadow: var(--color-coffee-6) 0px 0px 10px;
+        max-width: 991px;
+        /* Keep the content width constrained */
+        margin: 0 auto;
+        /* Centre-align the content on large screens */
+        border: var(--color-coffee-6) solid 1px;
+        box-shadow: var(--color-coffee-6) 0px 0px 10px;
     }
 }

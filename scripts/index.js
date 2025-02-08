@@ -1,6 +1,7 @@
 import initialiseMap from './initialise-map.js';
 import addMapClickListener from './map-click-listener.js';
 import addEventListenersToWaypointDivs from './waypoint-div-click-listener.js';
+import removeLandingOverlay from './remove-landing-overlay.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -28,4 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Adds a div below the waypoint div with ways to select or search for a location
     addEventListenersToWaypointDivs();
 
+    // Add an overlay to the landing page to explain the app
+    const continueButtom = document.getElementById("continue-button");
+    continueButtom.addEventListener("click", removeLandingOverlay);    
 });
