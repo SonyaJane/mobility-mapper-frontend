@@ -582,7 +582,7 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 | Section | Mobile | Desktop | 
 | --- | --- | --- |
-| ![Landing page on a mobile](/readme-files/landing-page-mobile.png) | ![Landing page on a desktop](/readme-files/landing-page-desktop.png) |
+| Landing Page | ![Landing page on a mobile](/readme-files/landing-page-mobile.png) | ![Landing page on a desktop](/readme-files/landing-page-desktop.png) |
 | Main App Page | ![Mobile main page image](./readme-files/loading-page.png)  | ![Desktop main page image](./readme-files/loading-page-desktop.png) |
 | Location Selection Options | ![Mobile selection options image](/readme-files/location-selection-options-mobile.png) | ![Desktop partnerships page image](/readme-files/location-selection-options-desktop.png) |
 | Map Select Screen | ![Mobile map select image](./readme-files/map-select-mobile.png) | ![Desktop map select image](./readme-files/map-select-desktop.png) |
