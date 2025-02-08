@@ -143,18 +143,17 @@ main {
     justify-content: center ;
     align-items: center;
     text-align: center;
-  
-    /* Create a radial gradient centered in the viewport that covers the whole screen */
     background: linear-gradient(135deg,
-    var(--color-orange-1) 0%,
-    #eabaa5 50%,
-    #e09878 100%);
+        var(--color-orange-1) 0%,
+        #eabaa5 50%,
+        #e09878 100%);
 }
 
 #landingOverlay img { 
     width: 100%;
     max-width: 400px;
-    margin-bottom: 0.05vh;
+    /* increase margin with height of screen */
+    margin-bottom: calc(0.2*(100vh - 560px)); 
 }
 
 #landingOverlay h2 {
@@ -175,6 +174,7 @@ main {
 #landingOverlay button {
     font-size: 1.2rem;
     cursor: pointer;
+    margin-top: calc(0.1*(100vh - 560px)); 
 }
 
 #current-device-container {

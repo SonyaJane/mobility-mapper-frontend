@@ -18,6 +18,7 @@ Visit the deployed website [here](https://sonyajane.github.io/mobility-mapper-fr
     - [Wireframes](#wireframes)
   - [Features](#features)
     - [General](#general)
+    - [Landing Page](#landing-page)
     - [Header](#header)
     - [Start location and destination location sections](#start-location-and-destination-location-sections)
     - [Location selection options](#location-selection-options)
@@ -62,13 +63,14 @@ The Mobility Mapper frontend is designed to deliver an intuitive user experience
 
 ### User Stories
 
-1. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
-2. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
-3. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
-4. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
-5. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
-6. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
-7. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used 8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
+1. As a user, I want an explanation of what the website does before I use it, so that I understand its purpose and decide if it is the tool I need.
+2. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
+3. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
+4. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
+5. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
+6. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
+7. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
+8. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used 8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
 9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
 
 [Back to top ⇧](#mobility-mapper-frontend)
@@ -100,6 +102,14 @@ Wireframes were created using [Balsamiq](https://balsamiq.com/) to plan the desi
 * Responsive design across all device sizes.
 * Hovering over a button or clickable section changes the cursor to a pointer to let the user know it is clickable.
 
+### Landing Page
+
+The landing page welcomes the user and explains the purpose of the app. It provides brief intructions on how to get started, and a button to close the landing page and start using the app. Note that this page is actually a div that covers the app, and is removed when the button is clicked.
+
+| Mobile | Desktop |  
+| --- | --- |
+| ![Landing page on a mobile](/readme-files/landing-page-mobile.png) | ![Landing page on a desktop](/readme-files/landing-page-desktop.png) |
+
 ### Header 
 
 The header indicates that the app is a route planner. The Mobility Mapper logo is on the right. On very small screens (<350px) the logo is replaced with the Mobility Mapper route marker, as the full logo does not fit.
@@ -107,6 +117,7 @@ The header indicates that the app is a route planner. The Mobility Mapper logo i
 | Screens < 350px | Screens >= 350px |  
 | --- | --- |
 | ![Header for small screens](/readme-files/header-small.png) | ![Header for regular screens](/readme-files/header.png) |
+
 
 ### Start location and destination location sections
 
@@ -345,14 +356,17 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
 
 ### Testing User Stories
 
-1. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
+1. As a user, I want an explanation of what the website does before I use it, so that I understand its purpose and decide if it is the tool I need.
+    - The landing page (actually a div that covers the entire screen) explains what the app does, and how to use it. After reading, the user can click a button to reveal the app. This removes the landing page div, showing the app underneath.
+
+2. As a user, I want the web application to work on mobile and desktop, so that I can use it on any device.
     - The website is fully responsive across various devices and screen sizes.
 
-2. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
+3. As a user, I want the user interface to be intuitive and easy to use, so that I don't need to read a manual on how to use it.
     - The UI is intuitive and easy to understand, allowing users to quickly access the app's features.
     - Icons are used to enhance the user experience and make it easier to identify the purpose of features.
 
-3. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
+4. As a user, I want to enter a start and destination location, so that I can find an optimised accessible route.
     - On loading, the first two rows of the application invite the user to select a start and destination location. The first is section for the start location, and the second is for the destination location.
     - The start location is indicated with the letter A, and the destination with the letter B. On the right, the text invites the user to select either the start or destination location.
     - Hovering over either section changes the mouse cursor to a pointer, and the section background changes to a light orange, to indicate that the section is clickable.
@@ -361,31 +375,31 @@ The JSHints JavaScript Code Quality Tool was used to validate the JavaScript cod
     - The destination location is shown on the map with a red marker labelled with an "B".
     - There are four different ways of selecting a start and destination location. They are shown on clicking the start or destination div, keeping the UI tidy.
 
-4. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
+5. As a user, I want to search for a place or address, so that I can select it as my start or destination location.
     - The user can type in the text input, as indicated by the placeholder text "Search for place", and then click on the magnifying glass button to search for the location. 
     - The user can select one of the returned locations.
     - The selected location is displayed in the start or destination div and a location marker is added to the map.
 
-5. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
+6. As a user, I want to get my current GPS location, so that I can set it as my start or destination location.
     - The user can click the "current location" button, which is visually enhanced with a crosshairs icon, to set their current location as the start or destination location. 
     - The location is displayed on the map using a marker, and the place name in the start/destination location div
     - The user can also click the button in the top right hand corner of the map with the crosshairs icon, to pan to their location. A circle centred on their location has a radius representing the accuracy of that location.
 
-6. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
+7. As a user, I want to click on a location on the map, so that I can select it as my start or destination.
     - The user can click on the map at any time, even before clicking the start or destination display div.
     - The user can also click on the map after clicking in the start or destination display div to display the location selection options, and then click on the "Map Select" button, whose purpose is higlighted by the use of a map icon. On doing so, the map expands and all sections other than the header are hidden to enable maximum viewing of the map.
     - On clicking on a location on the map, a blue marker is placed at the click location, and a popup div is shown at the bottom of screen, below the map, containing the location name, and buttons to set it as the start or destination location.
     - when the user clicks on one of these buttons, the place name is displayed in the corresponding location div, and the blue marker is changed to the corresponding start/destination marker.
 
-7. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used locations.
+8. As a user, I want to select a location from my saved places, so that I can quickly choose frequently used locations.
     - The user can click the "Saved Places" button, visually enhanced with a bookmark icon, to select a location from their list of saved places. 
     - On clicking the Saved Places button, the list of user saved places is shown.
     - The user can select a saved place by clicking on it, then it is displayed in the corresponding start or destination div, and a marker indicates the location on the map.
 
-8. As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
+9.  As a user, I want to zoom in and out of the map, so that I can view my route in more detail.
     - The Leaflet Javascript automatically includes zoom functionality, including a plus '+' minus '-' icon in the top left of the map.
 
-9. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
+10. As a wheelchair user, I want to view the generated route on an interactive map, so that I can visually confirm the accessibility.
     - When both a start and destination location have been selected, a an accessible wheelchair route is automatically generated, and then displayed on the map as a blue line. The map view is initially set to contain both the route and the start and destination markers. The user can then zoom in and out as desired to view the route in greater detail.
 
 [Back to top ⇧](#mobility-mapper-frontend)
@@ -456,7 +470,14 @@ Samsung Galaxy Ultra 22 | No appearance, responsiveness nor functionality issues
 
 * Elements Testing
 
-**Loading screen**
+**Landing Page**
+
+Feature | Outcome | Pass/Fail
+--- | --- | ---
+Welcome screen | Displayed on landing on the website | Pass
+Go to app button | On click, closes the landing welcome page (the div is removed), and the main app screen is shown | Pass
+
+**Main app screen, shown on closing landing page**
 
 Feature | Outcome | Pass/Fail
 --- | --- | ---
@@ -560,7 +581,8 @@ Further reading and troubleshooting on cloning a repository from GitHub [here](h
 
 | Section | Mobile | Desktop | 
 | --- | --- | --- |
-| Loading Page | ![Mobile loading page image](./readme-files/loading-page.png)  | ![Desktop loading page page image](./readme-files/loading-page-desktop.png) |
+| ![Landing page on a mobile](/readme-files/landing-page-mobile.png) | ![Landing page on a desktop](/readme-files/landing-page-desktop.png) |
+| Main App Page | ![Mobile loading page image](./readme-files/loading-page.png)  | ![Desktop loading page page image](./readme-files/loading-page-desktop.png) |
 | Location Selection Options | ![Mobile selection options image](/readme-files/location-selection-options-mobile.png) | ![Desktop partnerships page image](/readme-files/location-selection-options-desktop.png) |
 | Map Select Screen | ![Mobile map select image](./readme-files/map-select-mobile.png) | ![Desktop map select image](./readme-files/map-select-desktop.png) |
 | Saved places | ![Mobile saved places image](./readme-files/saved-places-mobile.png) | ![Desktop saved places image](./readme-files/saved-places-desktop.png) |
